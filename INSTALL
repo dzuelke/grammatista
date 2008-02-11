@@ -1,0 +1,16 @@
+Grammatista Installation Instructions
+=====================================
+
+Requirements
+------------
+Grammatista requires PHP 5.2.2 or later.
+
+External dependencies
+---------------------
+If you would like to run Grammatista's Unit Tests, you need PHPUnit 3.2 or later installed.
+
+Setting up
+----------
+To use Grammatista, simply include lib/Grammatista.php, or include lib/Grammatista.class.php and call Grammatista::boostrap().
+
+After that, Grammatista is ready for action. Refer to the documentation to learn how to get started by registering a scanner etc.

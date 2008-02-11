@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+| This file is part of the Agavi package.                                    |
+| Copyright (c) 2006 the Agavi Project.                                      |
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+| AGAVI VALIDATORS CONFIGURATION                                             |
++~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
+-->
+<configurations xmlns="http://agavi.org/agavi/1.0/config">
+	<!-- custom validators and default parameters -->
+	<configuration>
+		<validators>
+
+			<validator class="string" name="username_too_short" translation_domain="default.errors.Login">
+				<arguments>
+					<argument>username</argument>
+				</arguments>
+				<errors>
+					<error>The username you supplied is fewer than 5 characters long.</error>
+				</errors>
+				<parameters>
+					<parameter name="min">5</parameter>
+				</parameters>
+			</validator>
+
+			<validator class="string" name="password_non_existant" translation_domain="default.errors.Login">
+				<arguments>
+					<argument>password</argument>
+				</arguments>
+				<errors>
+					<!-- comment -->
+					<!-- tc: omg lol :) -->
+					<!-- comment -->
+					<error>Please supply a password.</error>
+					<error />
+					<!-- tc: omg lol 2 :) -->
+					<error>adasd.</error>
+				</errors>
+				<parameters>
+					<parameter name="min">1</parameter>
+				</parameters>
+			</validator>
+			
+			<validator class="isset" name="remember" required="false">
+				<arguments>
+					<argument>remember</argument>
+				</arguments>
+			</validator>
+
+		</validators>
+	</configuration>
+</configurations>
