@@ -4,7 +4,13 @@ class GrammatistaParserPcreSmarty extends GrammatistaParserPcre
 {
 	public function handles(GrammatistaEntity $entity)
 	{
-		return $entity->type == 'tpl';
+		$retval = $entity->type == 'tpl';
+		
+		if($retval) {
+			Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
+		}
+		
+		return $retval;
 	}
 	
 	protected function validate($name, $value)

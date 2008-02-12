@@ -24,7 +24,13 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 	
 	public function handles(GrammatistaEntity $entity)
 	{
-		return $entity->type == 'php';
+		$retval = $entity->type == 'php';
+		
+		if($retval) {
+			Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
+		}
+		
+		return $retval;
 	}
 	
 	protected function parsePattern($pattern)
@@ -246,6 +252,8 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 	
 	public function parse(GrammatistaEntity $entity)
 	{
+		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
+		
 		$retval = array();
 		
 		$tokens = $this->tokenize($entity->content);
@@ -292,7 +300,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			// }
 		}
 		
-		Grammatista::dispatchEvent('grammatista.parser.parsed');
+		Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
 		
 		return $retval;
 	}

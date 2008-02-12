@@ -6,6 +6,8 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 	
 	public function parse(GrammatistaEntity $entity)
 	{
+		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
+		
 		$retval = array();
 		
 		$matched = array();
@@ -84,7 +86,7 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 			}
 		}
 		
-		Grammatista::dispatchEvent('grammatista.parser.parsed');
+		Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
 		
 		return $retval;
 	}

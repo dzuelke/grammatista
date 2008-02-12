@@ -10,6 +10,10 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 			$handles = $this->xpath->query('//agavi:validator')->length > 0;
 		}
 		
+		if($handles) {
+			Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
+		}
+		
 		return $handles;
 	}
 	
@@ -40,6 +44,8 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 	
 	public function parse(GrammatistaEntity $entity)
 	{
+		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
+		
 		$retval = array();
 		
 		// find all <validator ... translation_domain="..."> elements
@@ -69,7 +75,7 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 			}
 		}
 		
-		Grammatista::dispatchEvent('grammatista.parser.parsed');
+		Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
 		
 		return $retval;
 	}

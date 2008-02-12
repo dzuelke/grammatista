@@ -68,6 +68,8 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 	
 	public function writeTranslatable(GrammatistaTranslatable $info)
 	{
+		Grammatista::dispatchEvent('grammatista.storage.translatable.writing', array('translatable' => $info));
+		
 		$stmt = $this->connection->prepare('INSERT INTO translatables (item_name, line, domain, singular_message, plural_message, comment, parser_name) VALUES(:item_name, :line, :domain, :singular_message, :plural_message, :comment, :parser_name)');
 		$stmt->bindValue(':item_name', $info['item_name'], PDO::PARAM_STR);
 		$stmt->bindValue(':line', $info['line'], PDO::PARAM_INT);
@@ -78,11 +80,13 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 		$stmt->bindValue(':parser_name', $info['parser_name'], PDO::PARAM_STR);
 		$stmt->execute();
 		
-		Grammatista::dispatchEvent('grammatista.storage.translatable.written');
+		Grammatista::dispatchEvent('grammatista.storage.translatable.written', array('translatable' => $info));
 	}
 	
 	public function writeWarning(GrammatistaWarning $info)
 	{
+		Grammatista::dispatchEvent('grammatista.storage.warning.writing', array('warning' => $info));
+		
 		$stmt = $this->connection->prepare('INSERT INTO warnings (item_name, line, domain, singular_message, plural_message, comment, parser_name) VALUES(:item_name, :line, :domain, :singular_message, :plural_message, :comment, :parser_name)');
 		$stmt->bindValue(':item_name', $info['item_name'], PDO::PARAM_STR);
 		$stmt->bindValue(':line', $info['line'], PDO::PARAM_INT);
@@ -93,7 +97,7 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 		$stmt->bindValue(':parser_name', $info['parser_name'], PDO::PARAM_STR);
 		$stmt->execute();
 		
-		Grammatista::dispatchEvent('grammatista.storage.warning.written');
+		Grammatista::dispatchEvent('grammatista.storage.warning.written', array('warning' => $info));
 	}
 	
 	public function __destruct()
