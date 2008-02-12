@@ -35,6 +35,7 @@ class Grammatista
 		'GrammatistaParserXmlAgavi'           => 'Grammatista/Parser/Xml/Agavi.class.php',
 		'GrammatistaParserXmlAgaviValidation' => 'Grammatista/Parser/Xml/Agavi/Validation.class.php',
 		'GrammatistaScannerFilesystem'        => 'Grammatista/Scanner/Filesystem.class.php',
+		'GrammatistaScannerFilesystemRecursivedirectoryiterator' => 'Grammatista/Scanner/Filesystem/Recursivedirectoryiterator.class.php',
 		'GrammatistaStorage'                  => 'Grammatista/Storage.class.php',
 		'GrammatistaStoragePdo'               => 'Grammatista/Storage/Pdo.class.php',
 		'GrammatistaTranslatable'             => 'Grammatista/Translatable.class.php',

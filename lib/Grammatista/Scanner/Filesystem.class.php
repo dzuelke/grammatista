@@ -8,7 +8,7 @@ class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatist
 			throw new GrammatistaException('No path given for GrammatistaScannerFilesystem');
 		}
 		
-		$this->innerIterator = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($options['filesystem.path']), RecursiveIteratorIterator::LEAVES_ONLY | RecursiveIteratorIterator::CHILD_FIRST);
+		$this->innerIterator = new RecursiveIteratorIterator(new GrammatistaScannerFilesystemRecursivedirectoryiterator($options), RecursiveIteratorIterator::LEAVES_ONLY | RecursiveIteratorIterator::CHILD_FIRST);
 		
 		parent::__construct($this->innerIterator);
 	}
