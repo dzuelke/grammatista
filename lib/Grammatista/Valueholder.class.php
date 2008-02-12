@@ -12,7 +12,7 @@ class GrammatistaValueholder extends ArrayObject
 	 */
 	public function __construct(array $values = array())
 	{
-		parent::__construct($values, ArrayObject::ARRAY_AS_PROPS | ArrayObject::STD_PROP_LIST);
+		parent::__construct($values, ArrayObject::ARRAY_AS_PROPS);
 	}
 }
 
