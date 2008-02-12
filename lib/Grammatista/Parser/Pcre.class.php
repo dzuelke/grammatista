@@ -48,6 +48,10 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 						}
 					}
 					
+					if((!isset($info['domain']) || $info['domain'] === '') && isset($entity->default_domain)) {
+						$info['domain'] = $entity->default_domain;
+					}
+					
 					foreach($info as $key => $value) {
 						if(!$this->validate($key, $value)) {
 							$problem = true;
