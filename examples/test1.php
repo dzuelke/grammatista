@@ -21,6 +21,12 @@ Grammatista::registerStorage('sqlite', new GrammatistaStoragePdo(array('pdo.dsn'
 
 Grammatista::registerWriter('pot', new GrammatistaWriterFilePo(array('file.basedir' => dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'], 'file.pattern' => '%s.pot')));
 
+$logger = new GrammatistaLoggerShell();
+Grammatista::registerEventResponder('grammatista.parser.parsed', array($logger, 'log'));
+Grammatista::registerEventResponder('grammatista.storage.translatable.written', array($logger, 'log'));
+Grammatista::registerEventResponder('grammatista.storage.warning.written', array($logger, 'log'));
+Grammatista::registerEventResponder('grammatista.writer.written', array($logger, 'log'));
+
 Grammatista::run();
 
 ?>

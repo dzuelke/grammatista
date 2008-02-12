@@ -77,6 +77,8 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 		$stmt->bindValue(':comment', $info['comment'], PDO::PARAM_STR);
 		$stmt->bindValue(':parser_name', $info['parser_name'], PDO::PARAM_STR);
 		$stmt->execute();
+		
+		Grammatista::dispatchEvent('grammatista.storage.translatable.written');
 	}
 	
 	public function writeWarning(GrammatistaWarning $info)
@@ -90,6 +92,8 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 		$stmt->bindValue(':comment', $info['comment'], PDO::PARAM_STR);
 		$stmt->bindValue(':parser_name', $info['parser_name'], PDO::PARAM_STR);
 		$stmt->execute();
+		
+		Grammatista::dispatchEvent('grammatista.storage.warning.written');
 	}
 	
 	public function __destruct()

@@ -23,6 +23,8 @@ class Grammatista
 	protected static $autoloads = array(
 		'GrammatistaEntity'                   => 'Grammatista/Entity.class.php',
 		'GrammatistaException'                => 'Grammatista/Exception.class.php',
+		'GrammatistaLogger'                   => 'Grammatista/Logger.class.php',
+		'GrammatistaLoggerShell'              => 'Grammatista/Logger/Shell.class.php',
 		'GrammatistaParser'                   => 'Grammatista/Parser.class.php',
 		'GrammatistaParserPcre'               => 'Grammatista/Parser/Pcre.class.php',
 		'GrammatistaParserPcreSmarty'         => 'Grammatista/Parser/Pcre/Smarty.class.php',
@@ -44,6 +46,7 @@ class Grammatista
 		'GrammatistaWriterFileC'              => 'Grammatista/Writer/File/C.class.php',
 		'GrammatistaWriterFilePo'             => 'Grammatista/Writer/File/Po.class.php',
 		'IGrammatistaException'               => 'Grammatista/Exception.interface.php',
+		'IGrammatistaLogger'                  => 'Grammatista/Logger.interface.php',
 		'IGrammatistaParser'                  => 'Grammatista/Parser.interface.php',
 		'IGrammatistaScanner'                 => 'Grammatista/Scanner.interface.php',
 		'IGrammatistaStorage'                 => 'Grammatista/Storage.interface.php',
@@ -54,6 +57,11 @@ class Grammatista
 	 * @var        array An array of registered parsers.
 	 */
 	protected static $parsers = array();
+	
+	/**
+	 * @var        array An array of event responders.
+	 */
+	protected static $responders = array();
 	
 	/**
 	 * @var        array An array of registered scanners.
@@ -399,6 +407,25 @@ class Grammatista
 	public static function clearWriters()
 	{
 		self::$writers = array();
+	}
+	
+	public static function registerEventResponder($pattern, $callback)
+	{
+		if(!isset(self::$responders[$pattern])) {
+			self::$responders[$pattern] = array();
+		}
+		self::$responders[$pattern][] = $callback;
+	}
+	
+	public static function dispatchEvent($name, array $arguments = array())
+	{
+		// no regex check against patterns yet :D
+		
+		if(isset(self::$responders[$name])) {
+			foreach(self::$responders[$name] as $callback) {
+				call_user_func($callback, $name, $arguments);
+			}
+		}
 	}
 	
 	public static function run()

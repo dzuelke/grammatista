@@ -292,6 +292,8 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			// }
 		}
 		
+		Grammatista::dispatchEvent('grammatista.parser.parsed');
+		
 		return $retval;
 	}
 }

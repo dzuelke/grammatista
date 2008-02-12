@@ -69,6 +69,8 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 			}
 		}
 		
+		Grammatista::dispatchEvent('grammatista.parser.parsed');
+		
 		return $retval;
 	}
 }

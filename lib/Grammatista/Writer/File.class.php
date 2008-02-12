@@ -17,6 +17,8 @@ abstract class GrammatistaWriterFile extends GrammatistaWriter
 	public function writeTranslatable(GrammatistaTranslatable $translatable)
 	{
 		file_put_contents($this->options['file.basedir'] . '/' . sprintf($this->options['file.pattern'], $translatable->domain), $this->formatOutput($translatable), FILE_APPEND);
+		
+		Grammatista::dispatchEvent('grammatista.writer.written');
 	}
 }
 

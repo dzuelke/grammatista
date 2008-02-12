@@ -84,6 +84,8 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 			}
 		}
 		
+		Grammatista::dispatchEvent('grammatista.parser.parsed');
+		
 		return $retval;
 	}
 	
