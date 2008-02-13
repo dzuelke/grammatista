@@ -27,11 +27,6 @@ Grammatista::registerParser('agsmarty', array(
 
 Grammatista::setStorage(new GrammatistaStoragePdo(array('pdo.dsn' => 'sqlite:' . dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'] . '.sqlite')));
 
-Grammatista::registerWriter('pot', new GrammatistaWriterFilePo(array(
-	'file.basedir' => dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'],
-	'file.pattern' => '%s.pot',
-)));
-
 $logger = new GrammatistaLoggerShell();
 Grammatista::registerEventResponder('grammatista.parser.parsed', array($logger, 'log'));
 Grammatista::registerEventResponder('grammatista.storage.translatable.written', array($logger, 'log'));
@@ -40,6 +35,13 @@ Grammatista::registerEventResponder('grammatista.writer.written', array($logger,
 
 Grammatista::doScanParseStore();
 
-Grammatista::doWrite();
+$writer = new GrammatistaWriterFilePo(array(
+	'file.basedir' => dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'],
+	'file.pattern' => '%s.pot',
+));
+
+foreach(Grammatista::getStorage()->readTranslatables() as $translatable) {
+	$writer->writeTranslatable($translatable);
+}
 
 ?>

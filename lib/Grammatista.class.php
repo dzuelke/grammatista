@@ -421,15 +421,6 @@ class Grammatista
 			}
 		}
 	}
-	
-	public static function doWrite()
-	{
-		foreach(self::$storage->readTranslatables() as $translatable) {
-			foreach(self::$writers as $writer) {
-				$writer->writeTranslatable($translatable);
-			}
-		}
-	}
 }
 
 ?>
