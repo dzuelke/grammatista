@@ -2,11 +2,19 @@
 
 class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatistaScanner
 {
+	protected $options = array();
+	
 	public function __construct(array $options)
 	{
 		if(!isset($options['filesystem.path'])) {
 			throw new GrammatistaException('No path given for GrammatistaScannerFilesystem');
 		}
+		
+		if(!isset($options['filesystem.ident.strip'])) {
+			$options['filesystem.ident.strip'] = $options['filesystem.path'] . '/';
+		}
+		
+		$this->options = $options;
 		
 		$this->innerIterator = new RecursiveIteratorIterator(new GrammatistaScannerFilesystemRecursivedirectoryiterator($options), RecursiveIteratorIterator::LEAVES_ONLY | RecursiveIteratorIterator::CHILD_FIRST);
 		
@@ -33,7 +41,7 @@ class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatist
 		$current = $this->innerIterator->current();
 		
 		$retval = new GrammatistaEntity(array(
-			'ident' => $current->getRealpath(),
+			'ident' => preg_replace('#^' . preg_quote($this->options['filesystem.ident.strip'], '#') . '#', '', $current->getRealpath()),
 			'type' => pathinfo($current->getPathname(), PATHINFO_EXTENSION),
 			'content' => file_get_contents($current->getRealpath()),
 		));
