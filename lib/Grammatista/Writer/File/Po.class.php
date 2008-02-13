@@ -9,6 +9,23 @@ class GrammatistaWriterFilePo extends GrammatistaWriterFile
 		parent::__construct($options);
 	}
 	
+	protected function escapeString($string)
+	{
+		$parts = preg_split('/\\n/', $string);
+		
+		foreach($parts as &$part) {
+			$part = addcslashes($part, "\\\0\n\r\t\"");
+		}
+		
+		$retval = join('\\n"' . "\n" . '"', $parts);
+		
+		if(count($parts) > 1) {
+			$retval = "\"\n\"" . $retval;
+		}
+		
+		return $retval;
+	}
+	
 	protected function formatOutput(GrammatistaTranslatable $translatable)
 	{
 		$lines = array();
@@ -19,9 +36,9 @@ class GrammatistaWriterFilePo extends GrammatistaWriterFile
 		
 		$lines[] = '#: ' . $translatable->item_name . ':' . $translatable->line;
 		
-		$lines[] = sprintf('msgid "%s"', addslashes($translatable->singular_message));
+		$lines[] = sprintf('msgid "%s"', $this->escapeString($translatable->singular_message));
 		if($translatable->plural_message !== null) {
-			$lines[] = sprintf('msgid_plural "%s"', addslashes($translatable->plural_message));
+			$lines[] = sprintf('msgid_plural "%s"', $this->escapeString($translatable->plural_message));
 		}
 		
 		if($translatable->plural_message !== null) {
