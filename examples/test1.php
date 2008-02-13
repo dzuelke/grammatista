@@ -35,11 +35,6 @@ Grammatista::registerEventResponder('grammatista.writer.written', array($logger,
 
 Grammatista::doScanParseStore();
 
-$writer = new GrammatistaWriterFilePo(array(
-	'file.basedir' => dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'],
-	'file.pattern' => '%s.pot',
-));
-
 $currentDomain = null;
 foreach(Grammatista::getStorage()->readTranslatables() as $translatable) {
 	if($translatable->domain != $currentDomain) {
