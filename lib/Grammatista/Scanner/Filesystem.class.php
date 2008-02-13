@@ -11,7 +11,7 @@ class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatist
 		}
 		
 		if(!isset($options['filesystem.ident.strip'])) {
-			$options['filesystem.ident.strip'] = $options['filesystem.path'] . '/';
+			$options['filesystem.ident.strip'] = '#^' . preg_quote($options['filesystem.path'] . '/', '#') . '#';
 		}
 		
 		$this->options = $options;
@@ -41,7 +41,7 @@ class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatist
 		$current = $this->innerIterator->current();
 		
 		$retval = new GrammatistaEntity(array(
-			'ident' => preg_replace('#^' . preg_quote($this->options['filesystem.ident.strip'], '#') . '#', '', $current->getRealpath()),
+			'ident' => preg_replace($this->options['filesystem.ident.strip'], '', $current->getRealpath()),
 			'type' => pathinfo($current->getPathname(), PATHINFO_EXTENSION),
 			'content' => file_get_contents($current->getRealpath()),
 		));
