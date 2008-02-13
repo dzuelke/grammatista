@@ -70,9 +70,9 @@ class Grammatista
 	protected static $scanners = array();
 	
 	/**
-	 * @var        array An array of registered storages.
+	 * @var        IBabelcotStorage A storage.
 	 */
-	protected static $storages = array();
+	protected static $storage = null;
 	
 	/**
 	 * @var        array An array of registered writers.
@@ -287,65 +287,29 @@ class Grammatista
 	}
 	
 	/**
-	 * Register a storage.
+	 * Set the storage.
 	 *
-	 * @param      string          The name of the storage.
 	 * @param      IGrammatistaStorage A storage instance.
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      1.0.0
 	 */
-	public static function registerStorage($name, IGrammatistaStorage $storage)
+	public static function setStorage(IGrammatistaStorage $storage)
 	{
-		self::$storages[$name] = $storage;
+		self::$storage = $storage;
 	}
 	
 	/**
-	 * Unregister a previously registered storage.
+	 * Retrieve the storage instance.
 	 *
-	 * @param      string The name of the storage to remove.
-	 *
-	 * @return     IGrammatistaStorage The storage instance that was removed from the pool, or null if no storage was found.
+	 * @return     IGrammatistaStorage The storage instance.
 	 *
 	 * @author     David Zülke <dz@bitxtender.com>
 	 * @since      1.0.0
 	 */
-	public static function unregisterStorage($name)
+	public static function getStorage()
 	{
-		if(isset(self::$storages[$name])) {
-			// remember the value we are about to remove...
-			$retval = self::$storages[$name];
-			unset(self::$storages[$name]);
-			
-			// ...and return it
-			return $retval;
-		}
-	}
-	
-	/**
-	 * Retrieve a registered storage instance.
-	 *
-	 * @param      string The name of the storage.
-	 *
-	 * @return     IGrammatistaStorage A storage instance, if found.
-	 *
-	 * @throws     IGrammatistaException If no storage of this name was found.
-	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
-	 */
-	public static function getStorage($name)
-	{
-		if(isset(self::$storages[$name])) {
-			return self::$storages[$name];
-		} else {
-			throw new GrammatistaException(sprintf('Storage "%s" not configured.', $name));
-		}
-	}
-	
-	public static function clearStorages()
-	{
-		self::$storages = array();
+		return self::$storage;
 	}
 	
 	/**
@@ -429,10 +393,8 @@ class Grammatista
 		}
 	}
 	
-	public static function run()
+	public static function doScanParseStore()
 	{
-		$results = array();
-		
 		foreach(self::$scanners as $scanner) {
 			foreach($scanner as $item) {
 				foreach(self::$parsers as $parserName => $parserInfo) {
@@ -442,9 +404,7 @@ class Grammatista
 							if($translatable instanceof GrammatistaTranslatable && $translatable->isValid()) {
 								$translatable->item_name = $item->ident;
 								$translatable->parser_name = $parserName;
-								foreach(self::$storages as $storage) {
-									$storage->writeTranslatable($translatable);
-								}
+								self::$storage->writeTranslatable($translatable);
 							} else {
 								if($translatable instanceof GrammatistaTranslatable) {
 									$warning = new GrammatistaWarning($translatable->getArrayCopy());
@@ -453,21 +413,20 @@ class Grammatista
 								}
 								$warning->item_name = $item->ident;
 								$warning->parser_name = $parserName;
-								foreach(self::$storages as $storage) {
-									$storage->writeWarning($warning);
-								}
+								self::$storage->writeWarning($warning);
 							}
 						}
 					}
 				}
 			}
 		}
-		
-		foreach(self::$storages as $storage) {
-			foreach($storage->readTranslatables() as $translatable) {
-				foreach(self::$writers as $writer) {
-					$writer->writeTranslatable($translatable);
-				}
+	}
+	
+	public static function doWrite()
+	{
+		foreach(self::$storage->readTranslatables() as $translatable) {
+			foreach(self::$writers as $writer) {
+				$writer->writeTranslatable($translatable);
 			}
 		}
 	}

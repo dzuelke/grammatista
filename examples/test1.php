@@ -25,7 +25,7 @@ Grammatista::registerParser('agsmarty', array(
 	),
 ));
 
-Grammatista::registerStorage('sqlite', new GrammatistaStoragePdo(array('pdo.dsn' => 'sqlite:' . dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'] . '.sqlite')));
+Grammatista::setStorage(new GrammatistaStoragePdo(array('pdo.dsn' => 'sqlite:' . dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'] . '.sqlite')));
 
 Grammatista::registerWriter('pot', new GrammatistaWriterFilePo(array(
 	'file.basedir' => dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'],
@@ -38,6 +38,8 @@ Grammatista::registerEventResponder('grammatista.storage.translatable.written', 
 Grammatista::registerEventResponder('grammatista.storage.warning.written', array($logger, 'log'));
 Grammatista::registerEventResponder('grammatista.writer.written', array($logger, 'log'));
 
-Grammatista::run();
+Grammatista::doScanParseStore();
+
+Grammatista::doWrite();
 
 ?>
