@@ -4,7 +4,9 @@ class GrammatistaWriterFilePo extends GrammatistaWriterFile
 {
 	public function __construct(array $options = array())
 	{
-		$this->options['file.pattern'] = '%s.pot';
+		if(!isset($options['file.pattern'])) {
+			$this->options['file.pattern'] = '%s.pot';
+		}
 		
 		parent::__construct($options);
 	}

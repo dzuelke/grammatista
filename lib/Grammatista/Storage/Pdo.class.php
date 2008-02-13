@@ -56,9 +56,9 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 		');
 	}
 	
-	public function readTranslatables()
+	public function readTranslatables($unique = true, $order = 'domain')
 	{
-		return $this->connection->query('SELECT * FROM translatables', PDO::FETCH_CLASS, $this->options['pdo.translatable_class_name'], $this->options['pdo.translatable_class_ctorargs']);
+		return $this->connection->query('SELECT * FROM translatables ' . ($unique ? 'GROUP BY domain, singular_message ' : '') . 'ORDER BY ' . $order, PDO::FETCH_CLASS, $this->options['pdo.translatable_class_name'], $this->options['pdo.translatable_class_ctorargs']);
 	}
 	
 	public function readWarnings()

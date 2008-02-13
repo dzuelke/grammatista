@@ -40,7 +40,18 @@ $writer = new GrammatistaWriterFilePo(array(
 	'file.pattern' => '%s.pot',
 ));
 
+$currentDomain = null;
 foreach(Grammatista::getStorage()->readTranslatables() as $translatable) {
+	if($translatable->domain != $currentDomain) {
+		$currentDomain = $translatable->domain;
+		
+		// new writer
+		$writer = new GrammatistaWriterFilePo(array(
+			'file.basedir' => dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'],
+			'file.pattern' => $currentDomain . '.pot',
+		));
+	}
+	
 	$writer->writeTranslatable($translatable);
 }
 

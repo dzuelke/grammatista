@@ -2,6 +2,8 @@
 
 abstract class GrammatistaWriterFile extends GrammatistaWriter
 {
+	protected $fp = null;
+	
 	public function __construct(array $options = array())
 	{
 		// TODO: options checks
@@ -12,11 +14,20 @@ abstract class GrammatistaWriterFile extends GrammatistaWriter
 		if(!is_readable($this->options['file.basedir'])) {
 			mkdir($this->options['file.basedir']);
 		}
+		
+		$this->fp = fopen($this->options['file.basedir'] . '/' . $this->options['file.pattern'], 'w');
+	}
+	
+	public function __destruct()
+	{
+		if($this->fp !== null) {
+			fclose($this->fp);
+		}
 	}
 	
 	public function writeTranslatable(GrammatistaTranslatable $translatable)
 	{
-		file_put_contents($this->options['file.basedir'] . '/' . sprintf($this->options['file.pattern'], $translatable->domain), $this->formatOutput($translatable), FILE_APPEND);
+		fwrite($this->fp, $this->formatOutput($translatable));
 		
 		Grammatista::dispatchEvent('grammatista.writer.written');
 	}
