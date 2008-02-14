@@ -16,6 +16,7 @@ Grammatista::registerParser('gettextphp', array('class' => 'GrammatistaParserPhp
 Grammatista::registerParser('agsmarty', array(
 	'class' => 'GrammatistaParserPcreSmarty',
 	'options' => array(
+		'pcre.comment_pattern' => '/\{\*\s*%s\s*(?P<comment>[^\*\}]+?)\s*\*\}(?!.*?\{trans[\s\}])/s',
 		'pcre.patterns' => array(
 			'/\{trans(\s+(domain=(["\']?)(?P<domain>(?(3)((?!(?<!\\\\)\3).)*|[^\s\}]+))\3|[^\s\}"\'=]+=[^\s\}"\']+|[^\s\}=]+=(["\']?)(?(6)((?!(?<!\\\\)\6).)*|[^\s\}]+)\6))*\s*\}\s*(?P<subpattern>.+?)\s*\{\/trans\}/ms' => array( // best so far! doesn't handle domains without quotation marks yet
 				'/(\s*\{singular\}(?P<singular_message>.+?)\{\/singular\}|\s*\{plural\}(?P<plural_message>.+?)\{\/plural\})+\s*/s' => true,
