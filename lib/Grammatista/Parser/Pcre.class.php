@@ -12,6 +12,8 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 		
 		$matched = array();
 		
+		$lastComment = null;
+		
 		foreach($this->options['pcre.patterns'] as $pattern => $patternInfo) {
 			if(preg_match_all($pattern, $entity->content, $matches, PREG_SET_ORDER | PREG_OFFSET_CAPTURE)) {
 				// var_dump('match!', $pattern, $matches);
@@ -54,6 +56,15 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 						$info['domain'] = $entity->default_domain;
 					}
 					
+					// find comment
+					
+					if(isset($this->options['pcre.comment_pattern'])) {
+						if(preg_match(sprintf($this->options['pcre.comment_pattern'], $this->options['comment_prefix']), substr($entity->content, 0, $match[0][1]), $cmatches)) {
+							var_dump($cmatches);
+							$info['comment'] = $cmatches['comment'];
+						}
+					}
+					
 					foreach($info as $key => $value) {
 						if(!$this->validate($key, $value)) {
 							$problem = true;
@@ -71,7 +82,7 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 							'plural_message' => isset($info['plural_message']) ? $info['plural_message'] : null,
 							'line' => $this->findLine($entity->content, $match[0][1]), //(int)$match[0][1], // offset, not line (yet)
 							'domain' => isset($info['domain']) ? $info['domain'] : null,
-							'comment' => null,
+							'comment' => isset($info['comment']) ? $info['comment'] : null,
 						));
 					} else {
 						$retval[] = new GrammatistaTranslatable(array(
@@ -79,7 +90,7 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 							'plural_message' => isset($info['plural_message']) ? $info['plural_message'] : null,
 							'line' => $this->findLine($entity->content, $match[0][1]), //(int)$match[0][1], // offset, not line (yet)
 							'domain' => isset($info['domain']) ? $info['domain'] : null,
-							'comment' => null,
+							'comment' => isset($info['comment']) ? $info['comment'] : null,
 						));
 					}
 				}

@@ -1,5 +1,6 @@
 Smarty lolz :)
 
+{* tc: comment test *}
 {trans domain="products.latest"}hello!{/trans}
 {trans zomg="bar" domain="newsletter.signup"  }Your E-Mail Address{/trans}
 
