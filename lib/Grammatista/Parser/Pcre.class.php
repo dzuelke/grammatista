@@ -60,7 +60,6 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 					
 					if(isset($this->options['pcre.comment_pattern'])) {
 						if(preg_match(sprintf($this->options['pcre.comment_pattern'], $this->options['comment_prefix']), substr($entity->content, 0, $match[0][1]), $cmatches)) {
-							var_dump($cmatches);
 							$info['comment'] = $cmatches['comment'];
 						}
 					}
