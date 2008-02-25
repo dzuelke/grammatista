@@ -199,7 +199,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		return false;
 	}
 	
-	public function extractInfo(array $tokens, $i, $pattern)
+	protected function extractInfo(GrammatistaEntity $entity, array $tokens, $i, $pattern)
 	{
 		$info = array();
 		
@@ -283,7 +283,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			
 			// check if token (and those following) match one of the patterns
 			if(($pattern = $this->compareToken($tokens, $i)) !== false) {
-				$info = $this->extractInfo($tokens, $i, $this->patterns[$pattern]);
+				$info = $this->extractInfo($entity, $tokens, $i, $this->patterns[$pattern]);
 				$info->comment = $lastComment ? $lastComment : null;
 				
 				$retval[] = $info;
