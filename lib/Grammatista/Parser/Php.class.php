@@ -239,15 +239,6 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		} else {
 			return new GrammatistaWarning($info);
 		}
-		
-		// "decode" all values
-		foreach($info as $key => $value) {
-			$info[$key] = eval('return ' . $value . ';');
-		}
-		
-		// var_dump('LOLZ', $info, 'LOLZ');
-		
-		return $info;
 	}
 	
 	public function parse(GrammatistaEntity $entity)
