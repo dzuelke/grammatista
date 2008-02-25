@@ -401,19 +401,19 @@ class Grammatista
 					$parser = new $parserInfo['class']($parserInfo['options']);
 					if($parser->handles($item)) {
 						foreach($parser->parse($item) as $translatable) {
-							if($translatable instanceof GrammatistaTranslatable && $translatable->isValid()) {
+							if(!isset($translatable->item_name)) {
 								$translatable->item_name = $item->ident;
+							}
+							if(!isset($translatable->parser_name)) {
 								$translatable->parser_name = $parserName;
+							}
+							if($translatable instanceof GrammatistaTranslatable && $translatable->isValid()) {
 								self::$storage->writeTranslatable($translatable);
 							} else {
 								if($translatable instanceof GrammatistaTranslatable) {
-									$warning = new GrammatistaWarning($translatable->getArrayCopy());
-								} else {
-									$warning = $translatable;
+									$translatable = new GrammatistaWarning($translatable->getArrayCopy());
 								}
-								$warning->item_name = $item->ident;
-								$warning->parser_name = $parserName;
-								self::$storage->writeWarning($warning);
+								self::$storage->writeWarning($translatable);
 							}
 						}
 					}
