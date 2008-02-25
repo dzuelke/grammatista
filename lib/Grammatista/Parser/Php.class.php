@@ -119,12 +119,13 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			}
 			
 			switch($tokens[$i]) {
-				case '(':
 				case '{':
+				case ';':
+					break;
+				case '(':
 					$balance++;
 					break;
 				case ')':
-				case '}':
 					$balance--;
 					break;
 			}
@@ -158,6 +159,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 					try {
 						$skip = $this->findBalance($tokens, $i + $j, $j == (count($pattern['tokens']) - 1));
 					} catch(GrammatistaException $e) {
+						return false;
 						var_dump('imbalance. aborting...');
 						// TODO: handle this. doesn't ever happen so far.
 					}
@@ -213,15 +215,30 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 				}
 				// var_dump($tokens[$i + $j], $tokens[$i + $j + $skip]);
 				$valid = true;
-				if($skip > 1 || !is_array($tokens[$i + $j]) || (is_array($pattern['placeholders'][$pattern['tokens'][$j][1]]) && !in_array($tokens[$i + $j][0], $pattern['placeholders'][$pattern['tokens'][$j][1]]))) {
-					// todo: throw warning
+				
+				if($pattern['placeholders'][$pattern['tokens'][$j][1]] === null) {
+					// okay, so the argument is valid, but we need to skip it! (e.g. an amount where anything, like $count, is allowed)
+					// nothing to do here then
+					// var_dump('skipping', $tokens[$i + $j], $skip);
+				} elseif($skip == 1 && $pattern['placeholders'][$pattern['tokens'][$j][1]] !== null) {
+					// something to extract
+					$info[$pattern['tokens'][$j][1]] = $this->decodeToken($tokens[$i + $j]);
+					// var_dump('extracting', $tokens[$i + $j], $info[$pattern['tokens'][$j][1]]);
+				} else {
+					// that didn't go so well...
 					$valid = false;
 					break;
-					// die('omg');
-				} elseif($pattern['placeholders'][$pattern['tokens'][$j][1]] !== null) {
-					// okay, so the argument is valid, but we need to skip it! (e.g. an amount where anything, like $count, is allowed)
-					$info[$pattern['tokens'][$j][1]] = $this->decodeToken($tokens[$i + $j]);
 				}
+				// var_dump($skip);
+				// if($skip > 1 || !is_array($tokens[$i + $j]) || (is_array($pattern['placeholders'][$pattern['tokens'][$j][1]]) && !in_array($tokens[$i + $j][0], $pattern['placeholders'][$pattern['tokens'][$j][1]]))) {
+				// 	// todo: throw warning
+				// 	$valid = false;
+				// 	break;
+				// 	// die('omg');
+				// } elseif($pattern['placeholders'][$pattern['tokens'][$j][1]] !== null) {
+				// 	// okay, so the argument is valid, but we need to skip it! (e.g. an amount where anything, like $count, is allowed)
+				// 	$info[$pattern['tokens'][$j][1]] = $this->decodeToken($tokens[$i + $j]);
+				// }
 				$j += $skip;
 				// var_dump($skip);
 			}
