@@ -244,6 +244,12 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			}
 		}
 		
+		// set a default domain
+		// patterns that have 'warn' will still fail
+		if((!isset($info['domain']) || $info['domain'] === '') && isset($entity->default_domain)) {
+			$info['domain'] = $entity->default_domain;
+		}
+		
 		$info = array(
 			'singular_message' => isset($info['singular_message']) ? $info['singular_message'] : null,
 			'plural_message' => isset($info['plural_message']) ? $info['plural_message'] : null,
