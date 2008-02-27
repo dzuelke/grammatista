@@ -9,6 +9,15 @@ class GrammatistaWriterFilePo extends GrammatistaWriterFile
 		}
 		
 		parent::__construct($options);
+		
+		$headers = array();
+		$headers[] = 'msgid ""';
+		$headers[] = 'msgstr ""';
+		$headers[] = '"MIME-Version: 1.0\\n"';
+		$headers[] = '"Content-Type: text/plain; charset=utf-8\\n"';
+		$headers[] = '"Content-Transfer-Encoding: 8bit\\n"';
+		
+		fwrite($this->fp, implode("\n", $headers) . "\n\n");
 	}
 	
 	protected function escapeString($string)
