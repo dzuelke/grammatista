@@ -417,6 +417,7 @@ class Grammatista
 							}
 						}
 					}
+					unset($parser);
 				}
 			}
 		}

@@ -4,10 +4,14 @@ Smarty lolz :)
 {trans domain=products.latest}hello!{/trans}
 {trans zomg="bar" domain="newsletter.signup"  }Your E-Mail Address{/trans}
 
-{foo bar=baz|trans:sdfghjsd:"en_US"}
+{snippet src="1px" w="10" h="10" title="close this box"|trans}
+
+{foo bar=baz|trans}
 
 {trans arg1=$messageCount domain="widget.messaging" arg2="some text with \" escaped quotation marks :D"}{singular}You have one new Message{/singular}
 {plural}You have %s new Messages{/plural}{/trans}
+
+{foo bar=baz|trans:sdfghjsd:"en_US"}
 
 {snippet src="1px" w="10" h="10" title=closethisbox|trans}
 

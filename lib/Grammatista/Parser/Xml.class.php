@@ -18,6 +18,12 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 		}
 	}
 	
+	public function __destruct()
+	{
+		unset($this->xpath);
+		unset($this->doc);
+	}
+	
 	public function handles(GrammatistaEntity $entity)
 	{
 		return $entity->type == 'xml';
@@ -36,7 +42,7 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 	{
 		// generate unique tag to flag the element and set it as an attribute
 		// that way we can find it again in XPath and XSL
-		$tag = md5(uniqid());
+		$tag = md5(uniqid('', true));
 		$element->setAttributeNS(self::XMLNS_GRAMMATISTA_PARSER_XML, 'grammatista:tag', $tag);
 		return $tag;
 	}
@@ -72,8 +78,8 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 		$line = trim($xslt->transformToXML($this->doc));
 		
 		// cleanup
-		$xslt = null;
-		$xsl = null;
+		unset($xslt);
+		unset($xsl);
 		
 		return $line;
 	}
