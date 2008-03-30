@@ -51,7 +51,7 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 		// find all <validator ... translation_domain="..."> elements
 		foreach($this->xpath->query('//agavi:validator[@translation_domain]') as $validator) {
 			// find all <error> elements in the validator block
-			foreach($this->xpath->query('descendant::agavi:error', $validator) as $error) {
+			foreach($this->xpath->query('agavi:error | agavi:errors/agavi:error', $validator) as $error) {
 				$info = $this->buildErrorInfo($error);
 				$info+= array('domain' => $validator->getAttribute('translation_domain'));
 				
@@ -64,9 +64,9 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 		}
 		
 		// find all <validator> elements without a translation_domain attribute
-		foreach($this->xpath->query('//agavi:validator[not(@translation_domain) and descendant::agavi:error]') as $validator) {
+		foreach($this->xpath->query('//agavi:validator[not(@translation_domain) and (agavi:error | agavi:errors/agavi:error)]') as $validator) {
 			// find all <error> elements in the validator block
-			foreach($this->xpath->query('descendant::agavi:error', $validator) as $error) {
+			foreach($this->xpath->query('agavi:error | agavi:errors/agavi:error', $validator) as $error) {
 				$info = $this->buildErrorInfo($error);
 				$info+= array('domain' => null);
 				
