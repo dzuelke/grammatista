@@ -1,7 +1,7 @@
 Smarty lolz :)
 
 {* tc: comment test *}
-{trans domain=products.latest}hello!{/trans}
+<h1>{trans domain=products.latest}hello!{/trans}</h1>
 {trans zomg="bar" domain="newsletter.signup"  }Your E-Mail Address{/trans}
 
 {snippet src="1px" w="10" h="10" title="close this box"|trans}
