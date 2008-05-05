@@ -193,7 +193,8 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 				}
 			}
 			
-			return $string;
+			// we must have a statement before the return, otherwise, PHP will segfault - see http://bugs.php.net/bug.php?id=44913
+			return $string = $string;
 		}
 		
 		return false;
