@@ -14,8 +14,8 @@
  */
 class Grammatista
 {
-	const VERSION_NUMBER = '0.1.0';
-	const VERSION_STATUS = null;
+	const VERSION_NUMBER = '0.1.1';
+	const VERSION_STATUS = 'dev';
 	
 	/**
 	 * @var        array An array of class names and file paths for autoloading.
