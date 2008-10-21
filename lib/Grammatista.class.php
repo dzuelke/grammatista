@@ -5,16 +5,16 @@
  *
  * @package    Grammatista
  *
- * @author     David Zülke <dz@bitxtender.com>
- * @copyright  bitXtender GbR
+ * @author     David Zülke <david.zuelke@bitextender.com>
+ * @copyright  Bitextender GmbH
  *
- * @since      1.0.0
+ * @since      0.1.0
  *
  * @version    $Id$
  */
 class Grammatista
 {
-	const VERSION_NUMBER = '1.0.0';
+	const VERSION_NUMBER = '0.1.0';
 	const VERSION_STATUS = 'dev';
 	
 	/**
@@ -89,8 +89,8 @@ class Grammatista
 	 *
 	 * @param      string The name of the class to autoload.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function autoload($className)
 	{
@@ -104,8 +104,8 @@ class Grammatista
 	 *
 	 * This sets up the base path and registers the autoloader.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function bootstrap()
 	{
@@ -123,8 +123,8 @@ class Grammatista
 	 *
 	 * @return     string A version number, including status if applicable, e.g. "1.2.0-RC2".
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function getVersionInfo()
 	{
@@ -145,8 +145,8 @@ class Grammatista
 	 *
 	 * @return     string A full version string, example: "Grammatista/1.0.0".
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function getVersionString()
 	{
@@ -160,8 +160,8 @@ class Grammatista
 	 * @param      string The name of the parser.
 	 * @param      array  An associative array of information for this parser.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function registerParser($name, array $parserInfo)
 	{
@@ -183,8 +183,8 @@ class Grammatista
 	 *
 	 * @return     IGrammatistaParser The parser instance that was removed from the pool, or null if no parser for that extension was registered.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function unregisterParser($name)
 	{
@@ -207,8 +207,8 @@ class Grammatista
 	 *
 	 * @throws     IGrammatistaException If no parser for this extension was configured.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function getParser($name)
 	{
@@ -230,8 +230,8 @@ class Grammatista
 	 * @param      string          The name of the scanner.
 	 * @param      IGrammatistaScanner A scanner instance.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function registerScanner($name, IGrammatistaScanner $scanner)
 	{
@@ -245,8 +245,8 @@ class Grammatista
 	 *
 	 * @return     IGrammatistaScanner The scanner instance that was removed from the pool, or null if no scanner was found.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function unregisterScanner($name)
 	{
@@ -269,8 +269,8 @@ class Grammatista
 	 *
 	 * @throws     IGrammatistaException If no scanner of this name was found.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function getScanner($name)
 	{
@@ -291,8 +291,8 @@ class Grammatista
 	 *
 	 * @param      IGrammatistaStorage A storage instance.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function setStorage(IGrammatistaStorage $storage)
 	{
@@ -304,8 +304,8 @@ class Grammatista
 	 *
 	 * @return     IGrammatistaStorage The storage instance.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function getStorage()
 	{
@@ -318,8 +318,8 @@ class Grammatista
 	 * @param      string          The name of the writer.
 	 * @param      IGrammatistaWriter A writer instance.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function registerWriter($name, IGrammatistaWriter $writer)
 	{
@@ -333,8 +333,8 @@ class Grammatista
 	 *
 	 * @return     IGrammatistaWriter The writer instance that was removed from the pool, or null if no writer was found.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function unregisterWriter($name)
 	{
@@ -357,8 +357,8 @@ class Grammatista
 	 *
 	 * @throws     IGrammatistaException If no writer of this name was found.
 	 *
-	 * @author     David Zülke <dz@bitxtender.com>
-	 * @since      1.0.0
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
 	 */
 	public static function getWriter($name)
 	{
