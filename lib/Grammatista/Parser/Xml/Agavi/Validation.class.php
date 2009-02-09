@@ -2,12 +2,23 @@
 
 class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 {
+	const XMLNS_AGAVI_VALIDATION_0_11 = 'http://agavi.org/agavi/1.0/config';
+	const XMLNS_AGAVI_VALIDATION_1_0 = 'http://agavi.org/agavi/config/parts/validators/1.0';
+	
+	protected function load(GrammatistaEntity $entity)
+	{
+		parent::load($entity);
+		
+		$this->xpath->registerNamespace('agavi_validation_0_11', self::XMLNS_AGAVI_VALIDATION_0_11);
+		$this->xpath->registerNamespace('agavi_validation_1_0', self::XMLNS_AGAVI_VALIDATION_1_0);
+	}
+	
 	public function handles(GrammatistaEntity $entity)
 	{
 		$handles = parent::handles($entity);
 		
 		if($handles) {
-			$handles = $this->xpath->query('//agavi:validator')->length > 0;
+			$handles = (bool) $this->xpath->evaluate('count(//agavi_validation_0_11:validator | //agavi_validation_1_0:validator)');
 		}
 		
 		if($handles) {
@@ -20,13 +31,28 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 	protected function buildErrorInfo(DOMElement $error)
 	{
 		// tag the element so we can find it later
-		$tag = $this->tagElement($error);
+		$marker = $this->tagElement($error);
 		
 		// grab the line of the element
-		$line = $this->findLine($tag, 'agavi:error', array('agavi' => self::XMLNS_AGAVI_CONFIG));
+		$line = $this->findLine($marker);
 		
 		// next, find comments for this element
-		$comment = $this->xpath->evaluate(sprintf('normalize-space(substring-after(normalize-space(string(preceding-sibling::comment()[starts-with(normalize-space(.), "%1$s")][following-sibling::agavi:error[1][@grammatista:tag="%2$s"]][1])), "%1$s"))', $this->options['comment_prefix'], $tag), $error);
+		$comment = $this->xpath->evaluate(sprintf('
+			normalize-space(
+				substring-after(
+					normalize-space(
+						string(
+							preceding-sibling::comment()[starts-with(normalize-space(.), "%1$s")][following-sibling::*[local-name() = "%3$s" and namespace-uri() = "%4$s"][1][@grammatista:tag="%2$s"]][1]
+						)
+					),
+					"%1$s"
+				)
+			)',
+			$this->options['comment_prefix'],
+			$marker,
+			$error->localName,
+			$error->namespaceURI
+		), $error);
 		
 		// and remove the tag
 		$this->untagElement($error);
@@ -49,9 +75,9 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 		$retval = array();
 		
 		// find all <validator ... translation_domain="..."> elements
-		foreach($this->xpath->query('//agavi:validator[@translation_domain]') as $validator) {
+		foreach($this->xpath->query('//agavi_validation_0_11:validator[@translation_domain] | //agavi_validation_1_0:validator[@translation_domain]') as $validator) {
 			// find all <error> elements in the validator block
-			foreach($this->xpath->query('agavi:error | agavi:errors/agavi:error', $validator) as $error) {
+			foreach($this->xpath->query('agavi_validation_0_11:error | agavi_validation_1_0:error | agavi_validation_0_11:errors/agavi_validation_0_11:error | agavi_validation_1_0:errors/agavi_validation_1_0:error', $validator) as $error) {
 				$info = $this->buildErrorInfo($error);
 				$info+= array('domain' => $validator->getAttribute('translation_domain'));
 				
@@ -64,9 +90,9 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 		}
 		
 		// find all <validator> elements without a translation_domain attribute
-		foreach($this->xpath->query('//agavi:validator[not(@translation_domain) and (agavi:error | agavi:errors/agavi:error)]') as $validator) {
+		foreach($this->xpath->query('//agavi_validation_0_11:validator[not(@translation_domain) and (agavi_validation_0_11:error | agavi_validation_0_11:errors/agavi_validation_0_11:error)] | //agavi_validation_1_0:validator[not(@translation_domain) and (agavi_validation_1_0:error | agavi_validation_1_0:errors/agavi_validation_1_0:error)]') as $validator) {
 			// find all <error> elements in the validator block
-			foreach($this->xpath->query('agavi:error | agavi:errors/agavi:error', $validator) as $error) {
+			foreach($this->xpath->query('agavi_validation_0_11:error | agavi_validation_0_11:errors/agavi_validation_0_11:error | agavi_validation_1_0:error | agavi_validation_1_0:errors/agavi_validation_1_0:error', $validator) as $error) {
 				$info = $this->buildErrorInfo($error);
 				$info+= array('domain' => null);
 				

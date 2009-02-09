@@ -53,18 +53,14 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 		$element->removeAttributeNS(self::XMLNS_GRAMMATISTA_PARSER_XML, 'grammatista:tag');
 	}
 	
-	protected function findLine($tag, $elementName, array $namespaces = array())
+	protected function findLine($marker)
 	{
 		// stylesheet to find that tagged element
 		$xml = '<?xml version="1.0" encoding="utf-8"?>';
-		$xml.= sprintf('<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:grammatista="%1$s" xmlns:saxon="%2$s"', self::XMLNS_GRAMMATISTA_PARSER_XML, self::XMLNS_SAXON);
-		foreach($namespaces as $prefix => $uri) {
-			$xml.= sprintf(' xmlns:%s="%s"', $prefix, $uri);
-		}
-		$xml.= '>';
+		$xml.= sprintf('<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:grammatista="%1$s" xmlns:saxon="%2$s">', self::XMLNS_GRAMMATISTA_PARSER_XML, self::XMLNS_SAXON);
 		$xml.= '<xsl:strip-space elements="*" />';
 		$xml.= '<xsl:output method="text" encoding="utf-8" indent="yes" />';
-		$xml.= sprintf('<xsl:template match="%s[@grammatista:tag=\'%s\']"><xsl:value-of select="saxon:line-number(.)" /></xsl:template>', $elementName, $tag);
+		$xml.= sprintf('<xsl:template match="*[@grammatista:tag=\'%s\']"><xsl:value-of select="saxon:line-number(.)" /></xsl:template>', $marker);
 		$xml.= '<xsl:template match="text()|@*" />';
 		$xml.= '</xsl:stylesheet>';
 		

@@ -7,24 +7,24 @@
 | AGAVI VALIDATORS CONFIGURATION                                             |
 +~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~+
 -->
-<configurations xmlns="http://agavi.org/agavi/1.0/config">
+<ae:configurations xmlns="http://agavi.org/agavi/config/parts/validators/1.0" xmlns:ae="http://agavi.org/agavi/config/global/envelope/1.0">
 	<!-- custom validators and default parameters -->
-	<configuration>
+	<ae:configuration>
 		<validators>
 
-			<validator class="string" name="username_too_short" translation_domain="default.errors.Login">
+			<validator class="string" name="username_too_short" translation_domain="default.errors.Login2">
 				<arguments>
 					<argument>username</argument>
 				</arguments>
 				<errors>
 					<error>The username you supplied is fewer than 5 characters long.</error>
 				</errors>
-				<parameters>
-					<parameter name="min">5</parameter>
-				</parameters>
+				<ae:parameters>
+					<ae:parameter name="min">5</ae:parameter>
+				</ae:parameters>
 			</validator>
 
-			<validator class="string" name="password_non_existant" translation_domain="default.errors.Login">
+			<validator class="string" name="password_non_existant" translation_domain="default.errors.Login2">
 				<arguments>
 					<argument>password</argument>
 				</arguments>
@@ -38,9 +38,9 @@
 					<!-- tc: omg lol 2 :) -->
 					<error>adasd.</error>
 				</errors>
-				<parameters>
-					<parameter name="min">1</parameter>
-				</parameters>
+				<ae:parameters>
+					<ae:parameter name="min">1</ae:parameter>
+				</ae:parameters>
 			</validator>
 			
 			<validator class="isset" name="remember" required="false">
@@ -50,5 +50,5 @@
 			</validator>
 
 		</validators>
-	</configuration>
-</configurations>
+	</ae:configuration>
+</ae:configurations>

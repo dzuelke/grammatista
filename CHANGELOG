@@ -1,6 +1,12 @@
 Grammatista Changelog
 =====================
 
+0.1.1 (February ?, 2009)
+------------------------
+
+ADD: Support for Agavi 1.0 XML Config Envelopes and Agavi 1.0 Validation Configs (#9) (David)
+
+
 0.1.0 (October 21, 2008)
 ------------------------
 
