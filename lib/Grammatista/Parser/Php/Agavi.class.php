@@ -7,18 +7,26 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 		$this->options = array(
 			'php.patterns' => array(
 				
+				'$tm->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'plural_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'amount' => null, // any
+					),
+				),
 				'$tm->__(declare(singular_message), declare(plural_message), declare(amount), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 					),
@@ -27,32 +35,9 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'amount' => null, // any
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'$tm->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'plural_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 						'domain' => array(
@@ -61,18 +46,26 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'$translationManager->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'plural_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'amount' => null, // any
+					),
+				),
 				'$translationManager->__(declare(singular_message), declare(plural_message), declare(amount), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 					),
@@ -81,32 +74,9 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'amount' => null, // any
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'$translationManager->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'plural_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 						'domain' => array(
@@ -115,18 +85,26 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'getTranslationManager()->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'plural_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'amount' => null, // any
+					),
+				),
 				'getTranslationManager()->__(declare(singular_message), declare(plural_message), declare(amount), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 					),
@@ -135,32 +113,9 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'amount' => null, // any
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'getTranslationManager()->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'plural_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 						'domain' => array(
@@ -169,18 +124,26 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'$this->tm->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'plural_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'amount' => null, // any
+					),
+				),
 				'$this->tm->__(declare(singular_message), declare(plural_message), declare(amount), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 					),
@@ -189,32 +152,9 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'amount' => null, // any
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'$this->tm->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'plural_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 						'domain' => array(
@@ -223,18 +163,26 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'$tm->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'plural_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'amount' => null, // any
+					),
+				),
 				'$tm->_(array(declare(singular_message), declare(plural_message), declare(amount)), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 					),
@@ -243,32 +191,9 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'amount' => null, // any
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'$tm->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'plural_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 						'domain' => array(
@@ -277,18 +202,26 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'$translationManager->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'plural_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'amount' => null, // any
+					),
+				),
 				'$translationManager->_(array(declare(singular_message), declare(plural_message), declare(amount)), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 					),
@@ -297,32 +230,9 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'amount' => null, // any
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'$translationManager->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'plural_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 						'domain' => array(
@@ -331,18 +241,26 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'getTranslationManager()->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'plural_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'amount' => null, // any
+					),
+				),
 				'getTranslationManager()->_(array(declare(singular_message), declare(plural_message), declare(amount)), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 					),
@@ -351,32 +269,9 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'amount' => null, // any
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'getTranslationManager()->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'plural_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 						'domain' => array(
@@ -385,18 +280,26 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'$this->tm->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'plural_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+						'amount' => null, // any
+					),
+				),
 				'$this->tm->_(array(declare(singular_message), declare(plural_message), declare(amount)), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 					),
@@ -405,32 +308,9 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'plural_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'amount' => null, // any
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'$this->tm->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'plural_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'amount' => null, // any
 						'domain' => array(
@@ -439,13 +319,19 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'$tm->_(declare(singular_message))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+					),
+				),
 				'$tm->_(declare(singular_message), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 					),
 				),
@@ -453,21 +339,6 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'$tm->_(declare(singular_message))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'domain' => array(
 							T_CONSTANT_ENCAPSED_STRING,
@@ -475,13 +346,19 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'$translationManager->_(declare(singular_message))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+					),
+				),
 				'$translationManager->_(declare(singular_message), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 					),
 				),
@@ -489,21 +366,6 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'$translationManager->_(declare(singular_message))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'domain' => array(
 							T_CONSTANT_ENCAPSED_STRING,
@@ -511,13 +373,19 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'getTranslationManager()->_(declare(singular_message))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+					),
+				),
 				'getTranslationManager()->_(declare(singular_message), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 					),
 				),
@@ -525,21 +393,6 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'getTranslationManager()->_(declare(singular_message))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'domain' => array(
 							T_CONSTANT_ENCAPSED_STRING,
@@ -547,13 +400,19 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					),
 				),
 				
+				'$this->tm->_(declare(singular_message))' => array(
+					'warn' => true,
+					'placeholders' => array(
+						'singular_message' => array(
+							T_CONSTANT_ENCAPSED_STRING,
+						),
+					),
+				),
 				'$this->tm->_(declare(singular_message), null' => array(
 					'warn' => true,
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 					),
 				),
@@ -561,21 +420,6 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 					'placeholders' => array(
 						'singular_message' => array(
 							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
-						),
-						'domain' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-						),
-					),
-				),
-				'$this->tm->_(declare(singular_message))' => array(
-					'warn' => true,
-					'placeholders' => array(
-						'singular_message' => array(
-							T_CONSTANT_ENCAPSED_STRING,
-							T_DNUMBER,
-							T_LNUMBER,
 						),
 						'domain' => array(
 							T_CONSTANT_ENCAPSED_STRING,
