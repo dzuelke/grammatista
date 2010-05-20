@@ -28,46 +28,6 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 		return $handles;
 	}
 	
-	protected function buildErrorInfo(DOMElement $error)
-	{
-		// tag the element so we can find it later
-		$marker = $this->tagElement($error);
-		
-		// grab the line of the element
-		$line = $this->findLine($marker);
-		
-		// next, find comments for this element
-		$comment = $this->xpath->evaluate(sprintf('
-			normalize-space(
-				substring-after(
-					normalize-space(
-						string(
-							preceding-sibling::comment()[starts-with(normalize-space(.), "%1$s")][following-sibling::*[local-name() = "%3$s" and namespace-uri() = "%4$s"][1][@grammatista:tag="%2$s"]][1]
-						)
-					),
-					"%1$s"
-				)
-			)',
-			$this->options['comment_prefix'],
-			$marker,
-			$error->localName,
-			$error->namespaceURI
-		), $error);
-		
-		// and remove the tag
-		$this->untagElement($error);
-		
-		// build info
-		$info = array(
-			'singular_message' => $error->nodeValue,
-			'plural_message' => null,
-			'line' => $line ? (int)$line : null,
-			'comment' => $comment !== "" ? $comment : null,
-		);
-		
-		return $info;
-	}
-	
 	public function parse(GrammatistaEntity $entity)
 	{
 		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
