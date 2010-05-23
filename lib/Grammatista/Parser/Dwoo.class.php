@@ -35,25 +35,22 @@ class GrammatistaParserDwoo extends GrammatistaParser
 		unset($this->dwoo);
 	}
 	
+	public static function extractString($string)
+	{
+		$tokens = token_get_all('<?php ' . $string);
+		if(count($tokens) == 2 && $tokens[1][0] == T_CONSTANT_ENCAPSED_STRING) {
+			return eval('return ' . $string . ';');
+		}
+	}
+	
 	// the dwoo plugins will call this when they are compiled
 	// hax <:
-	public function collect($info, array $params, array $paramsToExtract, Dwoo_Compiler $compiler)
+	public function collect($info)
 	{
-		$params = $compiler->getCompiledParams($params);
-		foreach($paramsToExtract as $name) {
-			if(isset($params[$name])) {
-				$tokens = token_get_all('<?php ' . $params[$name]);
-				if(count($tokens) == 2 && $tokens[1][0] == T_CONSTANT_ENCAPSED_STRING) {
-					$info->$name = eval('return ' . $params[$name] . ';');
-				}
-			}
-		}
-		
 		if(($info->domain === null || $info->domain === '') && $this->entity->default_domain !== null) {
 			$info->domain = $this->entity->default_domain;
 		}
 		
-		$info->line = $compiler->getLine();
 		$info->comment = $this->comment;
 		
 		$this->items[] = $info;
