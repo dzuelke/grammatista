@@ -38,9 +38,15 @@ class GrammatistaParserDwoo extends GrammatistaParser
 	public static function extractString($string)
 	{
 		$tokens = token_get_all('<?php ' . $string);
-		if(count($tokens) == 2 && $tokens[1][0] == T_CONSTANT_ENCAPSED_STRING) {
-			return eval('return ' . $string . ';');
+		if(count($tokens) == 2 && isset($tokens[1][0])) {
+			if($tokens[1][0] == T_CONSTANT_ENCAPSED_STRING) {
+				return eval('return ' . $string . ';');
+			} elseif($tokens[1][0] == T_STRING && strtolower($tokens[1][1]) == 'null') {
+				return null;
+			}
 		}
+		
+		return false;
 	}
 	
 	// the dwoo plugins will call this when they are compiled
