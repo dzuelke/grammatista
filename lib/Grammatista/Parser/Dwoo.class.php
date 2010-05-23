@@ -2,6 +2,11 @@
 
 class GrammatistaParserDwoo extends GrammatistaParser
 {
+	// current comment
+	protected $comment = null;
+	// current entity
+	protected $entity = null;
+	// all found items
 	protected $items = array();
 	
 	public function __construct(array $options = array())
@@ -32,17 +37,38 @@ class GrammatistaParserDwoo extends GrammatistaParser
 	
 	// the dwoo plugins will call this when they are compiled
 	// hax <:
-	public function collect($info, Dwoo_Compiler $compiler)
+	public function collect($info, array $params, array $paramsToExtract, Dwoo_Compiler $compiler)
 	{
+		$params = $compiler->getCompiledParams($params);
+		foreach($paramsToExtract as $name) {
+			if(isset($params[$name])) {
+				$tokens = token_get_all('<?php ' . $params[$name]);
+				if(count($tokens) == 2 && $tokens[1][0] == T_CONSTANT_ENCAPSED_STRING) {
+					$info->$name = eval('return ' . $params[$name] . ';');
+				}
+			}
+		}
+		
+		if(($info->domain === null || $info->domain === '') && $this->entity->default_domain !== null) {
+			$info->domain = $this->entity->default_domain;
+		}
+		
 		$info->line = $compiler->getLine();
-		$info->comment = $this->extractComment($compiler);
+		$info->comment = $this->comment;
 		
 		$this->items[] = $info;
 	}
 	
-	protected function extractComment(Dwoo_Compiler $compiler)
+	public function collectComment($offset)
 	{
-		return null;
+		if($offset > 0) {
+			if(preg_match(sprintf('#\{\*(?!.*\{\*)\s*%s\s*(.+?)\s*\*\}\s*$#', $this->options['comment_prefix']), substr($this->entity->content, 0, $offset), $matches)) {
+				$this->comment = $matches[1];
+				return;
+			}
+		}
+		
+		$this->comment = null;
 	}
 	
 	public function handles(GrammatistaEntity $entity)
@@ -52,16 +78,14 @@ class GrammatistaParserDwoo extends GrammatistaParser
 	
 	public function parse(GrammatistaEntity $entity)
 	{
+		$this->entity = $entity;
+		
 		$template = new Dwoo_Template_String($entity->content, 0);
 		$template->forceCompilation();
 		$this->dwoo->setTemplate($template);
 		$template->getCompiledTemplate($this->dwoo);
 		
-		foreach($this->items as $item) {
-			if($item->domain === null && $entity->default_domain !== null) {
-				$item->domain = $entity->default_domain;
-			}
-		}
+		$this->entity = null;
 		
 		return $this->items;
 	}
