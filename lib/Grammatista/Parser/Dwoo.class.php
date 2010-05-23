@@ -21,7 +21,7 @@ class GrammatistaParserDwoo extends GrammatistaParser
 			}
 		}
 		
-		$this->dwoo = new Dwoo();
+		$this->dwoo = new Dwoo(isset($this->options['compile_dir']) ? $this->options['compile_dir'] : sys_get_temp_dir());
 		$this->dwoo->_grammatista_parser_dwoo = $this;
 		
 		foreach(array_merge($this->options['runtime_plugin_dirs'], $this->options['grammatista_plugin_dirs']) as $dir) {
