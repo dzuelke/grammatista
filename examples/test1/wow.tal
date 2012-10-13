@@ -1,0 +1,12 @@
+<div class="zomg">
+
+	<h1 tal:content="php:tm._('wow', 'tal.baz')" />
+	
+	<p>There is ${php:count(foo) . ' ' . tm.__('lol', 'lolz', 1, 'tal.baz')} in here</p>
+	
+	<!-- 
+		!!For serious?!!
+		<p tal:content="php:tm._('lol', 'tal.baz')" />
+	-->
+	
+</div>

@@ -1,6 +1,6 @@
 <?php
 
-class GrammatistaStoragePdo extends GrammatistaStorage
+abstract class GrammatistaStoragePdo extends GrammatistaStorage
 {
 	protected $connection = null;
 	
@@ -14,47 +14,19 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 		$this->options['pdo.init_queries'] = array();
 		$this->options['pdo.translatable_class_name'] = 'GrammatistaTranslatablePdo';
 		$this->options['pdo.translatable_class_ctorargs'] = array();
-		
+	
 		parent::__construct($options);
-		
+	
 		// TODO: checks <:
 		if(!isset($this->options['pdo.attributes'][PDO::ATTR_ERRMODE])) {
 			$this->options['pdo.attributes'][PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
 		}
-		
+	
 		$this->connection = new PDO($this->options['pdo.dsn'], $this->options['pdo.username'], $this->options['pdo.password'], $this->options['pdo.driver_options']);
 		foreach((array)$this->options['pdo.attributes'] as $attribute => $value) {
 			$this->connection->setAttribute($attribute, $value);
 		}
-		foreach((array)$this->options['pdo.init_queries'] as $query) {
-			$this->connection->executeQuery($query);
-		}
-		
-		// TODO: make configurable
-		$this->connection->exec('
-			CREATE TABLE translatables(
-				item_name TEXT,
-				line INTEGER,
-				domain TEXT,
-				singular_message TEXT,
-				plural_message TEXT,
-				comment TEXT,
-				parser_name TEXT
-			)
-		');
-		
-		$this->connection->exec('
-			CREATE TABLE warnings(
-				item_name TEXT,
-				line INTEGER,
-				domain TEXT,
-				singular_message TEXT,
-				plural_message TEXT,
-				comment TEXT,
-				parser_name TEXT
-			)
-		');
-	}
+	}	
 	
 	public function readTranslatables($unique = true, $order = 'domain')
 	{

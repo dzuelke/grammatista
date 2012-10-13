@@ -1,6 +1,12 @@
 Grammatista Changelog
 =====================
 
+0.1.2 (October ?, 2012)
+------------------------
+
+ADD: Support for PHPTal (Hash)
+ADD: Support for MySQL storage (Hash)
+
 0.1.1 (February ?, 2009)
 ------------------------
 

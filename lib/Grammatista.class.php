@@ -14,7 +14,7 @@
  */
 class Grammatista
 {
-	const VERSION_NUMBER = '0.1.1';
+	const VERSION_NUMBER = '0.1.2';
 	const VERSION_STATUS = 'dev';
 	
 	/**
@@ -29,6 +29,7 @@ class Grammatista
 		'GrammatistaParserDwoo'               => 'Grammatista/Parser/Dwoo.class.php',
 		'GrammatistaParserPcre'               => 'Grammatista/Parser/Pcre.class.php',
 		'GrammatistaParserPcreSmarty'         => 'Grammatista/Parser/Pcre/Smarty.class.php',
+		'GrammatistaParserPcrePhptal'         => 'Grammatista/Parser/Pcre/Phptal.class.php',
 		'GrammatistaParserPcreSmartySlv3'     => 'Grammatista/Parser/Pcre/Smarty/Slv3.class.php',
 		'GrammatistaParserPhp'                => 'Grammatista/Parser/Php.class.php',
 		'GrammatistaParserPhpAgavi'           => 'Grammatista/Parser/Php/Agavi.class.php',
@@ -39,6 +40,8 @@ class Grammatista
 		'GrammatistaScannerFilesystemRecursivedirectoryiterator' => 'Grammatista/Scanner/Filesystem/Recursivedirectoryiterator.class.php',
 		'GrammatistaStorage'                  => 'Grammatista/Storage.class.php',
 		'GrammatistaStoragePdo'               => 'Grammatista/Storage/Pdo.class.php',
+		'GrammatistaStorageSQLite'            => 'Grammatista/Storage/SQLite.class.php',
+		'GrammatistaStorageMySQL'             => 'Grammatista/Storage/MySQL.class.php',
 		'GrammatistaTranslatable'             => 'Grammatista/Translatable.class.php',
 		'GrammatistaTranslatablePdo'          => 'Grammatista/Translatable/Pdo.class.php',
 		'GrammatistaValueholder'              => 'Grammatista/Valueholder.class.php',

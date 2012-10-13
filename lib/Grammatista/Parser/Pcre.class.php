@@ -68,6 +68,8 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 						if(!$this->validate($key, $value)) {
 							$problem = true;
 							// var_dump('problem!');
+						} else {
+							$info[$key] = $this->transform($value);
 						}
 					}
 					
@@ -104,6 +106,18 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 	protected function findLine($content, $offset)
 	{
 		return preg_match_all('/$/m', substr($content, 0, $offset), $matches);
+	}
+	
+	protected function transform($value)
+	{
+		if(isset($this->options['pcre.transform']) && is_array($this->options['pcre.transform'])) {
+			foreach($this->options['pcre.transform'] as $search => $replace)
+			{
+				$value = str_replace($search, $replace, $value);
+			}
+		}
+		
+		return $value;
 	}
 	
 	abstract protected function validate($name, $value);

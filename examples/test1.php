@@ -29,8 +29,14 @@ Grammatista::registerParser('agsmarty', array(
 		),
 	),
 ));
+Grammatista::registerParser('agphptal', array(
+	'class' => 'GrammatistaParserPcrePhptal',
+	'options' => array(
+		'pcre.transform' => array("' . dquote . '" => '"')
+	)
+));
 
-Grammatista::setStorage(new GrammatistaStoragePdo(array('pdo.dsn' => 'sqlite:' . dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'] . '.sqlite')));
+Grammatista::setStorage(new GrammatistaStorageSQLite(array('pdo.dsn' => 'sqlite:' . dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'] . '.sqlite')));
 
 $logger = new GrammatistaLoggerShell();
 Grammatista::registerEventResponder('grammatista.parser.parsed', array($logger, 'log'));
