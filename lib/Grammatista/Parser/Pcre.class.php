@@ -110,8 +110,8 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 	
 	protected function transform($value)
 	{
-		if(isset($this->options['pcre.transform']) && is_array($this->options['pcre.transform'])) {
-			foreach($this->options['pcre.transform'] as $search => $replace)
+		if(isset($this->options['pcre.transform'])) {
+			foreach((array)$this->options['pcre.transform'] as $search => $replace)
 			{
 				$value = str_replace($search, $replace, $value);
 			}

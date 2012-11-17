@@ -5,11 +5,7 @@ class GrammatistaStorageSQLite extends GrammatistaStoragePdo
 	public function __construct(array $options = array())
 	{
 		parent::__construct($options);
-		
-		foreach((array)$this->options['pdo.init_queries'] as $query) {
-			$this->connection->executeQuery($query);
-		}
-		
+
 		// TODO: make configurable
 		$this->connection->exec('
 			CREATE TABLE translatables(

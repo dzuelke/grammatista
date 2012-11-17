@@ -26,6 +26,10 @@ abstract class GrammatistaStoragePdo extends GrammatistaStorage
 		foreach((array)$this->options['pdo.attributes'] as $attribute => $value) {
 			$this->connection->setAttribute($attribute, $value);
 		}
+		
+		foreach((array)$this->options['pdo.init_queries'] as $query) {
+			$this->connection->query($query);
+		}		
 	}	
 	
 	public function readTranslatables($unique = true, $order = 'domain')

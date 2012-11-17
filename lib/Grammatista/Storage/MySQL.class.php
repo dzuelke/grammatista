@@ -6,10 +6,6 @@ class GrammatistaStorageMySQL extends GrammatistaStoragePdo
 	{	
 		parent::__construct($options);
 
-		foreach((array)$this->options['pdo.init_queries'] as $query) {
-			$this->connection->query($query);
-		}		
-	
 		// TODO: make configurable
 		$this->connection->exec('
 			DROP TABLE IF EXISTS translatables;
