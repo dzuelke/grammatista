@@ -18,44 +18,6 @@ class Grammatista
 	const VERSION_STATUS = 'dev';
 
 	/**
-	 * @var        array An array of class names and file paths for autoloading.
-	 */
-	protected static $autoloads = array(
-		'GrammatistaEntity'                   => 'Grammatista/Entity.class.php',
-		'GrammatistaException'                => 'Grammatista/Exception.class.php',
-		'GrammatistaLogger'                   => 'Grammatista/Logger.class.php',
-		'GrammatistaLoggerShell'              => 'Grammatista/Logger/Shell.class.php',
-		'GrammatistaParser'                   => 'Grammatista/Parser.class.php',
-		'GrammatistaParserDwoo'               => 'Grammatista/Parser/Dwoo.class.php',
-		'GrammatistaParserPcre'               => 'Grammatista/Parser/Pcre.class.php',
-		'GrammatistaParserPcreSmarty'         => 'Grammatista/Parser/Pcre/Smarty.class.php',
-		'GrammatistaParserPcreSmartySlv3'     => 'Grammatista/Parser/Pcre/Smarty/Slv3.class.php',
-		'GrammatistaParserPhp'                => 'Grammatista/Parser/Php.class.php',
-		'GrammatistaParserPhpAgavi'           => 'Grammatista/Parser/Php/Agavi.class.php',
-		'GrammatistaParserXml'                => 'Grammatista/Parser/Xml.class.php',
-		'GrammatistaParserXmlAgavi'           => 'Grammatista/Parser/Xml/Agavi.class.php',
-		'GrammatistaParserXmlAgaviValidation' => 'Grammatista/Parser/Xml/Agavi/Validation.class.php',
-		'GrammatistaScannerFilesystem'        => 'Grammatista/Scanner/Filesystem.class.php',
-		'GrammatistaScannerFilesystemRecursivedirectoryiterator' => 'Grammatista/Scanner/Filesystem/Recursivedirectoryiterator.class.php',
-		'GrammatistaStorage'                  => 'Grammatista/Storage.class.php',
-		'GrammatistaStoragePdo'               => 'Grammatista/Storage/Pdo.class.php',
-		'GrammatistaTranslatable'             => 'Grammatista/Translatable.class.php',
-		'GrammatistaTranslatablePdo'          => 'Grammatista/Translatable/Pdo.class.php',
-		'GrammatistaValueholder'              => 'Grammatista/Valueholder.class.php',
-		'GrammatistaWarning'                  => 'Grammatista/Warning.class.php',
-		'GrammatistaWriter'                   => 'Grammatista/Writer.class.php',
-		'GrammatistaWriterFile'               => 'Grammatista/Writer/File.class.php',
-		'GrammatistaWriterFileC'              => 'Grammatista/Writer/File/C.class.php',
-		'GrammatistaWriterFilePo'             => 'Grammatista/Writer/File/Po.class.php',
-		'IGrammatistaException'               => 'Grammatista/Exception.interface.php',
-		'IGrammatistaLogger'                  => 'Grammatista/Logger.interface.php',
-		'IGrammatistaParser'                  => 'Grammatista/Parser.interface.php',
-		'IGrammatistaScanner'                 => 'Grammatista/Scanner.interface.php',
-		'IGrammatistaStorage'                 => 'Grammatista/Storage.interface.php',
-		'IGrammatistaWriter'                  => 'Grammatista/Writer.interface.php',
-	);
-
-	/**
 	 * @var        array An array of registered parsers.
 	 */
 	protected static $parsers = array();
@@ -79,43 +41,6 @@ class Grammatista
 	 * @var        array An array of registered writers.
 	 */
 	protected static $writers = array();
-
-	/**
-	 * @var        string The base filesystem path to the Grammatista distribution.
-	 */
-	protected static $path = null;
-
-	/**
-	 * Grammatista autoloader.
-	 *
-	 * @param      string The name of the class to autoload.
-	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
-	 * @since      0.1.0
-	 */
-	public static function autoload($className)
-	{
-		if(isset(self::$autoloads[$className])) {
-			require(self::$path . '/' . self::$autoloads[$className]);
-		}
-	}
-
-	/**
-	 * Main Grammatista initialization method.
-	 *
-	 * This sets up the base path and registers the autoloader.
-	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
-	 * @since      0.1.0
-	 */
-	public static function bootstrap()
-	{
-		// grab the base path where we are located
-		self::$path = dirname(__FILE__);
-
-		// and register our autoloader
-		spl_autoload_register(array('Grammatista', 'autoload'));
-	}
 
 	/**
 	 * Version information method.

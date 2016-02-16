@@ -2,7 +2,7 @@
 
 error_reporting(E_ALL | E_STRICT);
 
-require('../lib/Grammatista.php');
+require(__DIR__ . '/../vendor/autoload.php');
 
 Grammatista::registerScanner('fs', new GrammatistaScannerFilesystem(array(
 	'filesystem.path' => realpath(dirname(__FILE__) . '/test1/'),

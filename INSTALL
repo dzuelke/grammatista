@@ -11,6 +11,6 @@ If you would like to run Grammatista's Unit Tests, you need PHPUnit 3.2 or later
 
 Setting up
 ----------
-To use Grammatista, simply include lib/Grammatista.php, or include lib/Grammatista.class.php and call Grammatista::boostrap().
+To use Grammatista, simply add Grammatista to your composer.json and use the Grammatista class.
 
 After that, Grammatista is ready for action. Refer to the documentation to learn how to get started by registering a scanner etc.
