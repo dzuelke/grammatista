@@ -22,7 +22,7 @@ Grammatista::registerParser('agsmarty', array(
 			'/\{trans(\s+(domain=(["\'])?(?P<domain>.*?(?(-2)(?=(?<!\\\\)\g{-2})|(?=[\s\}])))(?(-2)\g{-2})|[^\s\}=]+=(["\'])?.*?(?(-1)(?=(?<!\\\\)\g{-1})|(?=[\s\}]))(?(-1)\g{-1})))*\s*\}\s*(?P<subpattern>.+?)\s*\{\/trans\}/ms' => array( // best so far! doesn't handle domains without quotation marks yet
 				'/(\s*\{singular\}(?P<singular_message>.+?)\{\/singular\}|\s*\{plural\}(?P<plural_message>.+?)\{\/plural\})+\s*/s' => true,
 				'/(?P<singular_message>.+)/s' => true,
-				
+
 			),
 			// '/[^\s\}=]+=(["\'])?(?P<singular_message>.*?(?(-2)(?=(?<!\\\\)\g{-2}\|)|(?=\|)))(?(-2)\g{-2})\|trans(?=[\s\}\:\|])(\:(["\'])?(?P<domain>.*?(?(-2)(?=(?<!\\\\)\g{-2})|(?=[\s\}"\'\:\|])))(?(-2)\g{-2}))?/' => true,
 			'/[^\s\}="\']+=(["\'])?(?P<singular_message>[^"\']*?(?(-2)(?=(?<!\\\\)\g{-2}\|trans[\s\|\:\}])|(?=\|trans[\s\|\:\}])))(?(-2)\g{-2})\|trans(?=[\s\|\:\}])(\:(["\'])?(?P<domain>.*?(?(-2)(?=(?<!\\\\)\g{-2})|(?=[\s\}"\'\:])))(?(-2)\g{-2}))?/' => true,
@@ -44,14 +44,14 @@ $currentDomain = null;
 foreach(Grammatista::getStorage()->readTranslatables() as $translatable) {
 	if($translatable->domain != $currentDomain) {
 		$currentDomain = $translatable->domain;
-		
+
 		// new writer
 		$writer = new GrammatistaWriterFilePo(array(
 			'file.basedir' => dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'],
 			'file.pattern' => $currentDomain . '.pot',
 		));
 	}
-	
+
 	$writer->writeTranslatable($translatable);
 }
 

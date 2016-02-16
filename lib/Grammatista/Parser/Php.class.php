@@ -3,17 +3,17 @@
 abstract class GrammatistaParserPhp extends GrammatistaParser
 {
 	const T_PLACEHOLDER = 1202226086;
-	
+
 	const PATTERN_TYPE_SINGULAR = 'singular';
 	const PATTERN_TYPE_PLURAL = 'plural';
 	const PATTERN_TYPE_WARNING = 'warning';
-	
+
 	protected $patterns = array();
-	
+
 	public function __construct(array $options = array())
 	{
 		parent::__construct($options);
-		
+
 		foreach($this->options['php.patterns'] as $pattern => $info) {
 			$this->patterns[$pattern] = $info + array(
 				'tokens' => $this->parsePattern($pattern),
@@ -21,31 +21,31 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			);
 		}
 	}
-	
+
 	public function handles(GrammatistaEntity $entity)
 	{
 		$retval = $entity->type == 'php';
-		
+
 		if($retval) {
 			Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
 		}
-		
+
 		return $retval;
 	}
-	
+
 	protected function parsePattern($pattern)
 	{
 		$tokens = $this->tokenize('<?php ' . $pattern);
-		
+
 		$retval = array();
-		
+
 		for($i = 0; $i < count($tokens); $i++) {
 			if(
-				is_array($tokens[$i]) && 
-				$tokens[$i][0] == T_DECLARE && 
-				isset($tokens[$i+1]) && $tokens[$i+1] === '(' && 
-				isset($tokens[$i+2]) && is_array($tokens[$i+2]) && $tokens[$i+2][0] == T_STRING && 
-				isset($tokens[$i+3]) && $tokens[$i+3] === ')' 
+				is_array($tokens[$i]) &&
+				$tokens[$i][0] == T_DECLARE &&
+				isset($tokens[$i+1]) && $tokens[$i+1] === '(' &&
+				isset($tokens[$i+2]) && is_array($tokens[$i+2]) && $tokens[$i+2][0] == T_STRING &&
+				isset($tokens[$i+3]) && $tokens[$i+3] === ')'
 			) {
 				$retval[] = array(0 => self::T_PLACEHOLDER, 1 => $tokens[$i+2][1], 2 => $tokens[$i+2][2]);
 				$i += 3;
@@ -53,30 +53,30 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 				$retval[] = $tokens[$i];
 			}
 		}
-		
+
 		return $retval;
 	}
-	
+
 	protected function tokenize($source)
 	{
 		$tokens = array();
-		
+
 		$i = 0;
 		foreach(token_get_all($source) as $token) {
 			$i++;
 			if(is_array($token)) {
 				switch($token[0]) {
-					
+
 					case T_COMMENT:
 						$translationComment = preg_match('/^((\/\*+)|#+|\/{2,})\s*' . preg_quote($this->options['comment_prefix']) . '\s*(.+)\s*(?(2)\*\/)$/ms', $token[1], $matches);
-						
+
 						if(!$translationComment) {
 							continue 2;
 						} else {
 							$token[1] = $matches[3];
 							break;
 						}
-						
+
 					case T_WHITESPACE:
 					case T_INLINE_HTML:
 					case T_OPEN_TAG:
@@ -92,10 +92,10 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			}
 			$tokens[] = $token;
 		}
-		
+
 		return $tokens;
 	}
-	
+
 	protected function decodeToken(array $token)
 	{
 		switch($token[0]) {
@@ -105,11 +105,11 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 				return var_export($token[1], true);
 		}
 	}
-	
+
 	protected function findBalance(array $tokens, $index, $lastInPattern = false)
 	{
 		$balance = 0;
-		
+
 		for($i = $index; $i < count($tokens); $i++) {
 			if($lastInPattern && ($tokens[$i] == ',' || $tokens[$i] == ')')) {
 				break;
@@ -117,7 +117,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			if($tokens[$i] == ',' && $balance == 0) {
 				break;
 			}
-			
+
 			switch($tokens[$i]) {
 				case '{':
 				case ';':
@@ -129,29 +129,29 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 					$balance--;
 					break;
 			}
-			
+
 			if($balance < 0) {
 				$balance = 0;
 				break;
 			}
 		}
-		
+
 		// var_dump('<imbalance>', $imbalance, $i, $index, '</imbalance>');
-		
+
 		if($balance != 0) {
 			throw new GrammatistaException('Unbalanced expression');
 		} else {
 			return $i - $index;
 		}
 	}
-	
+
 	protected function compareToken(array $tokens, $index)
 	{
 		foreach($this->patterns as $string => $pattern) {
 			$i = $index;
-			
+
 			for($j = 0; $j < count($pattern['tokens']); $j++) {
-				
+
 				if(is_array($pattern['tokens'][$j]) && $pattern['tokens'][$j][0] == self::T_PLACEHOLDER) {
 					// var_dump('comparing:', $tokens[$i + $j], $pattern['tokens'][$j]);
 					// var_dump('placeholder "' . $pattern['tokens'][$j][1] . '"! woot! checking balance...');
@@ -175,7 +175,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 					// var_dump($skip);
 					// var_dump($tokens[$i + $j], $tokens[$i + $j + $skip]);
 				}
-				
+
 				if(!isset($tokens[$i + $j])) {
 					continue 2;
 				}
@@ -192,18 +192,18 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 					continue 2;
 				}
 			}
-			
+
 			// we must have a statement before the return, otherwise, PHP will segfault - see http://bugs.php.net/bug.php?id=44913
 			return $string = $string;
 		}
-		
+
 		return false;
 	}
-	
+
 	protected function extractInfo(GrammatistaEntity $entity, array $tokens, $i, $pattern)
 	{
 		$info = array();
-		
+
 		for($j = 0; $j < count($pattern['tokens']); $j++) {
 			if(is_array($pattern['tokens'][$j]) && $pattern['tokens'][$j][0] == self::T_PLACEHOLDER) {
 				// var_dump('placeholder "' . $pattern['tokens'][$j][1] . '"! woot! checking balance...');
@@ -216,7 +216,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 				}
 				// var_dump($tokens[$i + $j], $tokens[$i + $j + $skip]);
 				$valid = true;
-				
+
 				if($pattern['placeholders'][$pattern['tokens'][$j][1]] === null) {
 					// okay, so the argument is valid, but we need to skip it! (e.g. an amount where anything, like $count, is allowed)
 					// nothing to do here then
@@ -244,51 +244,51 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 				// var_dump($skip);
 			}
 		}
-		
+
 		// set a default domain
 		// patterns that have 'warn' will still fail
 		if((!isset($info['domain']) || $info['domain'] === '') && isset($entity->default_domain)) {
 			$info['domain'] = $entity->default_domain;
 		}
-		
+
 		$info = array(
 			'singular_message' => isset($info['singular_message']) ? $info['singular_message'] : null,
 			'plural_message' => isset($info['plural_message']) ? $info['plural_message'] : null,
 			'line' => (int)$tokens[$i][2],
 			'domain' => isset($info['domain']) ? $info['domain'] : null,
 		);
-		
+
 		if($valid && !$pattern['warn']) {
 			return new GrammatistaTranslatable($info);
 		} else {
 			return new GrammatistaWarning($info);
 		}
 	}
-	
+
 	public function parse(GrammatistaEntity $entity)
 	{
 		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
-		
+
 		$retval = array();
-		
+
 		$tokens = $this->tokenize($entity->content);
-		
+
 		$lastComment = null;
-		
+
 		for($i = 0; $i < count($tokens); $i++) {
-			
+
 			if(isset($tokens[$i][0]) && $tokens[$i][0] == T_COMMENT) {
 				// comment? remember it
 				$lastComment = $tokens[$i][1];
 			}
-			
+
 			// check if token (and those following) match one of the patterns
 			if(($pattern = $this->compareToken($tokens, $i)) !== false) {
 				$info = $this->extractInfo($entity, $tokens, $i, $this->patterns[$pattern]);
 				$info->comment = $lastComment ? $lastComment : null;
-				
+
 				$retval[] = $info;
-				
+
 				// $retval[] = new GrammatistaTranslatable(array(
 				// 	'singular_message' => $info['singular_message'],
 				// 	'plural_message' => isset($info['plural_message']) ? $info['plural_message'] : null,
@@ -296,7 +296,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 				// 	'comment' => $lastComment ? $lastComment : null,
 				// 	'domain' => $info['domain'],
 				// ));
-				
+
 				// and reset the last comment
 				$lastComment = null;
 			}
@@ -309,14 +309,14 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			// 		'comment' => $lastComment ? $lastComment : null,
 			// 		'domain' => $info['domain'],
 			// 	));
-			// 	
+			//
 			// 	// and reset the last comment
 			// 	$lastComment = null;
 			// }
 		}
-		
+
 		Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
-		
+
 		return $retval;
 	}
 }

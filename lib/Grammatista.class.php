@@ -16,7 +16,7 @@ class Grammatista
 {
 	const VERSION_NUMBER = '0.1.1';
 	const VERSION_STATUS = 'dev';
-	
+
 	/**
 	 * @var        array An array of class names and file paths for autoloading.
 	 */
@@ -54,37 +54,37 @@ class Grammatista
 		'IGrammatistaStorage'                 => 'Grammatista/Storage.interface.php',
 		'IGrammatistaWriter'                  => 'Grammatista/Writer.interface.php',
 	);
-	
+
 	/**
 	 * @var        array An array of registered parsers.
 	 */
 	protected static $parsers = array();
-	
+
 	/**
 	 * @var        array An array of event responders.
 	 */
 	protected static $responders = array();
-	
+
 	/**
 	 * @var        array An array of registered scanners.
 	 */
 	protected static $scanners = array();
-	
+
 	/**
 	 * @var        IBabelcotStorage A storage.
 	 */
 	protected static $storage = null;
-	
+
 	/**
 	 * @var        array An array of registered writers.
 	 */
 	protected static $writers = array();
-	
+
 	/**
 	 * @var        string The base filesystem path to the Grammatista distribution.
 	 */
 	protected static $path = null;
-	
+
 	/**
 	 * Grammatista autoloader.
 	 *
@@ -99,7 +99,7 @@ class Grammatista
 			require(self::$path . '/' . self::$autoloads[$className]);
 		}
 	}
-	
+
 	/**
 	 * Main Grammatista initialization method.
 	 *
@@ -112,11 +112,11 @@ class Grammatista
 	{
 		// grab the base path where we are located
 		self::$path = dirname(__FILE__);
-		
+
 		// and register our autoloader
 		spl_autoload_register(array('Grammatista', 'autoload'));
 	}
-	
+
 	/**
 	 * Version information method.
 	 *
@@ -130,15 +130,15 @@ class Grammatista
 	public static function getVersionInfo()
 	{
 		$retval = self::VERSION_NUMBER;
-		
+
 		// only append a status (like "RC3") if it is set
 		if(self::VERSION_STATUS !== null) {
 			$retval .= '-' . self::VERSION_STATUS;
 		}
-		
+
 		return $retval;
 	}
-	
+
 	/**
 	 * Full version information string method.
 	 *
@@ -154,7 +154,7 @@ class Grammatista
 		// a slash is common, e.g. Apache/2.2.23 or PHP/5.2.4, so we do that too
 		return 'Grammatista/' . self::getVersionInfo();
 	}
-	
+
 	/**
 	 * Register a parser.
 	 *
@@ -169,14 +169,14 @@ class Grammatista
 		if(!isset($parserInfo['class'])) {
 			throw new GrammatistaException('No class name given in parser info for registerParser()');
 		}
-		
+
 		if(!isset($parserInfo['options']) || !is_array($parserInfo['options'])) {
 			$parserInfo['options'] = array();
 		}
-		
+
 		self::$parsers[$name] = $parserInfo;
 	}
-	
+
 	/**
 	 * Unregister a previously registered parser.
 	 *
@@ -193,12 +193,12 @@ class Grammatista
 			// remember the value we are about to remove...
 			$retval = self::$parsers[$name];
 			unset(self::$parsers[$name]);
-			
+
 			// ...and return it
 			return $retval;
 		}
 	}
-	
+
 	/**
 	 * Retrieve a registered parser instance.
 	 *
@@ -219,12 +219,12 @@ class Grammatista
 			throw new GrammatistaException(sprintf('Parser "%s" not configured.', $name));
 		}
 	}
-	
+
 	public static function clearParsers()
 	{
 		self::$parsers = array();
 	}
-	
+
 	/**
 	 * Register a scanner.
 	 *
@@ -238,7 +238,7 @@ class Grammatista
 	{
 		self::$scanners[$name] = $scanner;
 	}
-	
+
 	/**
 	 * Unregister a previously registered scanner.
 	 *
@@ -255,12 +255,12 @@ class Grammatista
 			// remember the value we are about to remove...
 			$retval = self::$scanners[$name];
 			unset(self::$scanners[$name]);
-			
+
 			// ...and return it
 			return $retval;
 		}
 	}
-	
+
 	/**
 	 * Retrieve a registered scanner instance.
 	 *
@@ -281,12 +281,12 @@ class Grammatista
 			throw new GrammatistaException(sprintf('Scanner "%s" not configured.', $name));
 		}
 	}
-	
+
 	public static function clearScanners()
 	{
 		self::$scanners = array();
 	}
-	
+
 	/**
 	 * Set the storage.
 	 *
@@ -299,7 +299,7 @@ class Grammatista
 	{
 		self::$storage = $storage;
 	}
-	
+
 	/**
 	 * Retrieve the storage instance.
 	 *
@@ -312,7 +312,7 @@ class Grammatista
 	{
 		return self::$storage;
 	}
-	
+
 	/**
 	 * Register a writer.
 	 *
@@ -326,7 +326,7 @@ class Grammatista
 	{
 		self::$writers[$name] = $writer;
 	}
-	
+
 	/**
 	 * Unregister a previously registered writer.
 	 *
@@ -343,12 +343,12 @@ class Grammatista
 			// remember the value we are about to remove...
 			$retval = self::$writers[$name];
 			unset(self::$writers[$name]);
-			
+
 			// ...and return it
 			return $retval;
 		}
 	}
-	
+
 	/**
 	 * Retrieve a registered writer instance.
 	 *
@@ -369,12 +369,12 @@ class Grammatista
 			throw new GrammatistaException(sprintf('Writer "%s" not configured.', $name));
 		}
 	}
-	
+
 	public static function clearWriters()
 	{
 		self::$writers = array();
 	}
-	
+
 	public static function registerEventResponder($pattern, $callback)
 	{
 		if(!isset(self::$responders[$pattern])) {
@@ -382,18 +382,18 @@ class Grammatista
 		}
 		self::$responders[$pattern][] = $callback;
 	}
-	
+
 	public static function dispatchEvent($name, array $arguments = array())
 	{
 		// no regex check against patterns yet :D
-		
+
 		if(isset(self::$responders[$name])) {
 			foreach(self::$responders[$name] as $callback) {
 				call_user_func($callback, $name, $arguments);
 			}
 		}
 	}
-	
+
 	public static function doScanParseStore()
 	{
 		foreach(self::$scanners as $scanner) {

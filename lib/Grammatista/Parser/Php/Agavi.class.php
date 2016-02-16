@@ -6,7 +6,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 	{
 		$this->options = array(
 			'php.patterns' => array(
-				
+
 				'$tm->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -45,7 +45,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'$translationManager->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -84,7 +84,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'getTranslationManager()->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -123,7 +123,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'$this->tm->__(declare(singular_message), declare(plural_message), declare(amount))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -162,7 +162,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'$tm->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -201,7 +201,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'$translationManager->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -240,7 +240,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'getTranslationManager()->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -279,7 +279,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'$this->tm->_(array(declare(singular_message), declare(plural_message), declare(amount)))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -318,7 +318,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'$tm->_(declare(singular_message))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -345,7 +345,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'$translationManager->_(declare(singular_message))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -372,7 +372,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'getTranslationManager()->_(declare(singular_message))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -399,7 +399,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 						),
 					),
 				),
-				
+
 				'$this->tm->_(declare(singular_message))' => array(
 					'warn' => true,
 					'placeholders' => array(
@@ -428,7 +428,7 @@ class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
 				),
 			),
 		);
-		
+
 		parent::__construct($options);
 	}
 }
