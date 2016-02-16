@@ -1,6 +1,14 @@
 <?php
 
-class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
+namespace Grammatista\Parser\Xml\Agavi;
+
+use DOMElement;
+use Grammatista\Entity;
+use Grammatista\Parser\Xml\Agavi;
+use Grammatista\Translatable;
+use Grammatista\Warning;
+
+class Validation extends Agavi
 {
 	const XMLNS_AGAVI_VALIDATION_0_11 = 'http://agavi.org/agavi/1.0/config';
 	const XMLNS_AGAVI_VALIDATION_1_0 = 'http://agavi.org/agavi/config/parts/validators/1.0';
@@ -9,7 +17,7 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function load(GrammatistaEntity $entity)
+	protected function load(Entity $entity)
 	{
 		parent::load($entity);
 
@@ -21,7 +29,7 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(GrammatistaEntity $entity)
+	public function handles(Entity $entity)
 	{
 		$handles = parent::handles($entity);
 
@@ -30,7 +38,7 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 		}
 
 		if($handles) {
-			Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
+			\Grammatista\Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
 		}
 
 		return $handles;
@@ -89,9 +97,9 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 	/**
 	 * {@inheritdoc}
 	 */
-	public function parse(GrammatistaEntity $entity)
+	public function parse(Entity $entity)
 	{
-		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
+		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
 
 		$retval = array();
 
@@ -103,9 +111,9 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 				$info+= array('domain' => $validator->getAttribute('translation_domain'));
 
 				if($info['singular_message'] != '') {
-					$retval[] = new GrammatistaTranslatable($info);
+					$retval[] = new Translatable($info);
 				} else {
-					$retval[] = new GrammatistaWarning($info);
+					$retval[] = new Warning($info);
 				}
 			}
 		}
@@ -118,11 +126,11 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 				$info+= array('domain' => null);
 
 				// build error info
-				$retval[] = new GrammatistaWarning($info);
+				$retval[] = new Warning($info);
 			}
 		}
 
-		Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
+		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
 
 		return $retval;
 	}

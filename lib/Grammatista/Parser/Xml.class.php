@@ -1,6 +1,16 @@
 <?php
 
-abstract class GrammatistaParserXml extends GrammatistaParser
+namespace Grammatista\Parser;
+
+use DOMDocument;
+use DOMElement;
+use DOMXPath;
+use XSLTProcessor;
+use Grammatista\Exception;
+use Grammatista\Entity;
+use Grammatista\Parser;
+
+abstract class Xml extends Parser
 {
 	const XMLNS_GRAMMATISTA_PARSER_XML = 'urn:GrammatistaParserXml';
 	const XMLNS_SAXON = 'http://icl.com/saxon';
@@ -29,7 +39,7 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 
 		$xslt = new XSLTProcessor();
 		if(!$xslt->hasExsltSupport()) {
-			throw new GrammatistaException('EXSLT Support not available');
+			throw new Exception('EXSLT Support not available');
 		}
 	}
 
@@ -48,7 +58,7 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(GrammatistaEntity $entity)
+	public function handles(Entity $entity)
 	{
 		return $entity->type == 'xml';
 	}
@@ -56,12 +66,12 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 	/**
 	 * Load an entity.
 	 *
-	 * @param      GrammatistaEntity The entity.
+	 * @param      Entity The entity.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
-	protected function load(GrammatistaEntity $entity)
+	protected function load(Entity $entity)
 	{
 		$this->doc = new DOMDocument();
 		$this->doc->loadXML($entity->content);

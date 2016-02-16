@@ -1,6 +1,10 @@
 <?php
 
-interface IGrammatistaScanner extends Iterator
+namespace Grammatista;
+
+use Iterator;
+
+interface IScanner extends Iterator
 {
 }
 

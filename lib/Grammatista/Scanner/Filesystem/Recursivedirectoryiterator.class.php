@@ -1,6 +1,11 @@
 <?php
 
-class GrammatistaScannerFilesystemRecursivedirectoryiterator extends RecursiveDirectoryIterator
+namespace Grammatista\Scanner\Filesystem;
+
+use ReflectionClass;
+use Grammatista\Exception;
+
+class Recursivedirectoryiterator extends \RecursiveDirectoryIterator
 {
 	/**
 	 * @var        ReflectionClass
@@ -29,7 +34,7 @@ class GrammatistaScannerFilesystemRecursivedirectoryiterator extends RecursiveDi
 		$this->options = $options;
 
 		if(!isset($options['filesystem.path'])) {
-			throw new GrammatistaException('No path given for GrammatistaScannerFilesystemRecursivedirectoryiterator');
+			throw new Exception('No path given for Grammatista\\Scanner\\Filesystem\\Recursivedirectoryiterator');
 		}
 
 		parent::__construct($options['filesystem.path']);
@@ -79,7 +84,7 @@ class GrammatistaScannerFilesystemRecursivedirectoryiterator extends RecursiveDi
 	/**
 	 * Get the iterator for the current (directory) entry.
 	 *
-	 * @return     GrammatistaScannerFilesystemRecursivedirectoryiterator The iterator.
+	 * @return     Recursivedirectoryiterator The iterator.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0

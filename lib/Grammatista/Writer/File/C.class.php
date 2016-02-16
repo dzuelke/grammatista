@@ -1,6 +1,10 @@
 <?php
 
-class GrammatistaWriterFileC extends GrammatistaWriterFile
+namespace Grammatista\Writer\File;
+
+use Grammatista\Writer\File;
+
+class C extends File
 {
 }
 

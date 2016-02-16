@@ -1,26 +1,28 @@
 <?php
 
-interface IGrammatistaStorage
+namespace Grammatista;
+
+interface IStorage
 {
 	/**
 	 * Write a translatable item to the store.
 	 *
-	 * @param      GrammatistaTranslatable The translatable item.
+	 * @param      Translatable The translatable item.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
-	public function writeTranslatable(GrammatistaTranslatable $info);
+	public function writeTranslatable(Translatable $info);
 
 	/**
 	 * Write a warning to the store.
 	 *
-	 * @param      GrammatistaWarning The warning.
+	 * @param      Warning The warning.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
-	public function writeWarning(GrammatistaWarning $info);
+	public function writeWarning(Warning $info);
 
 	/**
 	 * Read all translatable items from thestore.

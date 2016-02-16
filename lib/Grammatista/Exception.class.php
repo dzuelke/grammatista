@@ -1,6 +1,8 @@
 <?php
 
-class GrammatistaException extends Exception implements IGrammatistaException
+namespace Grammatista;
+
+class Exception extends \Exception implements IException
 {
 }
 

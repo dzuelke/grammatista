@@ -1,6 +1,10 @@
 <?php
 
-class GrammatistaTranslatablePdo extends GrammatistaTranslatable
+namespace Grammatista\Translatable;
+
+use Grammatista\Translatable;
+
+class Pdo extends Translatable
 {
 	// public function __get($name)
 	// {

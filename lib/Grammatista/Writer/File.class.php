@@ -1,6 +1,11 @@
 <?php
 
-abstract class GrammatistaWriterFile extends GrammatistaWriter
+namespace Grammatista\Writer;
+
+use Grammatista\Writer;
+use Grammatista\Translatable;
+
+abstract class File extends Writer
 {
 	/**
 	 * @var        resource The open file handle.
@@ -40,11 +45,11 @@ abstract class GrammatistaWriterFile extends GrammatistaWriter
 	/**
 	 * {@inheritdoc}
 	 */
-	public function writeTranslatable(GrammatistaTranslatable $translatable)
+	public function writeTranslatable(Translatable $translatable)
 	{
 		fwrite($this->fp, $this->formatOutput($translatable));
 
-		Grammatista::dispatchEvent('grammatista.writer.written');
+		\Grammatista\Grammatista::dispatchEvent('grammatista.writer.written');
 	}
 }
 

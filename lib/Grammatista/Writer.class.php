@@ -1,6 +1,8 @@
 <?php
 
-abstract class GrammatistaWriter implements IGrammatistaWriter
+namespace Grammatista;
+
+abstract class Writer implements IWriter
 {
 	/**
 	 * @var        mixed[] An array of option values.
@@ -25,14 +27,14 @@ abstract class GrammatistaWriter implements IGrammatistaWriter
 	/**
 	 * Transform the translatable item into an item suitable for the target format.
 	 *
-	 * @param      GrammatistaTranslatable The translatable item.
+	 * @param      Translatable The translatable item.
 	 *
 	 * @return     string The transformed item.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
-	abstract protected function formatOutput(GrammatistaTranslatable $translatable);
+	abstract protected function formatOutput(Translatable $translatable);
 }
 
 ?>

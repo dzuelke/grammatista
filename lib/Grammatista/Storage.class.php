@@ -1,6 +1,8 @@
 <?php
 
-abstract class GrammatistaStorage implements IGrammatistaStorage
+namespace Grammatista;
+
+abstract class Storage implements IStorage
 {
 	/**
 	 * @var        mixed[] An array of option values.

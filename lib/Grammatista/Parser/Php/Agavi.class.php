@@ -1,6 +1,10 @@
 <?php
 
-class GrammatistaParserPhpAgavi extends GrammatistaParserPhp
+namespace Grammatista\Parser\Php;
+
+use Grammatista\Parser\Php;
+
+class Agavi extends Php
 {
 	/**
 	 * Constructor. Accepts an array of options.

@@ -1,6 +1,8 @@
 <?php
 
-class GrammatistaTranslatable extends GrammatistaValueholder
+namespace Grammatista;
+
+class Translatable extends Valueholder
 {
 	/**
 	 * Checks if this translatable is valid.

@@ -1,6 +1,8 @@
 <?php
 
-abstract class GrammatistaParser implements IGrammatistaParser
+namespace Grammatista;
+
+abstract class Parser implements IParser
 {
 	/**
 	 * @var        mixed[] An array of option values.

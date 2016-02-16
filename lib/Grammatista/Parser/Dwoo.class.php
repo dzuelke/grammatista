@@ -1,6 +1,12 @@
 <?php
 
-class GrammatistaParserDwoo extends GrammatistaParser
+namespace Grammatista\Parser;
+
+use Dwoo_Template_String;
+use Grammatista\Entity;
+use Grammatista\Parser;
+
+class Dwoo extends Parser
 {
 	/**
 	 * @var        string The current comment.
@@ -8,12 +14,12 @@ class GrammatistaParserDwoo extends GrammatistaParser
 	protected $comment = null;
 
 	/**
-	 * @var         GrammatistaEntity The current entity.
+	 * @var         Entity The current entity.
 	 */
 	protected $entity = null;
 
 	/**
-	 * @var         (GrammatistaTranslatable|GrammatistaWarning)[] All found items.
+	 * @var         (\Grammatista\Translatable|\Grammatista\Warning)[] All found items.
 	 */
 	protected $items = array();
 
@@ -84,7 +90,7 @@ class GrammatistaParserDwoo extends GrammatistaParser
 	/**
 	 * The dwoo plugins will call this when they are compiled.
 	 *
-	 * @param      GrammatistaTranslatable|GrammatistaWarning The translatable item
+	 * @param      \Grammatista\Translatable|\Grammatista\Warning The translatable item
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -123,7 +129,7 @@ class GrammatistaParserDwoo extends GrammatistaParser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(GrammatistaEntity $entity)
+	public function handles(Entity $entity)
 	{
 		return $entity->type == 'tpl';
 	}
@@ -131,7 +137,7 @@ class GrammatistaParserDwoo extends GrammatistaParser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function parse(GrammatistaEntity $entity)
+	public function parse(Entity $entity)
 	{
 		$this->entity = $entity;
 

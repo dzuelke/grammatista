@@ -1,6 +1,8 @@
 <?php
 
-abstract class GrammatistaLogger implements IGrammatistaLogger
+namespace Grammatista;
+
+abstract class Logger implements ILogger
 {
 }
 

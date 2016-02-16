@@ -1,6 +1,8 @@
 <?php
 
-class GrammatistaEntity extends GrammatistaValueholder
+namespace Grammatista;
+
+class Entity extends Valueholder
 {
 }
 

@@ -1,6 +1,11 @@
 <?php
 
-class GrammatistaParserPcreSmarty extends GrammatistaParserPcre
+namespace Grammatista\Parser\Pcre;
+
+use Grammatista\Parser\Pcre;
+use Grammatista\Entity;
+
+class Smarty extends Pcre
 {
 	/**
 	 * Constructor. Accepts an array of options.
@@ -22,12 +27,12 @@ class GrammatistaParserPcreSmarty extends GrammatistaParserPcre
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(GrammatistaEntity $entity)
+	public function handles(Entity $entity)
 	{
 		$retval = $entity->type == 'tpl';
 
 		if($retval) {
-			Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
+			\Grammatista\Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
 		}
 
 		return $retval;

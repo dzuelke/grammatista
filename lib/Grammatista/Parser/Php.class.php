@@ -1,6 +1,14 @@
 <?php
 
-abstract class GrammatistaParserPhp extends GrammatistaParser
+namespace Grammatista\Parser;
+
+use Grammatista\Entity;
+use Grammatista\Exception;
+use Grammatista\Parser;
+use Grammatista\Translatable;
+use Grammatista\Warning;
+
+abstract class Php extends Parser
 {
 	const T_PLACEHOLDER = 1202226086;
 
@@ -36,12 +44,12 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(GrammatistaEntity $entity)
+	public function handles(Entity $entity)
 	{
 		$retval = $entity->type == 'php';
 
 		if($retval) {
-			Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
+			\Grammatista\Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
 		}
 
 		return $retval;
@@ -159,7 +167,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 	 *
 	 * @return     int The balance.
 	 *
-	 * @throws     GrammatistaException if there are unbalanced paranthesis
+	 * @throws     Exception if there are unbalanced paranthesis
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -197,7 +205,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		// var_dump('<imbalance>', $imbalance, $i, $index, '</imbalance>');
 
 		if($balance != 0) {
-			throw new GrammatistaException('Unbalanced expression');
+			throw new Exception('Unbalanced expression');
 		} else {
 			return $i - $index;
 		}
@@ -227,7 +235,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 					// a placeholder. continue until we have a balanced set of parentheses
 					try {
 						$skip = $this->findBalance($tokens, $i + $j, $j == (count($pattern['tokens']) - 1));
-					} catch(GrammatistaException $e) {
+					} catch(Exception $e) {
 						return false;
 						var_dump('imbalance. aborting...');
 						// TODO: handle this. doesn't ever happen so far.
@@ -272,17 +280,17 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 	/**
 	 * Construct an translatable item from the pattern at the given position in the token list.
 	 *
-	 * @param      GrammatistaEntity The entity.
+	 * @param      Entity            The entity.
 	 * @param      mixed[][]         The token list.
 	 * @param      int               The curent index.
 	 * @param      mixed[]           The pattern to use for extraction.
 	 *
-	 * @return     GrammatistaTranslatable|GrammatistaWarning The array index of the found pattern.
+	 * @return     Translatable|Warning The array index of the found pattern.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
-	protected function extractInfo(GrammatistaEntity $entity, array $tokens, $i, $pattern)
+	protected function extractInfo(Entity $entity, array $tokens, $i, $pattern)
 	{
 		$info = array();
 
@@ -292,7 +300,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 				// a placeholder. continue until we have a balanced set of parentheses
 				try {
 					$skip = $this->findBalance($tokens, $i + $j, $j == (count($pattern['tokens']) - 1));
-				} catch(GrammatistaException $e) {
+				} catch(Exception $e) {
 					var_dump('imbalance. aborting...');
 					// TODO: handle this. doesn't ever happen so far.
 				}
@@ -341,18 +349,18 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		);
 
 		if($valid && !$pattern['warn']) {
-			return new GrammatistaTranslatable($info);
+			return new Translatable($info);
 		} else {
-			return new GrammatistaWarning($info);
+			return new Warning($info);
 		}
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function parse(GrammatistaEntity $entity)
+	public function parse(Entity $entity)
 	{
-		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
+		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
 
 		$retval = array();
 
@@ -400,7 +408,7 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 			// }
 		}
 
-		Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
+		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
 
 		return $retval;
 	}

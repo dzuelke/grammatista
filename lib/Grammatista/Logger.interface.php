@@ -1,6 +1,8 @@
 <?php
 
-interface IGrammatistaLogger
+namespace Grammatista;
+
+interface ILogger
 {
 	/**
 	 * Log a Message.

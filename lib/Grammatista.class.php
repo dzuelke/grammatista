@@ -1,5 +1,7 @@
 <?php
 
+namespace Grammatista;
+
 /**
  * Main Grammatista class.
  *
@@ -86,7 +88,7 @@ class Grammatista
 	 * @param      string The name of the parser.
 	 * @param      array  An associative array of information for this parser.
 	 *
-	 * @throws     IGrammatistaException If no class info was given in $parserInfo.
+	 * @throws     IException If no class info was given in $parserInfo.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -94,7 +96,7 @@ class Grammatista
 	public static function registerParser($name, array $parserInfo)
 	{
 		if(!isset($parserInfo['class'])) {
-			throw new GrammatistaException('No class name given in parser info for registerParser()');
+			throw new Exception('No class name given in parser info for registerParser()');
 		}
 
 		if(!isset($parserInfo['options']) || !is_array($parserInfo['options'])) {
@@ -109,7 +111,7 @@ class Grammatista
 	 *
 	 * @param      string The extension of the parser to remove.
 	 *
-	 * @return     IGrammatistaParser The parser instance that was removed from the pool, or null if no parser for that extension was registered.
+	 * @return     IParser The parser instance that was removed from the pool, or null if no parser for that extension was registered.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -131,9 +133,9 @@ class Grammatista
 	 *
 	 * @param      string The extension of the parser.
 	 *
-	 * @return     IGrammatistaParser A parser instance, if found.
+	 * @return     IParser A parser instance, if found.
 	 *
-	 * @throws     IGrammatistaException If no parser for this extension was configured.
+	 * @throws     Exception If no parser for this extension was configured.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -143,7 +145,7 @@ class Grammatista
 		if(isset(self::$parsers[$name])) {
 			return self::$parsers[$name];
 		} else {
-			throw new GrammatistaException(sprintf('Parser "%s" not configured.', $name));
+			throw new Exception(sprintf('Parser "%s" not configured.', $name));
 		}
 	}
 
@@ -155,13 +157,13 @@ class Grammatista
 	/**
 	 * Register a scanner.
 	 *
-	 * @param      string          The name of the scanner.
-	 * @param      IGrammatistaScanner A scanner instance.
+	 * @param      string           The name of the scanner.
+	 * @param      IScanner A scanner instance.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
-	public static function registerScanner($name, IGrammatistaScanner $scanner)
+	public static function registerScanner($name, IScanner $scanner)
 	{
 		self::$scanners[$name] = $scanner;
 	}
@@ -171,7 +173,7 @@ class Grammatista
 	 *
 	 * @param      string The name of the scanner to remove.
 	 *
-	 * @return     IGrammatistaScanner The scanner instance that was removed from the pool, or null if no scanner was found.
+	 * @return     IScanner The scanner instance that was removed from the pool, or null if no scanner was found.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -193,9 +195,9 @@ class Grammatista
 	 *
 	 * @param      string The name of the scanner.
 	 *
-	 * @return     IGrammatistaScanner A scanner instance, if found.
+	 * @return     IScanner A scanner instance, if found.
 	 *
-	 * @throws     IGrammatistaException If no scanner of this name was found.
+	 * @throws     Exception If no scanner of this name was found.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -205,7 +207,7 @@ class Grammatista
 		if(isset(self::$scanners[$name])) {
 			return self::$scanners[$name];
 		} else {
-			throw new GrammatistaException(sprintf('Scanner "%s" not configured.', $name));
+			throw new Exception(sprintf('Scanner "%s" not configured.', $name));
 		}
 	}
 
@@ -223,12 +225,12 @@ class Grammatista
 	/**
 	 * Set the storage.
 	 *
-	 * @param      IGrammatistaStorage A storage instance.
+	 * @param      IStorage A storage instance.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
-	public static function setStorage(IGrammatistaStorage $storage)
+	public static function setStorage(IStorage $storage)
 	{
 		self::$storage = $storage;
 	}
@@ -236,7 +238,7 @@ class Grammatista
 	/**
 	 * Retrieve the storage instance.
 	 *
-	 * @return     IGrammatistaStorage The storage instance.
+	 * @return     IStorage The storage instance.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -249,13 +251,13 @@ class Grammatista
 	/**
 	 * Register a writer.
 	 *
-	 * @param      string          The name of the writer.
-	 * @param      IGrammatistaWriter A writer instance.
+	 * @param      string  The name of the writer.
+	 * @param      IWriter A writer instance.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
-	public static function registerWriter($name, IGrammatistaWriter $writer)
+	public static function registerWriter($name, IWriter $writer)
 	{
 		self::$writers[$name] = $writer;
 	}
@@ -265,7 +267,7 @@ class Grammatista
 	 *
 	 * @param      string The name of the writer to remove.
 	 *
-	 * @return     IGrammatistaWriter The writer instance that was removed from the pool, or null if no writer was found.
+	 * @return     IWriter The writer instance that was removed from the pool, or null if no writer was found.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -287,9 +289,9 @@ class Grammatista
 	 *
 	 * @param      string The name of the writer.
 	 *
-	 * @return     IGrammatistaWriter A writer instance, if found.
+	 * @return     IWriter A writer instance, if found.
 	 *
-	 * @throws     IGrammatistaException If no writer of this name was found.
+	 * @throws     Exception If no writer of this name was found.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -299,7 +301,7 @@ class Grammatista
 		if(isset(self::$writers[$name])) {
 			return self::$writers[$name];
 		} else {
-			throw new GrammatistaException(sprintf('Writer "%s" not configured.', $name));
+			throw new Exception(sprintf('Writer "%s" not configured.', $name));
 		}
 	}
 
@@ -371,11 +373,11 @@ class Grammatista
 							if(!isset($translatable->parser_name)) {
 								$translatable->parser_name = $parserName;
 							}
-							if($translatable instanceof GrammatistaTranslatable && $translatable->isValid()) {
+							if($translatable instanceof Translatable && $translatable->isValid()) {
 								self::$storage->writeTranslatable($translatable);
 							} else {
-								if($translatable instanceof GrammatistaTranslatable) {
-									$translatable = new GrammatistaWarning($translatable->getArrayCopy());
+								if($translatable instanceof Translatable) {
+									$translatable = new Warning($translatable->getArrayCopy());
 								}
 								self::$storage->writeWarning($translatable);
 							}

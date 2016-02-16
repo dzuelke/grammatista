@@ -1,6 +1,11 @@
 <?php
 
-abstract class GrammatistaParserXmlAgavi extends GrammatistaParserXml
+namespace Grammatista\Parser\Xml;
+
+use Grammatista\Entity;
+use Grammatista\Parser\Xml;
+
+abstract class Agavi extends Xml
 {
 	const XMLNS_AGAVI_ENVELOPE_0_11 = 'http://agavi.org/agavi/1.0/config';
 	const XMLNS_AGAVI_ENVELOPE_1_0 = 'http://agavi.org/agavi/config/global/envelope/1.0';
@@ -15,7 +20,7 @@ abstract class GrammatistaParserXmlAgavi extends GrammatistaParserXml
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function load(GrammatistaEntity $entity)
+	protected function load(Entity $entity)
 	{
 		parent::load($entity);
 
@@ -27,7 +32,7 @@ abstract class GrammatistaParserXmlAgavi extends GrammatistaParserXml
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(GrammatistaEntity $entity)
+	public function handles(Entity $entity)
 	{
 		$handles = parent::handles($entity);
 

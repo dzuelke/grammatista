@@ -1,11 +1,11 @@
 Grammatista Changelog
 =====================
 
-0.1.1 (February ?, 2009)
+0.2.0 (February ?, 2016)
 ------------------------
 
 ADD: Support for Agavi 1.0 XML Config Envelopes and Agavi 1.0 Validation Configs (#9) (David)
-
+CHG: Move everything to namespaces, also bumping PHP requirement to 5.3 (Dominik)
 
 0.1.0 (October 21, 2008)
 ------------------------

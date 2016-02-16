@@ -1,6 +1,11 @@
 <?php
 
-class GrammatistaWriterFilePo extends GrammatistaWriterFile
+namespace Grammatista\Writer\File;
+
+use Grammatista\Writer\File;
+use Grammatista\Translatable;
+
+class Po extends File
 {
 	/**
 	 * {@inheritdoc}
@@ -53,7 +58,7 @@ class GrammatistaWriterFilePo extends GrammatistaWriterFile
 	/**
 	 * {@inheritdoc}
 	 */
-	protected function formatOutput(GrammatistaTranslatable $translatable)
+	protected function formatOutput(Translatable $translatable)
 	{
 		$lines = array();
 

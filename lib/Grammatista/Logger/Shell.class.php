@@ -1,6 +1,10 @@
 <?php
 
-class GrammatistaLoggerShell extends GrammatistaLogger
+namespace Grammatista\Logger;
+
+use Grammatista\Logger;
+
+class Shell extends Logger
 {
 	public function log($name, array $arguments = array())
 	{

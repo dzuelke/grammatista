@@ -1,13 +1,20 @@
 <?php
 
-abstract class GrammatistaParserPcre extends GrammatistaParser
+namespace Grammatista\Parser;
+
+use Grammatista\Entity;
+use Grammatista\Parser;
+use Grammatista\Translatable;
+use Grammatista\Warning;
+
+abstract class Pcre extends Parser
 {
 	/**
 	 * {@inheritdoc}
 	 */
-	public function parse(GrammatistaEntity $entity)
+	public function parse(Entity $entity)
 	{
-		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
+		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
 
 		$retval = array();
 
@@ -77,7 +84,7 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 					// var_dump('<<<<<<', $info, $problem, '>>>>>>');
 
 					if($problem) {
-						$retval[] = new GrammatistaWarning(array(
+						$retval[] = new Warning(array(
 							'singular_message' => isset($info['singular_message']) ? $info['singular_message'] : null,
 							'plural_message' => isset($info['plural_message']) ? $info['plural_message'] : null,
 							'line' => $this->findLine($entity->content, $match[0][1]), //(int)$match[0][1], // offset, not line (yet)
@@ -85,7 +92,7 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 							'comment' => isset($info['comment']) ? $info['comment'] : null,
 						));
 					} else {
-						$retval[] = new GrammatistaTranslatable(array(
+						$retval[] = new Translatable(array(
 							'singular_message' => isset($info['singular_message']) ? $info['singular_message'] : null,
 							'plural_message' => isset($info['plural_message']) ? $info['plural_message'] : null,
 							'line' => $this->findLine($entity->content, $match[0][1]), //(int)$match[0][1], // offset, not line (yet)
@@ -97,7 +104,7 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 			}
 		}
 
-		Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
+		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
 
 		return $retval;
 	}

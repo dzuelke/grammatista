@@ -1,6 +1,8 @@
 <?php
 
-interface IGrammatistaException
+namespace Grammatista;
+
+interface IException
 {
 }
 

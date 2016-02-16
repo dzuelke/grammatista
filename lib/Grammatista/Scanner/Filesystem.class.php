@@ -1,6 +1,15 @@
 <?php
 
-class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatistaScanner
+namespace Grammatista\Scanner;
+
+use FilterIterator;
+use RecursiveIteratorIterator;
+use Grammatista\Entity;
+use Grammatista\Exception;
+use Grammatista\IScanner;
+use Grammatista\Scanner\Filesystem\Recursivedirectoryiterator;
+
+class Filesystem extends FilterIterator implements IScanner
 {
 	/**
 	 * @var        mixed[] An array of option values.
@@ -22,7 +31,7 @@ class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatist
 	public function __construct(array $options)
 	{
 		if(!isset($options['filesystem.path'])) {
-			throw new GrammatistaException('No path given for GrammatistaScannerFilesystem');
+			throw new Exception('No path given for Grammatista\\Scanner\\Filesystem');
 		}
 
 		if(!isset($options['filesystem.ident.strip'])) {
@@ -31,7 +40,7 @@ class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatist
 
 		$this->options = $options;
 
-		$this->innerIterator = new RecursiveIteratorIterator(new GrammatistaScannerFilesystemRecursivedirectoryiterator($options), RecursiveIteratorIterator::LEAVES_ONLY | RecursiveIteratorIterator::CHILD_FIRST);
+		$this->innerIterator = new RecursiveIteratorIterator(new Recursivedirectoryiterator($options), RecursiveIteratorIterator::LEAVES_ONLY | RecursiveIteratorIterator::CHILD_FIRST);
 
 		parent::__construct($this->innerIterator);
 	}
@@ -52,7 +61,7 @@ class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatist
 	/**
 	 * Get the inner iterator.
 	 *
-	 * @return     Iterator
+	 * @return     \Iterator
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -78,7 +87,7 @@ class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatist
 	/**
 	 * Return the current element.
 	 *
-	 * @return     GrammatistaEntity The current element.
+	 * @return     Entity The current element.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -87,7 +96,7 @@ class GrammatistaScannerFilesystem extends FilterIterator implements IGrammatist
 	{
 		$current = $this->innerIterator->current();
 
-		$retval = new GrammatistaEntity(array(
+		$retval = new Entity(array(
 			'ident' => preg_replace($this->options['filesystem.ident.strip'], '', $current->getRealpath()),
 			'type' => pathinfo($current->getPathname(), PATHINFO_EXTENSION),
 			'content' => file_get_contents($current->getRealpath()),

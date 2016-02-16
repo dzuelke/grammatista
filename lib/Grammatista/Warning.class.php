@@ -1,6 +1,8 @@
 <?php
 
-class GrammatistaWarning extends GrammatistaValueholder
+namespace Grammatista;
+
+class Warning extends Valueholder
 {
 	// public function __get($name)
 	// {

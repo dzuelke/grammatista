@@ -1,6 +1,10 @@
 <?php
 
-class GrammatistaValueholder extends ArrayObject
+namespace Grammatista;
+
+use ArrayObject;
+
+class Valueholder extends ArrayObject
 {
 	/**
 	 * Constructor. Accepts an array of initial values as an argument.
