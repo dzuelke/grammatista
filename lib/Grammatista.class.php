@@ -7,7 +7,8 @@ namespace Grammatista;
  *
  * @package    Grammatista
  *
- * @author     David Zülke <dzuelk@gmai.com>
+ * @author     David Zülke <dzuelke@gmail.com>
+ * @author     Dominik del Bondio <ddb@bitextender.com>
  * @copyright  Bitextender GmbH
  *
  * @since      0.1.0
