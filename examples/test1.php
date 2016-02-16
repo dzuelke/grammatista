@@ -1,20 +1,22 @@
 <?php
 
+use Grammatista\Grammatista;
+
 error_reporting(E_ALL | E_STRICT);
 
 require(__DIR__ . '/../vendor/autoload.php');
 
-Grammatista::registerScanner('fs', new GrammatistaScannerFilesystem(array(
+Grammatista::registerScanner('fs', new \Grammatista\Scanner\Filesystem(array(
 	'filesystem.path' => realpath(dirname(__FILE__) . '/test1/'),
 	'filesystem.skip_patterns' => array(
 		'#/\.svn$#',
 	)
 )));
 
-Grammatista::registerParser('agxml', array('class' => 'GrammatistaParserXmlAgaviValidation'));
-Grammatista::registerParser('gettextphp', array('class' => 'GrammatistaParserPhpAgavi'));
+Grammatista::registerParser('agxml', array('class' => 'Grammatista\\Parser\\Xml\\Agavi\\Validation'));
+Grammatista::registerParser('gettextphp', array('class' => 'Grammatista\\Parser\\Php\\Agavi'));
 Grammatista::registerParser('agsmarty', array(
-	'class' => 'GrammatistaParserPcreSmarty',
+	'class' => 'Grammatista\\Parser\\Pcre\\Smarty',
 	'options' => array(
 		'pcre.comment_pattern' => '/\{\*\s*%s\s*(?P<comment>[^\*\}]+?)\s*\*\}(?!.*?\{trans[\s\}])/s',
 		'pcre.patterns' => array(
@@ -30,9 +32,9 @@ Grammatista::registerParser('agsmarty', array(
 	),
 ));
 
-Grammatista::setStorage(new GrammatistaStoragePdo(array('pdo.dsn' => 'sqlite:' . dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'] . '.sqlite')));
+Grammatista::setStorage(new \Grammatista\Storage\Pdo(array('pdo.dsn' => 'sqlite:' . dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'] . '.sqlite')));
 
-$logger = new GrammatistaLoggerShell();
+$logger = new \Grammatista\Logger\Shell();
 Grammatista::registerEventResponder('grammatista.parser.parsed', array($logger, 'log'));
 Grammatista::registerEventResponder('grammatista.storage.translatable.written', array($logger, 'log'));
 Grammatista::registerEventResponder('grammatista.storage.warning.written', array($logger, 'log'));
@@ -46,7 +48,7 @@ foreach(Grammatista::getStorage()->readTranslatables() as $translatable) {
 		$currentDomain = $translatable->domain;
 
 		// new writer
-		$writer = new GrammatistaWriterFilePo(array(
+		$writer = new \Grammatista\Writer\File\Po(array(
 			'file.basedir' => dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'],
 			'file.pattern' => $currentDomain . '.pot',
 		));
