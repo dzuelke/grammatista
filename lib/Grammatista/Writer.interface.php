@@ -2,7 +2,7 @@
 
 namespace Grammatista;
 
-interface IWriter
+interface WriterInterface
 {
 	/**
 	 * Write a translatable item.

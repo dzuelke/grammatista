@@ -2,7 +2,7 @@
 
 namespace Grammatista;
 
-interface ILogger
+interface LoggerInterface
 {
 	/**
 	 * Log a Message.

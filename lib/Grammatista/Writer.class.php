@@ -2,7 +2,7 @@
 
 namespace Grammatista;
 
-abstract class Writer implements IWriter
+abstract class Writer implements WriterInterface
 {
 	/**
 	 * @var        mixed[] An array of option values.

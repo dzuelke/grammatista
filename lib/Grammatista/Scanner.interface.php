@@ -4,7 +4,7 @@ namespace Grammatista;
 
 use Iterator;
 
-interface IScanner extends Iterator
+interface ScannerInterface extends Iterator
 {
 }
 

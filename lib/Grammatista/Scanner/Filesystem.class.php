@@ -6,10 +6,10 @@ use FilterIterator;
 use RecursiveIteratorIterator;
 use Grammatista\Entity;
 use Grammatista\Exception;
-use Grammatista\IScanner;
+use Grammatista\ScannerInterface;
 use Grammatista\Scanner\Filesystem\Recursivedirectoryiterator;
 
-class Filesystem extends FilterIterator implements IScanner
+class Filesystem extends FilterIterator implements ScannerInterface
 {
 	/**
 	 * @var        mixed[] An array of option values.

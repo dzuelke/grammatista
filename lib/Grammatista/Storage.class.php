@@ -2,7 +2,7 @@
 
 namespace Grammatista;
 
-abstract class Storage implements IStorage
+abstract class Storage implements StorageInterface
 {
 	/**
 	 * @var        mixed[] An array of option values.

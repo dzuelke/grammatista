@@ -35,7 +35,7 @@ class Grammatista
 	protected static $scanners = array();
 
 	/**
-	 * @var        IStorage A storage.
+	 * @var        StorageInterface A storage.
 	 */
 	protected static $storage = null;
 
@@ -86,7 +86,7 @@ class Grammatista
 	 * @param      string $name       The name of the parser.
 	 * @param      array  $parserInfo An associative array of information for this parser.
 	 *
-	 * @throws     IException If no class info was given in $parserInfo.
+	 * @throws     Exception If no class info was given in $parserInfo.
 	 *
 	 * @since      0.1.0
 	 */
@@ -108,7 +108,7 @@ class Grammatista
 	 *
 	 * @param      string $name The extension of the parser to remove.
 	 *
-	 * @return     IParser|null The parser instance that was removed from the pool, or null if no parser for that extension was registered.
+	 * @return     ParserInterface|null The parser instance that was removed from the pool, or null if no parser for that extension was registered.
 	 *
 	 * @since      0.1.0
 	 */
@@ -131,7 +131,7 @@ class Grammatista
 	 *
 	 * @param      string $name The extension of the parser.
 	 *
-	 * @return     IParser A parser instance, if found.
+	 * @return     ParserInterface A parser instance, if found.
 	 *
 	 * @throws     Exception If no parser for this extension was configured.
 	 *
@@ -154,12 +154,12 @@ class Grammatista
 	/**
 	 * Register a scanner.
 	 *
-	 * @param      string   $name    The name of the scanner.
-	 * @param      IScanner $scanner A scanner instance.
+	 * @param      string           $name    The name of the scanner.
+	 * @param      ScannerInterface $scanner A scanner instance.
 	 *
 	 * @since      0.1.0
 	 */
-	public static function registerScanner($name, IScanner $scanner)
+	public static function registerScanner($name, ScannerInterface $scanner)
 	{
 		self::$scanners[$name] = $scanner;
 	}
@@ -169,7 +169,7 @@ class Grammatista
 	 *
 	 * @param      string $name The name of the scanner to remove.
 	 *
-	 * @return     IScanner|null The scanner instance that was removed from the pool, or null if no scanner was found.
+	 * @return     ScannerInterface|null The scanner instance that was removed from the pool, or null if no scanner was found.
 	 *
 	 * @since      0.1.0
 	 */
@@ -192,7 +192,7 @@ class Grammatista
 	 *
 	 * @param      string $name The name of the scanner.
 	 *
-	 * @return     IScanner A scanner instance, if found.
+	 * @return     ScannerInterface A scanner instance, if found.
 	 *
 	 * @throws     Exception If no scanner of this name was found.
 	 *
@@ -220,11 +220,11 @@ class Grammatista
 	/**
 	 * Set the storage.
 	 *
-	 * @param      IStorage $storage A storage instance.
+	 * @param      StorageInterface $storage A storage instance.
 	 *
 	 * @since      0.1.0
 	 */
-	public static function setStorage(IStorage $storage)
+	public static function setStorage(StorageInterface $storage)
 	{
 		self::$storage = $storage;
 	}
@@ -232,7 +232,7 @@ class Grammatista
 	/**
 	 * Retrieve the storage instance.
 	 *
-	 * @return     IStorage The storage instance.
+	 * @return     StorageInterface The storage instance.
 	 *
 	 * @since      0.1.0
 	 */
@@ -244,12 +244,12 @@ class Grammatista
 	/**
 	 * Register a writer.
 	 *
-	 * @param      string  $name   The name of the writer.
-	 * @param      IWriter $writer A writer instance.
+	 * @param      string          $name   The name of the writer.
+	 * @param      WriterInterface $writer A writer instance.
 	 *
 	 * @since      0.1.0
 	 */
-	public static function registerWriter($name, IWriter $writer)
+	public static function registerWriter($name, WriterInterface $writer)
 	{
 		self::$writers[$name] = $writer;
 	}
@@ -259,7 +259,7 @@ class Grammatista
 	 *
 	 * @param      string $name The name of the writer to remove.
 	 *
-	 * @return     IWriter|null The writer instance that was removed from the pool, or null if no writer was found.
+	 * @return     WriterInterface|null The writer instance that was removed from the pool, or null if no writer was found.
 	 *
 	 * @since      0.1.0
 	 */
@@ -282,7 +282,7 @@ class Grammatista
 	 *
 	 * @param      string $name The name of the writer.
 	 *
-	 * @return     IWriter A writer instance, if found.
+	 * @return     WriterInterface A writer instance, if found.
 	 *
 	 * @throws     Exception If no writer of this name was found.
 	 *

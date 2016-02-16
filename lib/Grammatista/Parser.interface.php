@@ -2,7 +2,7 @@
 
 namespace Grammatista;
 
-interface IParser
+interface ParserInterface
 {
 	/**
 	 * Checks if an entity is handled by this parser.

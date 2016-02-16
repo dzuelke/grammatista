@@ -2,7 +2,7 @@
 
 namespace Grammatista;
 
-interface IException
+interface ExceptionInterface
 {
 }
 

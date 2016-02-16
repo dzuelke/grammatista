@@ -2,7 +2,7 @@
 
 namespace Grammatista;
 
-interface IStorage
+interface StorageInterface
 {
 	/**
 	 * Write a translatable item to the store.

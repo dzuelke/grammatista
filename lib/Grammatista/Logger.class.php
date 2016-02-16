@@ -2,7 +2,7 @@
 
 namespace Grammatista;
 
-abstract class Logger implements ILogger
+abstract class Logger implements LoggerInterface
 {
 }
 

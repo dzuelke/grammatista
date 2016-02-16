@@ -2,7 +2,7 @@
 
 namespace Grammatista;
 
-abstract class Parser implements IParser
+abstract class Parser implements ParserInterface
 {
 	/**
 	 * @var        mixed[] An array of option values.
