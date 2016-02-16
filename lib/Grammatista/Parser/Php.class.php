@@ -24,7 +24,7 @@ abstract class Php extends Parser
 	/**
 	 * Constructor. Accepts an array of options.
 	 *
-	 * @param      mixed[] The options.
+	 * @param      mixed[] $options The options.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -58,7 +58,7 @@ abstract class Php extends Parser
 	/**
 	 * Convert a string pattern into a list of tokens.
 	 *
-	 * @param      string The pattern.
+	 * @param      string $pattern The pattern.
 	 *
 	 * @return     mixed[] The list of tokens.
 	 *
@@ -92,7 +92,7 @@ abstract class Php extends Parser
 	/**
 	 * Convert a PHP source into a list of tokens.
 	 *
-	 * @param      string The source.
+	 * @param      string $source The source.
 	 *
 	 * @return     mixed[] The list of tokens.
 	 *
@@ -141,7 +141,7 @@ abstract class Php extends Parser
 	/**
 	 * Decode a token.
 	 *
-	 * @param      array The token.
+	 * @param      array $token The token.
 	 *
 	 * @return     mixed The decoded token.
 	 *
@@ -161,9 +161,9 @@ abstract class Php extends Parser
 	/**
 	 * Returns the index of the end of the currently opened parenthesis.
 	 *
-	 * @param      mixed[][] The list of tokens.
-	 * @param      int The start index.
-	 * @param      bool If at the last item in the last pattern.
+	 * @param      mixed[][] $tokens        The list of tokens.
+	 * @param      int       $index         The start index.
+	 * @param      bool      $lastInPattern If at the last item in the last pattern.
 	 *
 	 * @return     int The balance.
 	 *
@@ -214,8 +214,8 @@ abstract class Php extends Parser
 	/**
 	 * Find a matching pattern in the list of tokens.
 	 *
-	 * @param      mixed[][] The list of tokens.
-	 * @param      int       The curent index.
+	 * @param      mixed[][] $tokens The list of tokens.
+	 * @param      int       $index  The curent index.
 	 *
 	 * @return     string The array index of the found pattern.
 	 *
@@ -280,10 +280,10 @@ abstract class Php extends Parser
 	/**
 	 * Construct an translatable item from the pattern at the given position in the token list.
 	 *
-	 * @param      Entity            The entity.
-	 * @param      mixed[][]         The token list.
-	 * @param      int               The curent index.
-	 * @param      mixed[]           The pattern to use for extraction.
+	 * @param      Entity     $entity  The entity.
+	 * @param      mixed[][]  $tokens  The token list.
+	 * @param      int        $i       The curent index.
+	 * @param      mixed[]    $pattern The pattern to use for extraction.
 	 *
 	 * @return     Translatable|Warning The array index of the found pattern.
 	 *

@@ -47,7 +47,7 @@ class Validation extends Agavi
 	/**
 	 * Build the error info for an element.
 	 *
-	 * @param      DOMElement The errorneous element.
+	 * @param      DOMElement $error The errorneous element.
 	 *
 	 * @return     scalar[] The error info.
 	 *

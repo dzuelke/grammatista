@@ -10,7 +10,7 @@ class Smarty extends Pcre
 	/**
 	 * Constructor. Accepts an array of options.
 	 *
-	 * @param      mixed[] The options.
+	 * @param      mixed[] $options The options.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0

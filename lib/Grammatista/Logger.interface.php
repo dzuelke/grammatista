@@ -7,8 +7,8 @@ interface ILogger
 	/**
 	 * Log a Message.
 	 *
-	 * @param      string  The log message.
-	 * @param      mixed[] An array of additional information.
+	 * @param      string  $name      The log message.
+	 * @param      mixed[] $arguments An array of additional information.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0

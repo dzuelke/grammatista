@@ -23,7 +23,7 @@ class Filesystem extends FilterIterator implements IScanner
 	 *  - string   filesystem.path
 	 *  - string   filesystem.ident.strip
 	 *
-	 * @param      mixed[] The options.
+	 * @param      mixed[] $options The options.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -48,7 +48,10 @@ class Filesystem extends FilterIterator implements IScanner
 	/**
 	 * Passes all calls to the inner iterator.
 	 *
-	 * @return     Iterator
+	 * @param      string  $name The name.
+	 * @param      mixed[] $args The arguments.
+	 *
+	 * @return     mixed
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0

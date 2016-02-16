@@ -31,7 +31,7 @@ class Po extends File
 	/**
 	 * Escape a string for usage in " delimited parts of the po file.
 	 *
-	 * @param      string The string.
+	 * @param      string $string The string.
 	 *
 	 * @return     string The escaped string.
 	 *

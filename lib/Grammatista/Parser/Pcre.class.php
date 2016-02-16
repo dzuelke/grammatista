@@ -112,8 +112,8 @@ abstract class Pcre extends Parser
 	/**
 	 * Get the line at a offset
 	 *
-	 * @param      string The file content.
-	 * @param      int The offset.
+	 * @param      string $content The file content.
+	 * @param      int    $offset  The offset.
 	 *
 	 * @return     string The transformed item.
 	 *
@@ -128,8 +128,8 @@ abstract class Pcre extends Parser
 	/**
 	 * Checks if the value is valid for a field.
 	 *
-	 * @param      string The file content.
-	 * @param      int The offset.
+	 * @param      string $name The field name.
+	 * @param      int $value The field value.
 	 *
 	 * @return     bool
 	 *

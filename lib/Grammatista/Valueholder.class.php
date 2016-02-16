@@ -9,7 +9,7 @@ class Valueholder extends ArrayObject
 	/**
 	 * Constructor. Accepts an array of initial values as an argument.
 	 *
-	 * @param      array An array of values to be set right away.
+	 * @param      array $values An array of values to be set right away.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0

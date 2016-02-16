@@ -85,8 +85,8 @@ class Grammatista
 	/**
 	 * Register a parser.
 	 *
-	 * @param      string The name of the parser.
-	 * @param      array  An associative array of information for this parser.
+	 * @param      string $name       The name of the parser.
+	 * @param      array  $parserInfo An associative array of information for this parser.
 	 *
 	 * @throws     IException If no class info was given in $parserInfo.
 	 *
@@ -109,7 +109,7 @@ class Grammatista
 	/**
 	 * Unregister a previously registered parser.
 	 *
-	 * @param      string The extension of the parser to remove.
+	 * @param      string $name The extension of the parser to remove.
 	 *
 	 * @return     IParser The parser instance that was removed from the pool, or null if no parser for that extension was registered.
 	 *
@@ -131,7 +131,7 @@ class Grammatista
 	/**
 	 * Retrieve a registered parser instance.
 	 *
-	 * @param      string The extension of the parser.
+	 * @param      string $name The extension of the parser.
 	 *
 	 * @return     IParser A parser instance, if found.
 	 *
@@ -157,8 +157,8 @@ class Grammatista
 	/**
 	 * Register a scanner.
 	 *
-	 * @param      string           The name of the scanner.
-	 * @param      IScanner A scanner instance.
+	 * @param      string   $name    The name of the scanner.
+	 * @param      IScanner $scanner A scanner instance.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -171,7 +171,7 @@ class Grammatista
 	/**
 	 * Unregister a previously registered scanner.
 	 *
-	 * @param      string The name of the scanner to remove.
+	 * @param      string $name The name of the scanner to remove.
 	 *
 	 * @return     IScanner The scanner instance that was removed from the pool, or null if no scanner was found.
 	 *
@@ -193,7 +193,7 @@ class Grammatista
 	/**
 	 * Retrieve a registered scanner instance.
 	 *
-	 * @param      string The name of the scanner.
+	 * @param      string $name The name of the scanner.
 	 *
 	 * @return     IScanner A scanner instance, if found.
 	 *
@@ -225,7 +225,7 @@ class Grammatista
 	/**
 	 * Set the storage.
 	 *
-	 * @param      IStorage A storage instance.
+	 * @param      IStorage $storage A storage instance.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -251,8 +251,8 @@ class Grammatista
 	/**
 	 * Register a writer.
 	 *
-	 * @param      string  The name of the writer.
-	 * @param      IWriter A writer instance.
+	 * @param      string  $name   The name of the writer.
+	 * @param      IWriter $writer A writer instance.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -265,7 +265,7 @@ class Grammatista
 	/**
 	 * Unregister a previously registered writer.
 	 *
-	 * @param      string The name of the writer to remove.
+	 * @param      string $name The name of the writer to remove.
 	 *
 	 * @return     IWriter The writer instance that was removed from the pool, or null if no writer was found.
 	 *
@@ -287,7 +287,7 @@ class Grammatista
 	/**
 	 * Retrieve a registered writer instance.
 	 *
-	 * @param      string The name of the writer.
+	 * @param      string $name The name of the writer.
 	 *
 	 * @return     IWriter A writer instance, if found.
 	 *
@@ -316,16 +316,16 @@ class Grammatista
 		self::$writers = array();
 	}
 
-	public static function registerEventResponder($pattern, $callback)
 	/**
 	 * Register an event handler.
 	 *
-	 * @param      string   The event name.
-	 * @param      callable The event handler.
+	 * @param      string   $pattern The event name.
+	 * @param      callable $callback The event handler.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
+	public static function registerEventResponder($pattern, $callback)
 	{
 		if(!isset(self::$responders[$pattern])) {
 			self::$responders[$pattern] = array();
@@ -336,8 +336,8 @@ class Grammatista
 	/**
 	 * Dispatch an event.
 	 *
-	 * @param      string  The event name.
-	 * @param      mixed[] The event arguments.
+	 * @param      string  $name      The event name.
+	 * @param      mixed[] $arguments The event arguments.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0

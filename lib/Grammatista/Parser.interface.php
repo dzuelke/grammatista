@@ -7,7 +7,7 @@ interface IParser
 	/**
 	 * Checks if an entity is handled by this parser.
 	 *
-	 * @param      Entity The entity.
+	 * @param      Entity $entity The entity.
 	 *
 	 * @return     bool
 	 *
@@ -19,7 +19,7 @@ interface IParser
 	/**
 	 * Parses an entity to a list of translatable items.
 	 *
-	 * @param      Entity The entity.
+	 * @param      Entity $entity The entity.
 	 *
 	 * @return     (Translatable|Warning)[]
 	 *

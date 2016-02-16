@@ -7,7 +7,7 @@ interface IStorage
 	/**
 	 * Write a translatable item to the store.
 	 *
-	 * @param      Translatable The translatable item.
+	 * @param      Translatable $info The translatable item.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -17,7 +17,7 @@ interface IStorage
 	/**
 	 * Write a warning to the store.
 	 *
-	 * @param      Warning The warning.
+	 * @param      Warning $info The warning.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0

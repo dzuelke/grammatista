@@ -26,7 +26,7 @@ class Dwoo extends Parser
 	/**
 	 * Constructor. Accepts an array of options.
 	 *
-	 * @param      mixed[] The options.
+	 * @param      mixed[] $options The options.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -66,7 +66,7 @@ class Dwoo extends Parser
 	/**
 	 * Convert a source string into it's represented value.
 	 *
-	 * @param      string The PHP string. E.g '"Line1\nLine2"'.
+	 * @param      string $string The PHP string. E.g '"Line1\nLine2"'.
 	 *
 	 * @return     string The represented value.
 	 *
@@ -90,7 +90,7 @@ class Dwoo extends Parser
 	/**
 	 * The dwoo plugins will call this when they are compiled.
 	 *
-	 * @param      \Grammatista\Translatable|\Grammatista\Warning The translatable item
+	 * @param      \Grammatista\Translatable|\Grammatista\Warning $info The translatable item
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -109,7 +109,7 @@ class Dwoo extends Parser
 	/**
 	 * The dwoo plugins will call this when they are compiled.
 	 *
-	 * @param      int The offset
+	 * @param      int $offset The offset
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0

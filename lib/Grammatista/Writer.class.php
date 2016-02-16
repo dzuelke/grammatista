@@ -12,7 +12,7 @@ abstract class Writer implements IWriter
 	/**
 	 * Constructor. Accepts an array of options.
 	 *
-	 * @param      mixed[] The options.
+	 * @param      mixed[] $options The options.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -27,7 +27,7 @@ abstract class Writer implements IWriter
 	/**
 	 * Transform the translatable item into an item suitable for the target format.
 	 *
-	 * @param      Translatable The translatable item.
+	 * @param      Translatable $translatable The translatable item.
 	 *
 	 * @return     string The transformed item.
 	 *
