@@ -52,6 +52,8 @@ class Smarty extends Pcre
 			case 'comment':
 				return true;
 		}
+
+		return false;
 	}
 }
 

@@ -111,7 +111,7 @@ class Grammatista
 	 *
 	 * @param      string $name The extension of the parser to remove.
 	 *
-	 * @return     IParser The parser instance that was removed from the pool, or null if no parser for that extension was registered.
+	 * @return     IParser|null The parser instance that was removed from the pool, or null if no parser for that extension was registered.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -126,6 +126,8 @@ class Grammatista
 			// ...and return it
 			return $retval;
 		}
+
+		return null;
 	}
 
 	/**
@@ -173,7 +175,7 @@ class Grammatista
 	 *
 	 * @param      string $name The name of the scanner to remove.
 	 *
-	 * @return     IScanner The scanner instance that was removed from the pool, or null if no scanner was found.
+	 * @return     IScanner|null The scanner instance that was removed from the pool, or null if no scanner was found.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -188,6 +190,8 @@ class Grammatista
 			// ...and return it
 			return $retval;
 		}
+
+		return null;
 	}
 
 	/**
@@ -267,7 +271,7 @@ class Grammatista
 	 *
 	 * @param      string $name The name of the writer to remove.
 	 *
-	 * @return     IWriter The writer instance that was removed from the pool, or null if no writer was found.
+	 * @return     IWriter|null The writer instance that was removed from the pool, or null if no writer was found.
 	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
@@ -282,6 +286,8 @@ class Grammatista
 			// ...and return it
 			return $retval;
 		}
+
+		return null;
 	}
 
 	/**
