@@ -21,17 +21,17 @@ class Grammatista
 	const VERSION_STATUS = 'dev';
 
 	/**
-	 * @var        array An array of registered parsers.
+	 * @var        ParserInterface[] An array of registered parsers.
 	 */
 	protected static $parsers = array();
 
 	/**
-	 * @var        array An array of event responders.
+	 * @var        callable[] An array of event responders.
 	 */
 	protected static $responders = array();
 
 	/**
-	 * @var        array An array of registered scanners.
+	 * @var        ScannerInterface[] An array of registered scanners.
 	 */
 	protected static $scanners = array();
 
@@ -41,7 +41,7 @@ class Grammatista
 	protected static $storage = null;
 
 	/**
-	 * @var        array An array of registered writers.
+	 * @var        WriterInterface[] An array of registered writers.
 	 */
 	protected static $writers = array();
 
