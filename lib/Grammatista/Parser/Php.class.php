@@ -26,7 +26,6 @@ abstract class Php extends Parser
 	 *
 	 * @param      mixed[] $options The options.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __construct(array $options = array())
@@ -62,7 +61,6 @@ abstract class Php extends Parser
 	 *
 	 * @return     mixed[] The list of tokens.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function parsePattern($pattern)
@@ -96,7 +94,6 @@ abstract class Php extends Parser
 	 *
 	 * @return     mixed[] The list of tokens.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function tokenize($source)
@@ -145,7 +142,6 @@ abstract class Php extends Parser
 	 *
 	 * @return     mixed The decoded token.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function decodeToken(array $token)
@@ -169,7 +165,6 @@ abstract class Php extends Parser
 	 *
 	 * @throws     Exception if there are unbalanced paranthesis
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function findBalance(array $tokens, $index, $lastInPattern = false)
@@ -219,7 +214,6 @@ abstract class Php extends Parser
 	 *
 	 * @return     string The array index of the found pattern.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function compareToken(array $tokens, $index)
@@ -287,7 +281,6 @@ abstract class Php extends Parser
 	 *
 	 * @return     Translatable|Warning The array index of the found pattern.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function extractInfo(Entity $entity, array $tokens, $i, $pattern)

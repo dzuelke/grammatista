@@ -32,7 +32,6 @@ abstract class File extends Writer
 	/**
 	 * Destructor. Closes all open resources.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __destruct()

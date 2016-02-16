@@ -7,7 +7,7 @@ namespace Grammatista;
  *
  * @package    Grammatista
  *
- * @author     David Zülke <david.zuelke@bitextender.com>
+ * @author     David Zülke <dzuelk@gmai.com>
  * @copyright  Bitextender GmbH
  *
  * @since      0.1.0
@@ -51,7 +51,6 @@ class Grammatista
 	 *
 	 * @return     string A version number, including status if applicable, e.g. "1.2.0-RC2".
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function getVersionInfo()
@@ -73,7 +72,6 @@ class Grammatista
 	 *
 	 * @return     string A full version string, example: "Grammatista/1.0.0".
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function getVersionString()
@@ -90,7 +88,6 @@ class Grammatista
 	 *
 	 * @throws     IException If no class info was given in $parserInfo.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function registerParser($name, array $parserInfo)
@@ -113,7 +110,6 @@ class Grammatista
 	 *
 	 * @return     IParser|null The parser instance that was removed from the pool, or null if no parser for that extension was registered.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function unregisterParser($name)
@@ -139,7 +135,6 @@ class Grammatista
 	 *
 	 * @throws     Exception If no parser for this extension was configured.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function getParser($name)
@@ -162,7 +157,6 @@ class Grammatista
 	 * @param      string   $name    The name of the scanner.
 	 * @param      IScanner $scanner A scanner instance.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function registerScanner($name, IScanner $scanner)
@@ -177,7 +171,6 @@ class Grammatista
 	 *
 	 * @return     IScanner|null The scanner instance that was removed from the pool, or null if no scanner was found.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function unregisterScanner($name)
@@ -203,7 +196,6 @@ class Grammatista
 	 *
 	 * @throws     Exception If no scanner of this name was found.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function getScanner($name)
@@ -218,7 +210,6 @@ class Grammatista
 	/**
 	 * Remove all registered scanner instances.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function clearScanners()
@@ -231,7 +222,6 @@ class Grammatista
 	 *
 	 * @param      IStorage $storage A storage instance.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function setStorage(IStorage $storage)
@@ -244,7 +234,6 @@ class Grammatista
 	 *
 	 * @return     IStorage The storage instance.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function getStorage()
@@ -258,7 +247,6 @@ class Grammatista
 	 * @param      string  $name   The name of the writer.
 	 * @param      IWriter $writer A writer instance.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function registerWriter($name, IWriter $writer)
@@ -273,7 +261,6 @@ class Grammatista
 	 *
 	 * @return     IWriter|null The writer instance that was removed from the pool, or null if no writer was found.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function unregisterWriter($name)
@@ -299,7 +286,6 @@ class Grammatista
 	 *
 	 * @throws     Exception If no writer of this name was found.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function getWriter($name)
@@ -314,7 +300,6 @@ class Grammatista
 	/**
 	 * Remove all registered writer instances.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function clearWriters()
@@ -328,7 +313,6 @@ class Grammatista
 	 * @param      string   $pattern The event name.
 	 * @param      callable $callback The event handler.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function registerEventResponder($pattern, $callback)
@@ -345,7 +329,6 @@ class Grammatista
 	 * @param      string  $name      The event name.
 	 * @param      mixed[] $arguments The event arguments.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function dispatchEvent($name, array $arguments = array())
@@ -362,7 +345,6 @@ class Grammatista
 	/**
 	 * Parse and store the translations.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function doScanParseStore()

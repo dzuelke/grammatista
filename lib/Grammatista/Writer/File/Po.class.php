@@ -35,7 +35,6 @@ class Po extends File
 	 *
 	 * @return     string The escaped string.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function escapeString($string)

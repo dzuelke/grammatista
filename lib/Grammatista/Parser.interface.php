@@ -11,7 +11,6 @@ interface IParser
 	 *
 	 * @return     bool
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function handles(Entity $entity);
@@ -23,7 +22,6 @@ interface IParser
 	 *
 	 * @return     (Translatable|Warning)[]
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function parse(Entity $entity);

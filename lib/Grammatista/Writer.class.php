@@ -14,7 +14,6 @@ abstract class Writer implements IWriter
 	 *
 	 * @param      mixed[] $options The options.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __construct(array $options = array())
@@ -31,7 +30,6 @@ abstract class Writer implements IWriter
 	 *
 	 * @return     string The transformed item.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	abstract protected function formatOutput(Translatable $translatable);

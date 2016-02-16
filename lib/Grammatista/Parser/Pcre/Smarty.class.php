@@ -12,7 +12,6 @@ class Smarty extends Pcre
 	 *
 	 * @param      mixed[] $options The options.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __construct(array $options = array())

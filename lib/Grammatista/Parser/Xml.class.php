@@ -30,7 +30,6 @@ abstract class Xml extends Parser
 	 *
 	 * @param      mixed[] $options The options.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __construct(array $options = array())
@@ -46,7 +45,6 @@ abstract class Xml extends Parser
 	/**
 	 * Destructor. Closes all open resources.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __destruct()
@@ -68,7 +66,6 @@ abstract class Xml extends Parser
 	 *
 	 * @param      Entity $entity The entity.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function load(Entity $entity)
@@ -87,7 +84,6 @@ abstract class Xml extends Parser
 	 *
 	 * @return     string The unique identifier.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function tagElement(DOMElement $element)
@@ -104,7 +100,6 @@ abstract class Xml extends Parser
 	 *
 	 * @param      DOMElement $element The element.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function untagElement(DOMElement $element)
@@ -120,7 +115,6 @@ abstract class Xml extends Parser
 	 *
 	 * @return     int The line.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function findLine($marker)

@@ -26,7 +26,6 @@ class Recursivedirectoryiterator extends \RecursiveDirectoryIterator
 	 *
 	 * @param      mixed[] $options The options.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __construct(array $options = array())
@@ -43,7 +42,6 @@ class Recursivedirectoryiterator extends \RecursiveDirectoryIterator
 	/**
 	 * Iterate to the next valid item.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function fetch()
@@ -60,7 +58,6 @@ class Recursivedirectoryiterator extends \RecursiveDirectoryIterator
 	/**
 	 * Move forward to next element.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function next()
@@ -72,7 +69,6 @@ class Recursivedirectoryiterator extends \RecursiveDirectoryIterator
 	/**
 	 * Rewind the Iterator to the first element.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function rewind()
@@ -86,7 +82,6 @@ class Recursivedirectoryiterator extends \RecursiveDirectoryIterator
 	 *
 	 * @return     Recursivedirectoryiterator The iterator.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function getChildren()
@@ -103,7 +98,6 @@ class Recursivedirectoryiterator extends \RecursiveDirectoryIterator
 	 *
 	 * @return     bool
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function accept()

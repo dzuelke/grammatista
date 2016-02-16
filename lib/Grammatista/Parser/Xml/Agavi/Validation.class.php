@@ -51,7 +51,6 @@ class Validation extends Agavi
 	 *
 	 * @return     scalar[] The error info.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function buildErrorInfo(DOMElement $error)

@@ -9,7 +9,6 @@ class Translatable extends Valueholder
 	 *
 	 * @return     bool
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function isValid()

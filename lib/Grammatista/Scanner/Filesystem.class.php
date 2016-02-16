@@ -25,7 +25,6 @@ class Filesystem extends FilterIterator implements IScanner
 	 *
 	 * @param      mixed[] $options The options.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __construct(array $options)
@@ -53,7 +52,6 @@ class Filesystem extends FilterIterator implements IScanner
 	 *
 	 * @return     mixed
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __call($name, $args)
@@ -66,7 +64,6 @@ class Filesystem extends FilterIterator implements IScanner
 	 *
 	 * @return     \Iterator
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function getInnerIterator()
@@ -79,7 +76,6 @@ class Filesystem extends FilterIterator implements IScanner
 	 *
 	 * @return     bool
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function accept()
@@ -92,7 +88,6 @@ class Filesystem extends FilterIterator implements IScanner
 	 *
 	 * @return     Entity The current element.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function current()

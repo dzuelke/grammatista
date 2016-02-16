@@ -9,7 +9,6 @@ interface IStorage
 	 *
 	 * @param      Translatable $info The translatable item.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function writeTranslatable(Translatable $info);
@@ -19,7 +18,6 @@ interface IStorage
 	 *
 	 * @param      Warning $info The warning.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function writeWarning(Warning $info);
@@ -29,7 +27,6 @@ interface IStorage
 	 *
 	 * @return     mixed[][] An array of translatable items encoded as arrays.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function readTranslatables();
@@ -39,7 +36,6 @@ interface IStorage
 	 *
 	 * @return     mixed[][] An array of warnings encoded as arrays.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function readWarnings();

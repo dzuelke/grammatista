@@ -115,7 +115,6 @@ abstract class Pcre extends Parser
 	 *
 	 * @return     string The transformed item.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	protected function findLine($content, $offset)
@@ -131,7 +130,6 @@ abstract class Pcre extends Parser
 	 *
 	 * @return     bool
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	abstract protected function validate($name, $value);

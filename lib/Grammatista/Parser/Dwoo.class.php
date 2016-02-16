@@ -28,7 +28,6 @@ class Dwoo extends Parser
 	 *
 	 * @param      mixed[] $options The options.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __construct(array $options = array())
@@ -54,7 +53,6 @@ class Dwoo extends Parser
 	/**
 	 * Destructor. Closes all open resources.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __destruct()
@@ -70,7 +68,6 @@ class Dwoo extends Parser
 	 *
 	 * @return     string The represented value.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public static function extractString($string)
@@ -92,7 +89,6 @@ class Dwoo extends Parser
 	 *
 	 * @param      \Grammatista\Translatable|\Grammatista\Warning $info The translatable item
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function collect($info)
@@ -111,7 +107,6 @@ class Dwoo extends Parser
 	 *
 	 * @param      int $offset The offset
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function collectComment($offset)

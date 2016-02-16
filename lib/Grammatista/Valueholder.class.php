@@ -11,7 +11,6 @@ class Valueholder extends ArrayObject
 	 *
 	 * @param      array $values An array of values to be set right away.
 	 *
-	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
 	public function __construct(array $values = array())
