@@ -35,7 +35,7 @@ class Grammatista
 	protected static $scanners = array();
 
 	/**
-	 * @var        IBabelcotStorage A storage.
+	 * @var        IStorage A storage.
 	 */
 	protected static $storage = null;
 
