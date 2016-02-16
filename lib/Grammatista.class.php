@@ -16,7 +16,7 @@ namespace Grammatista;
  */
 class Grammatista
 {
-	const VERSION_NUMBER = '0.1.1';
+	const VERSION_NUMBER = '0.2.0';
 	const VERSION_STATUS = 'dev';
 
 	/**
