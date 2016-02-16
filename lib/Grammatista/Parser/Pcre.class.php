@@ -18,8 +18,6 @@ abstract class Pcre extends Parser
 
 		$retval = array();
 
-		$matched = array();
-
 		$lastComment = null;
 
 		foreach($this->options['pcre.patterns'] as $pattern => $patternInfo) {
