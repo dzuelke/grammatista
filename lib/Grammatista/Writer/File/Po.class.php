@@ -2,6 +2,9 @@
 
 class GrammatistaWriterFilePo extends GrammatistaWriterFile
 {
+	/**
+	 * {@inheritdoc}
+	 */
 	public function __construct(array $options = array())
 	{
 		if(!isset($options['file.pattern'])) {
@@ -20,6 +23,16 @@ class GrammatistaWriterFilePo extends GrammatistaWriterFile
 		fwrite($this->fp, implode("\n", $headers) . "\n\n");
 	}
 
+	/**
+	 * Escape a string for usage in " delimited parts of the po file.
+	 *
+	 * @param      string The string.
+	 *
+	 * @return     string The escaped string.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function escapeString($string)
 	{
 		$parts = preg_split('/\\n/', $string);
@@ -37,6 +50,9 @@ class GrammatistaWriterFilePo extends GrammatistaWriterFile
 		return $retval;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function formatOutput(GrammatistaTranslatable $translatable)
 	{
 		$lines = array();

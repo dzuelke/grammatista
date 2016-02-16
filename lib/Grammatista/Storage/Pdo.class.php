@@ -2,8 +2,29 @@
 
 class GrammatistaStoragePdo extends GrammatistaStorage
 {
+	/**
+	 * @var        PDO The database connection.
+	 */
 	protected $connection = null;
 
+	/**
+	 * Constructor. Accepts an array of options.
+	 *
+	 * Available options:
+	 *  - string   pdo.dsn
+	 *  - string   pdo.username
+	 *  - string   pdo.password
+	 *  - string[] pdo.driver_options
+	 *  - string[] pdo.attributes
+	 *  - string[] pdo.init_queries
+	 *  - string   pdo.translatable_class_name
+	 *  - mixed[]  pdo.translatable_class_ctorargs
+	 *
+	 * @param      mixed[] The options.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function __construct(array $options = array())
 	{
 		$this->options['pdo.dsn'] = null;
@@ -56,16 +77,25 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 		');
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function readTranslatables($unique = true, $order = 'domain')
 	{
 		return $this->connection->query('SELECT * FROM translatables ' . ($unique ? 'GROUP BY domain, singular_message ' : '') . 'ORDER BY domain, item_name, line', PDO::FETCH_CLASS, $this->options['pdo.translatable_class_name'], $this->options['pdo.translatable_class_ctorargs']);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function readWarnings()
 	{
 		return $this->connection->query('SELECT * FROM warnings', PDO::FETCH_CLASS, $this->options['pdo.translatable_class_name'], $this->options['pdo.translatable_class_ctorargs']);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function writeTranslatable(GrammatistaTranslatable $info)
 	{
 		Grammatista::dispatchEvent('grammatista.storage.translatable.writing', array('translatable' => $info));
@@ -83,6 +113,9 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 		Grammatista::dispatchEvent('grammatista.storage.translatable.written', array('translatable' => $info));
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function writeWarning(GrammatistaWarning $info)
 	{
 		Grammatista::dispatchEvent('grammatista.storage.warning.writing', array('warning' => $info));
@@ -100,6 +133,12 @@ class GrammatistaStoragePdo extends GrammatistaStorage
 		Grammatista::dispatchEvent('grammatista.storage.warning.written', array('warning' => $info));
 	}
 
+	/**
+	 * Destructor. Closes all open resources.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function __destruct()
 	{
 		// close PDO connection

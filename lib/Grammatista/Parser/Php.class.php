@@ -8,8 +8,19 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 	const PATTERN_TYPE_PLURAL = 'plural';
 	const PATTERN_TYPE_WARNING = 'warning';
 
+	/**
+	 * @var        mixed[][] An array of pattern definitions.
+	 */
 	protected $patterns = array();
 
+	/**
+	 * Constructor. Accepts an array of options.
+	 *
+	 * @param      mixed[] The options.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function __construct(array $options = array())
 	{
 		parent::__construct($options);
@@ -22,6 +33,9 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		}
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function handles(GrammatistaEntity $entity)
 	{
 		$retval = $entity->type == 'php';
@@ -33,6 +47,16 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		return $retval;
 	}
 
+	/**
+	 * Convert a string pattern into a list of tokens.
+	 *
+	 * @param      string The pattern.
+	 *
+	 * @return     mixed[] The list of tokens.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function parsePattern($pattern)
 	{
 		$tokens = $this->tokenize('<?php ' . $pattern);
@@ -57,6 +81,16 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		return $retval;
 	}
 
+	/**
+	 * Convert a PHP source into a list of tokens.
+	 *
+	 * @param      string The source.
+	 *
+	 * @return     mixed[] The list of tokens.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function tokenize($source)
 	{
 		$tokens = array();
@@ -96,6 +130,16 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		return $tokens;
 	}
 
+	/**
+	 * Decode a token.
+	 *
+	 * @param      array The token.
+	 *
+	 * @return     mixed The decoded token.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function decodeToken(array $token)
 	{
 		switch($token[0]) {
@@ -106,6 +150,20 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		}
 	}
 
+	/**
+	 * Returns the index of the end of the currently opened parenthesis.
+	 *
+	 * @param      mixed[][] The list of tokens.
+	 * @param      int The start index.
+	 * @param      bool If at the last item in the last pattern.
+	 *
+	 * @return     int The balance.
+	 *
+	 * @throws     GrammatistaException if there are unbalanced paranthesis
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function findBalance(array $tokens, $index, $lastInPattern = false)
 	{
 		$balance = 0;
@@ -145,6 +203,17 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		}
 	}
 
+	/**
+	 * Find a matching pattern in the list of tokens.
+	 *
+	 * @param      mixed[][] The list of tokens.
+	 * @param      int       The curent index.
+	 *
+	 * @return     string The array index of the found pattern.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function compareToken(array $tokens, $index)
 	{
 		foreach($this->patterns as $string => $pattern) {
@@ -200,6 +269,19 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		return false;
 	}
 
+	/**
+	 * Construct an translatable item from the pattern at the given position in the token list.
+	 *
+	 * @param      GrammatistaEntity The entity.
+	 * @param      mixed[][]         The token list.
+	 * @param      int               The curent index.
+	 * @param      mixed[]           The pattern to use for extraction.
+	 *
+	 * @return     GrammatistaTranslatable|GrammatistaWarning The array index of the found pattern.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function extractInfo(GrammatistaEntity $entity, array $tokens, $i, $pattern)
 	{
 		$info = array();
@@ -265,6 +347,9 @@ abstract class GrammatistaParserPhp extends GrammatistaParser
 		}
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function parse(GrammatistaEntity $entity)
 	{
 		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));

@@ -2,8 +2,9 @@
 
 abstract class GrammatistaParserPcre extends GrammatistaParser
 {
-	protected $contentByLines = null;
-
+	/**
+	 * {@inheritdoc}
+	 */
 	public function parse(GrammatistaEntity $entity)
 	{
 		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
@@ -101,11 +102,33 @@ abstract class GrammatistaParserPcre extends GrammatistaParser
 		return $retval;
 	}
 
+	/**
+	 * Get the line at a offset
+	 *
+	 * @param      string The file content.
+	 * @param      int The offset.
+	 *
+	 * @return     string The transformed item.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function findLine($content, $offset)
 	{
 		return preg_match_all('/$/m', substr($content, 0, $offset), $matches);
 	}
 
+	/**
+	 * Checks if the value is valid for a field.
+	 *
+	 * @param      string The file content.
+	 * @param      int The offset.
+	 *
+	 * @return     bool
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	abstract protected function validate($name, $value);
 }
 

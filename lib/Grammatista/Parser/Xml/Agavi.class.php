@@ -12,6 +12,9 @@ abstract class GrammatistaParserXmlAgavi extends GrammatistaParserXml
 		self::XMLNS_AGAVI_ENVELOPE_1_1,
 	);
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function load(GrammatistaEntity $entity)
 	{
 		parent::load($entity);
@@ -21,6 +24,9 @@ abstract class GrammatistaParserXmlAgavi extends GrammatistaParserXml
 		$this->xpath->registerNamespace('agavi_envelope_1_1', self::XMLNS_AGAVI_ENVELOPE_1_1);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function handles(GrammatistaEntity $entity)
 	{
 		$handles = parent::handles($entity);

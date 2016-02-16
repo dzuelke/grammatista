@@ -2,13 +2,29 @@
 
 class GrammatistaParserDwoo extends GrammatistaParser
 {
-	// current comment
+	/**
+	 * @var        string The current comment.
+	 */
 	protected $comment = null;
-	// current entity
+
+	/**
+	 * @var         GrammatistaEntity The current entity.
+	 */
 	protected $entity = null;
-	// all found items
+
+	/**
+	 * @var         (GrammatistaTranslatable|GrammatistaWarning)[] All found items.
+	 */
 	protected $items = array();
 
+	/**
+	 * Constructor. Accepts an array of options.
+	 *
+	 * @param      mixed[] The options.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function __construct(array $options = array())
 	{
 		parent::__construct($options);
@@ -29,12 +45,28 @@ class GrammatistaParserDwoo extends GrammatistaParser
 		}
 	}
 
+	/**
+	 * Destructor. Closes all open resources.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function __destruct()
 	{
 		unset($this->dwoo->_grammatista_parser_dwoo);
 		unset($this->dwoo);
 	}
 
+	/**
+	 * Convert a source string into it's represented value.
+	 *
+	 * @param      string The PHP string. E.g '"Line1\nLine2"'.
+	 *
+	 * @return     string The represented value.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public static function extractString($string)
 	{
 		$tokens = token_get_all('<?php ' . $string);
@@ -49,8 +81,14 @@ class GrammatistaParserDwoo extends GrammatistaParser
 		return false;
 	}
 
-	// the dwoo plugins will call this when they are compiled
-	// hax <:
+	/**
+	 * The dwoo plugins will call this when they are compiled.
+	 *
+	 * @param      GrammatistaTranslatable|GrammatistaWarning The translatable item
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function collect($info)
 	{
 		if(($info->domain === null || $info->domain === '') && $this->entity->default_domain !== null) {
@@ -62,6 +100,14 @@ class GrammatistaParserDwoo extends GrammatistaParser
 		$this->items[] = $info;
 	}
 
+	/**
+	 * The dwoo plugins will call this when they are compiled.
+	 *
+	 * @param      int The offset
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function collectComment($offset)
 	{
 		if($offset > 0) {
@@ -74,11 +120,17 @@ class GrammatistaParserDwoo extends GrammatistaParser
 		$this->comment = null;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function handles(GrammatistaEntity $entity)
 	{
 		return $entity->type == 'tpl';
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function parse(GrammatistaEntity $entity)
 	{
 		$this->entity = $entity;

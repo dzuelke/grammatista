@@ -6,6 +6,9 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 	const XMLNS_AGAVI_VALIDATION_1_0 = 'http://agavi.org/agavi/config/parts/validators/1.0';
 	const XMLNS_AGAVI_VALIDATION_1_1 = 'http://agavi.org/agavi/config/parts/validators/1.1';
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function load(GrammatistaEntity $entity)
 	{
 		parent::load($entity);
@@ -15,6 +18,9 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 		$this->xpath->registerNamespace('agavi_validation_1_1', self::XMLNS_AGAVI_VALIDATION_1_1);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function handles(GrammatistaEntity $entity)
 	{
 		$handles = parent::handles($entity);
@@ -30,6 +36,16 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 		return $handles;
 	}
 
+	/**
+	 * Build the error info for an element.
+	 *
+	 * @param      DOMElement The errorneous element.
+	 *
+	 * @return     scalar[] The error info.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function buildErrorInfo(DOMElement $error)
 	{
 		// tag the element so we can find it later
@@ -70,6 +86,9 @@ class GrammatistaParserXmlAgaviValidation extends GrammatistaParserXmlAgavi
 		return $info;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function parse(GrammatistaEntity $entity)
 	{
 		Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));

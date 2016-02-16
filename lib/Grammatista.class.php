@@ -161,6 +161,8 @@ class Grammatista
 	 * @param      string The name of the parser.
 	 * @param      array  An associative array of information for this parser.
 	 *
+	 * @throws     IGrammatistaException If no class info was given in $parserInfo.
+	 *
 	 * @author     David Zülke <david.zuelke@bitextender.com>
 	 * @since      0.1.0
 	 */
@@ -282,6 +284,12 @@ class Grammatista
 		}
 	}
 
+	/**
+	 * Remove all registered scanner instances.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public static function clearScanners()
 	{
 		self::$scanners = array();
@@ -370,12 +378,27 @@ class Grammatista
 		}
 	}
 
+	/**
+	 * Remove all registered writer instances.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public static function clearWriters()
 	{
 		self::$writers = array();
 	}
 
 	public static function registerEventResponder($pattern, $callback)
+	/**
+	 * Register an event handler.
+	 *
+	 * @param      string   The event name.
+	 * @param      callable The event handler.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	{
 		if(!isset(self::$responders[$pattern])) {
 			self::$responders[$pattern] = array();
@@ -383,6 +406,15 @@ class Grammatista
 		self::$responders[$pattern][] = $callback;
 	}
 
+	/**
+	 * Dispatch an event.
+	 *
+	 * @param      string  The event name.
+	 * @param      mixed[] The event arguments.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public static function dispatchEvent($name, array $arguments = array())
 	{
 		// no regex check against patterns yet :D
@@ -394,6 +426,12 @@ class Grammatista
 		}
 	}
 
+	/**
+	 * Parse and store the translations.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public static function doScanParseStore()
 	{
 		foreach(self::$scanners as $scanner) {

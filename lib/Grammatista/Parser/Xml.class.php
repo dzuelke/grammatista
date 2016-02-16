@@ -5,9 +5,24 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 	const XMLNS_GRAMMATISTA_PARSER_XML = 'urn:GrammatistaParserXml';
 	const XMLNS_SAXON = 'http://icl.com/saxon';
 
+	/**
+	 * @var        DOMDocument The parsed document.
+	 */
 	protected $doc;
+
+	/**
+	 * @var        DOMXPath The xpath instance.
+	 */
 	protected $xpath;
 
+	/**
+	 * Constructor. Accepts an array of options.
+	 *
+	 * @param      mixed[] The options.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function __construct(array $options = array())
 	{
 		parent::__construct($options);
@@ -18,17 +33,34 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 		}
 	}
 
+	/**
+	 * Destructor. Closes all open resources.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function __destruct()
 	{
 		unset($this->xpath);
 		unset($this->doc);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function handles(GrammatistaEntity $entity)
 	{
 		return $entity->type == 'xml';
 	}
 
+	/**
+	 * Load an entity.
+	 *
+	 * @param      GrammatistaEntity The entity.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function load(GrammatistaEntity $entity)
 	{
 		$this->doc = new DOMDocument();
@@ -38,6 +70,16 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 		$this->xpath->registerNamespace('grammatista', self::XMLNS_GRAMMATISTA_PARSER_XML);
 	}
 
+	/**
+	 * Tag an element of the document with an unique identifier, which is then returned.
+	 *
+	 * @param      DOMElement The element.
+	 *
+	 * @return     string The unique identifier.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function tagElement(DOMElement $element)
 	{
 		// generate unique tag to flag the element and set it as an attribute
@@ -47,12 +89,30 @@ abstract class GrammatistaParserXml extends GrammatistaParser
 		return $tag;
 	}
 
+	/**
+	 * Remove the unique identifier from an element.
+	 *
+	 * @param      DOMElement The element.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function untagElement(DOMElement $element)
 	{
 		// remove the tag attribute set above
 		$element->removeAttributeNS(self::XMLNS_GRAMMATISTA_PARSER_XML, 'grammatista:tag');
 	}
 
+	/**
+	 * Find the line of a tagged element.
+	 *
+	 * @param      string The unique identifier.
+	 *
+	 * @return     int The line.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	protected function findLine($marker)
 	{
 		// stylesheet to find that tagged element

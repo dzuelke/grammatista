@@ -2,6 +2,14 @@
 
 class GrammatistaTranslatable extends GrammatistaValueholder
 {
+	/**
+	 * Checks if this translatable is valid.
+	 *
+	 * @return     bool
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function isValid()
 	{
 		return isset($this->singular_message) && $this->singular_message != '' && isset($this->domain) && $this->domain != '';

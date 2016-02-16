@@ -2,6 +2,14 @@
 
 class GrammatistaParserPcreSmarty extends GrammatistaParserPcre
 {
+	/**
+	 * Constructor. Accepts an array of options.
+	 *
+	 * @param      mixed[] The options.
+	 *
+	 * @author     David Zülke <david.zuelke@bitextender.com>
+	 * @since      0.1.0
+	 */
 	public function __construct(array $options = array())
 	{
 		parent::__construct($options);
@@ -11,6 +19,9 @@ class GrammatistaParserPcreSmarty extends GrammatistaParserPcre
 		}
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function handles(GrammatistaEntity $entity)
 	{
 		$retval = $entity->type == 'tpl';
@@ -22,6 +33,9 @@ class GrammatistaParserPcreSmarty extends GrammatistaParserPcre
 		return $retval;
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	protected function validate($name, $value)
 	{
 		switch($name) {
