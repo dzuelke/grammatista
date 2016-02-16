@@ -9,6 +9,10 @@
         {
             "name": "David Zülke",
             "email": "dzuelke@gmail.com"
+        },
+        {
+            "name": "Dominik del Bondio",
+            "email": "ddb@bitextender.com"
         }
     ],
     "require": {
