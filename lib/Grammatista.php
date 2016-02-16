@@ -23,27 +23,27 @@ class Grammatista
 	/**
 	 * @var        ParserInterface[] An array of registered parsers.
 	 */
-	protected static $parsers = array();
+	protected $parsers = array();
 
 	/**
 	 * @var        callable[] An array of event responders.
 	 */
-	protected static $responders = array();
+	protected $responders = array();
 
 	/**
 	 * @var        ScannerInterface[] An array of registered scanners.
 	 */
-	protected static $scanners = array();
+	protected $scanners = array();
 
 	/**
 	 * @var        StorageInterface A storage.
 	 */
-	protected static $storage = null;
+	protected $storage = null;
 
 	/**
 	 * @var        WriterInterface[] An array of registered writers.
 	 */
-	protected static $writers = array();
+	protected $writers = array();
 
 	/**
 	 * Version information method.
@@ -91,7 +91,7 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function registerParser($name, array $parserInfo)
+	public function registerParser($name, array $parserInfo)
 	{
 		if(!isset($parserInfo['class'])) {
 			throw new Exception('No class name given in parser info for registerParser()');
@@ -101,7 +101,7 @@ class Grammatista
 			$parserInfo['options'] = array();
 		}
 
-		self::$parsers[$name] = $parserInfo;
+		$this->parsers[$name] = $parserInfo;
 	}
 
 	/**
@@ -113,12 +113,12 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function unregisterParser($name)
+	public function unregisterParser($name)
 	{
-		if(isset(self::$parsers[$name])) {
+		if(isset($this->parsers[$name])) {
 			// remember the value we are about to remove...
-			$retval = self::$parsers[$name];
-			unset(self::$parsers[$name]);
+			$retval = $this->parsers[$name];
+			unset($this->parsers[$name]);
 
 			// ...and return it
 			return $retval;
@@ -138,18 +138,18 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function getParser($name)
+	public function getParser($name)
 	{
-		if(isset(self::$parsers[$name])) {
-			return self::$parsers[$name];
+		if(isset($this->parsers[$name])) {
+			return $this->parsers[$name];
 		} else {
 			throw new Exception(sprintf('Parser "%s" not configured.', $name));
 		}
 	}
 
-	public static function clearParsers()
+	public function clearParsers()
 	{
-		self::$parsers = array();
+		$this->parsers = array();
 	}
 
 	/**
@@ -160,9 +160,9 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function registerScanner($name, ScannerInterface $scanner)
+	public function registerScanner($name, ScannerInterface $scanner)
 	{
-		self::$scanners[$name] = $scanner;
+		$this->scanners[$name] = $scanner;
 	}
 
 	/**
@@ -174,12 +174,12 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function unregisterScanner($name)
+	public function unregisterScanner($name)
 	{
-		if(isset(self::$scanners[$name])) {
+		if(isset($this->scanners[$name])) {
 			// remember the value we are about to remove...
-			$retval = self::$scanners[$name];
-			unset(self::$scanners[$name]);
+			$retval = $this->scanners[$name];
+			unset($this->scanners[$name]);
 
 			// ...and return it
 			return $retval;
@@ -199,10 +199,10 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function getScanner($name)
+	public function getScanner($name)
 	{
-		if(isset(self::$scanners[$name])) {
-			return self::$scanners[$name];
+		if(isset($this->scanners[$name])) {
+			return $this->scanners[$name];
 		} else {
 			throw new Exception(sprintf('Scanner "%s" not configured.', $name));
 		}
@@ -213,9 +213,9 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function clearScanners()
+	public function clearScanners()
 	{
-		self::$scanners = array();
+		$this->scanners = array();
 	}
 
 	/**
@@ -225,9 +225,9 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function setStorage(StorageInterface $storage)
+	public function setStorage(StorageInterface $storage)
 	{
-		self::$storage = $storage;
+		$this->storage = $storage;
 	}
 
 	/**
@@ -237,9 +237,9 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function getStorage()
+	public function getStorage()
 	{
-		return self::$storage;
+		return $this->storage;
 	}
 
 	/**
@@ -250,9 +250,9 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function registerWriter($name, WriterInterface $writer)
+	public function registerWriter($name, WriterInterface $writer)
 	{
-		self::$writers[$name] = $writer;
+		$this->writers[$name] = $writer;
 	}
 
 	/**
@@ -264,12 +264,12 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function unregisterWriter($name)
+	public function unregisterWriter($name)
 	{
-		if(isset(self::$writers[$name])) {
+		if(isset($this->writers[$name])) {
 			// remember the value we are about to remove...
-			$retval = self::$writers[$name];
-			unset(self::$writers[$name]);
+			$retval = $this->writers[$name];
+			unset($this->writers[$name]);
 
 			// ...and return it
 			return $retval;
@@ -289,10 +289,10 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function getWriter($name)
+	public function getWriter($name)
 	{
-		if(isset(self::$writers[$name])) {
-			return self::$writers[$name];
+		if(isset($this->writers[$name])) {
+			return $this->writers[$name];
 		} else {
 			throw new Exception(sprintf('Writer "%s" not configured.', $name));
 		}
@@ -303,9 +303,9 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function clearWriters()
+	public function clearWriters()
 	{
-		self::$writers = array();
+		$this->writers = array();
 	}
 
 	/**
@@ -316,12 +316,12 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function registerEventResponder($pattern, $callback)
+	public function registerEventResponder($pattern, $callback)
 	{
-		if(!isset(self::$responders[$pattern])) {
-			self::$responders[$pattern] = array();
+		if(!isset($this->responders[$pattern])) {
+			$this->responders[$pattern] = array();
 		}
-		self::$responders[$pattern][] = $callback;
+		$this->responders[$pattern][] = $callback;
 	}
 
 	/**
@@ -332,12 +332,12 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function dispatchEvent($name, array $arguments = array())
+	public function dispatchEvent($name, array $arguments = array())
 	{
 		// no regex check against patterns yet :D
 
-		if(isset(self::$responders[$name])) {
-			foreach(self::$responders[$name] as $callback) {
+		if(isset($this->responders[$name])) {
+			foreach($this->responders[$name] as $callback) {
 				call_user_func($callback, $name, $arguments);
 			}
 		}
@@ -348,14 +348,14 @@ class Grammatista
 	 *
 	 * @since      0.1.0
 	 */
-	public static function doScanParseStore()
+	public function doScanParseStore()
 	{
-		foreach(self::$scanners as $scanner) {
+		foreach($this->scanners as $scanner) {
 			foreach($scanner as $item) {
-				foreach(self::$parsers as $parserName => $parserInfo) {
+				foreach($this->parsers as $parserName => $parserInfo) {
 					$parser = new $parserInfo['class']($parserInfo['options']);
-					if($parser->handles($item)) {
-						foreach($parser->parse($item) as $translatable) {
+					if($parser->handles($this, $item)) {
+						foreach($parser->parse($this, $item) as $translatable) {
 							if(!isset($translatable->item_name)) {
 								$translatable->item_name = $item->ident;
 							}
@@ -363,12 +363,12 @@ class Grammatista
 								$translatable->parser_name = $parserName;
 							}
 							if($translatable instanceof Translatable && $translatable->isValid()) {
-								self::$storage->writeTranslatable($translatable);
+								$this->storage->writeTranslatable($this, $translatable);
 							} else {
 								if($translatable instanceof Translatable) {
 									$translatable = new Warning($translatable->getArrayCopy());
 								}
-								self::$storage->writeWarning($translatable);
+								$this->storage->writeWarning($this, $translatable);
 							}
 						}
 					}

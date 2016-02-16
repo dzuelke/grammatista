@@ -4,6 +4,7 @@ namespace Grammatista\Parser\Xml\Agavi;
 
 use DOMElement;
 use Grammatista\Entity;
+use Grammatista\Grammatista;
 use Grammatista\Parser\Xml\Agavi;
 use Grammatista\Translatable;
 use Grammatista\Warning;
@@ -29,16 +30,16 @@ class Validation extends Agavi
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(Entity $entity)
+	public function handles(Grammatista $grammatista, Entity $entity)
 	{
-		$handles = parent::handles($entity);
+		$handles = parent::handles($grammatista, $entity);
 
 		if($handles) {
 			$handles = (bool) $this->xpath->evaluate('count(//agavi_validation_0_11:validator | //agavi_validation_1_0:validator | //agavi_validation_1_1:validator)');
 		}
 
 		if($handles) {
-			\Grammatista\Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
+			$grammatista->dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
 		}
 
 		return $handles;
@@ -96,9 +97,9 @@ class Validation extends Agavi
 	/**
 	 * {@inheritdoc}
 	 */
-	public function parse(Entity $entity)
+	public function parse(Grammatista $grammatista, Entity $entity)
 	{
-		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
+		$grammatista->dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
 
 		$retval = array();
 
@@ -129,7 +130,7 @@ class Validation extends Agavi
 			}
 		}
 
-		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
+		$grammatista->dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
 
 		return $retval;
 	}

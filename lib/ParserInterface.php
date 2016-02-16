@@ -7,24 +7,26 @@ interface ParserInterface
 	/**
 	 * Checks if an entity is handled by this parser.
 	 *
-	 * @param      Entity $entity The entity.
+	 * @param      Grammatista $grammatista The grammatista instance.
+	 * @param      Entity      $entity      The entity.
 	 *
 	 * @return     bool
 	 *
 	 * @since      0.1.0
 	 */
-	public function handles(Entity $entity);
+	public function handles(Grammatista $grammatista, Entity $entity);
 
 	/**
 	 * Parses an entity to a list of translatable items.
 	 *
-	 * @param      Entity $entity The entity.
+	 * @param      Grammatista $grammatista The grammatista instance.
+	 * @param      Entity      $entity      The entity.
 	 *
 	 * @return     (Translatable|Warning)[]
 	 *
 	 * @since      0.1.0
 	 */
-	public function parse(Entity $entity);
+	public function parse(Grammatista $grammatista, Entity $entity);
 }
 
 ?>

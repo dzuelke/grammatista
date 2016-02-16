@@ -8,6 +8,7 @@ ADD: Support for Agavi 1.0 XML Config Envelopes and Agavi 1.0 Validation Configs
 CHG: Move everything to namespaces, also bumping PHP requirement to 5.3 (Dominik)
 CHG: Rename interfaces from IXXX style to XXXInterface (Dominik)
 CHG: Move to PSR-4 autoloading (Dominik)
+CHG: Grammatista class should be used with an instance of statically now. (Dominik)
 
 0.1.0 (October 21, 2008)
 ------------------------

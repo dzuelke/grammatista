@@ -5,6 +5,7 @@ namespace Grammatista\Parser;
 use DOMDocument;
 use DOMElement;
 use DOMXPath;
+use Grammatista\Grammatista;
 use XSLTProcessor;
 use Grammatista\Exception;
 use Grammatista\Entity;
@@ -58,7 +59,7 @@ abstract class Xml extends Parser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(Entity $entity)
+	public function handles(Grammatista $grammatista, Entity $entity)
 	{
 		return $entity->type == 'xml';
 	}

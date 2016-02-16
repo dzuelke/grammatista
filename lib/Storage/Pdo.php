@@ -2,6 +2,7 @@
 
 namespace Grammatista\Storage;
 
+use Grammatista\Grammatista;
 use Grammatista\Storage;
 use Grammatista\Translatable;
 use Grammatista\Warning;
@@ -85,7 +86,7 @@ class Pdo extends Storage
 	/**
 	 * {@inheritdoc}
 	 */
-	public function readTranslatables($unique = true, $order = 'domain')
+	public function readTranslatables(Grammatista $grammatista, $unique = true, $order = 'domain')
 	{
 		return $this->connection->query('SELECT * FROM translatables ' . ($unique ? 'GROUP BY domain, singular_message ' : '') . 'ORDER BY domain, item_name, line', \PDO::FETCH_CLASS, $this->options['pdo.translatable_class_name'], $this->options['pdo.translatable_class_ctorargs']);
 	}
@@ -93,7 +94,7 @@ class Pdo extends Storage
 	/**
 	 * {@inheritdoc}
 	 */
-	public function readWarnings()
+	public function readWarnings(Grammatista $grammatista)
 	{
 		return $this->connection->query('SELECT * FROM warnings', \PDO::FETCH_CLASS, $this->options['pdo.translatable_class_name'], $this->options['pdo.translatable_class_ctorargs']);
 	}
@@ -101,9 +102,9 @@ class Pdo extends Storage
 	/**
 	 * {@inheritdoc}
 	 */
-	public function writeTranslatable(Translatable $info)
+	public function writeTranslatable(Grammatista $grammatista, Translatable $info)
 	{
-		\Grammatista\Grammatista::dispatchEvent('grammatista.storage.translatable.writing', array('translatable' => $info));
+		$grammatista->dispatchEvent('grammatista.storage.translatable.writing', array('translatable' => $info));
 
 		$stmt = $this->connection->prepare('INSERT INTO translatables (item_name, line, domain, singular_message, plural_message, comment, parser_name) VALUES(:item_name, :line, :domain, :singular_message, :plural_message, :comment, :parser_name)');
 		$stmt->bindValue(':item_name', $info['item_name'], \PDO::PARAM_STR);
@@ -115,15 +116,15 @@ class Pdo extends Storage
 		$stmt->bindValue(':parser_name', $info['parser_name'], \PDO::PARAM_STR);
 		$stmt->execute();
 
-		\Grammatista\Grammatista::dispatchEvent('grammatista.storage.translatable.written', array('translatable' => $info));
+		$grammatista->dispatchEvent('grammatista.storage.translatable.written', array('translatable' => $info));
 	}
 
 	/**
 	 * {@inheritdoc}
 	 */
-	public function writeWarning(Warning $info)
+	public function writeWarning(Grammatista $grammatista, Warning $info)
 	{
-		\Grammatista\Grammatista::dispatchEvent('grammatista.storage.warning.writing', array('warning' => $info));
+		$grammatista->dispatchEvent('grammatista.storage.warning.writing', array('warning' => $info));
 
 		$stmt = $this->connection->prepare('INSERT INTO warnings (item_name, line, domain, singular_message, plural_message, comment, parser_name) VALUES(:item_name, :line, :domain, :singular_message, :plural_message, :comment, :parser_name)');
 		$stmt->bindValue(':item_name', $info['item_name'], \PDO::PARAM_STR);
@@ -135,7 +136,7 @@ class Pdo extends Storage
 		$stmt->bindValue(':parser_name', $info['parser_name'], \PDO::PARAM_STR);
 		$stmt->execute();
 
-		\Grammatista\Grammatista::dispatchEvent('grammatista.storage.warning.written', array('warning' => $info));
+		$grammatista->dispatchEvent('grammatista.storage.warning.written', array('warning' => $info));
 	}
 
 	/**

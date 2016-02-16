@@ -4,6 +4,7 @@ namespace Grammatista\Parser;
 
 use Grammatista\Entity;
 use Grammatista\Exception;
+use Grammatista\Grammatista;
 use Grammatista\Parser;
 use Grammatista\Translatable;
 use Grammatista\Warning;
@@ -43,12 +44,12 @@ abstract class Php extends Parser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(Entity $entity)
+	public function handles(Grammatista $grammatista, Entity $entity)
 	{
 		$retval = $entity->type == 'php';
 
 		if($retval) {
-			\Grammatista\Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
+			$grammatista->dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
 		}
 
 		return $retval;
@@ -351,9 +352,9 @@ abstract class Php extends Parser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function parse(Entity $entity)
+	public function parse(Grammatista $grammatista, Entity $entity)
 	{
-		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
+		$grammatista->dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
 
 		$retval = array();
 
@@ -401,7 +402,7 @@ abstract class Php extends Parser
 			// }
 		}
 
-		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
+		$grammatista->dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
 
 		return $retval;
 	}

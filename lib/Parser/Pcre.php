@@ -3,6 +3,7 @@
 namespace Grammatista\Parser;
 
 use Grammatista\Entity;
+use Grammatista\Grammatista;
 use Grammatista\Parser;
 use Grammatista\Translatable;
 use Grammatista\Warning;
@@ -12,9 +13,9 @@ abstract class Pcre extends Parser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function parse(Entity $entity)
+	public function parse(Grammatista $grammatista, Entity $entity)
 	{
-		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
+		$grammatista->dispatchEvent('grammatista.parser.parsing', array('entity' => $entity));
 
 		$retval = array();
 
@@ -102,7 +103,7 @@ abstract class Pcre extends Parser
 			}
 		}
 
-		\Grammatista\Grammatista::dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
+		$grammatista->dispatchEvent('grammatista.parser.parsed', array('entity' => $entity));
 
 		return $retval;
 	}

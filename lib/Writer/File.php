@@ -2,6 +2,7 @@
 
 namespace Grammatista\Writer;
 
+use Grammatista\Grammatista;
 use Grammatista\Writer;
 use Grammatista\Translatable;
 
@@ -44,11 +45,11 @@ abstract class File extends Writer
 	/**
 	 * {@inheritdoc}
 	 */
-	public function writeTranslatable(Translatable $translatable)
+	public function writeTranslatable(Grammatista $grammatista, Translatable $translatable)
 	{
 		fwrite($this->fp, $this->formatOutput($translatable));
 
-		\Grammatista\Grammatista::dispatchEvent('grammatista.writer.written');
+		$grammatista->dispatchEvent('grammatista.writer.written');
 	}
 }
 

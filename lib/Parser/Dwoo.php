@@ -4,6 +4,7 @@ namespace Grammatista\Parser;
 
 use Dwoo_Template_String;
 use Grammatista\Entity;
+use Grammatista\Grammatista;
 use Grammatista\Parser;
 
 class Dwoo extends Parser
@@ -124,7 +125,7 @@ class Dwoo extends Parser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(Entity $entity)
+	public function handles(Grammatista $grammatista, Entity $entity)
 	{
 		return $entity->type == 'tpl';
 	}
@@ -132,7 +133,7 @@ class Dwoo extends Parser
 	/**
 	 * {@inheritdoc}
 	 */
-	public function parse(Entity $entity)
+	public function parse(Grammatista $grammatista, Entity $entity)
 	{
 		$this->entity = $entity;
 

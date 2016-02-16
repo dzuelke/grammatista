@@ -6,16 +6,18 @@ error_reporting(E_ALL | E_STRICT);
 
 require(__DIR__ . '/../vendor/autoload.php');
 
-Grammatista::registerScanner('fs', new \Grammatista\Scanner\Filesystem(array(
+$grammatista = new Grammatista();
+
+$grammatista->registerScanner('fs', new \Grammatista\Scanner\Filesystem(array(
 	'filesystem.path' => realpath(dirname(__FILE__) . '/test1/'),
 	'filesystem.skip_patterns' => array(
 		'#/\.svn$#',
 	)
 )));
 
-Grammatista::registerParser('agxml', array('class' => 'Grammatista\\Parser\\Xml\\Agavi\\Validation'));
-Grammatista::registerParser('gettextphp', array('class' => 'Grammatista\\Parser\\Php\\Agavi'));
-Grammatista::registerParser('agsmarty', array(
+$grammatista->registerParser('agxml', array('class' => 'Grammatista\\Parser\\Xml\\Agavi\\Validation'));
+$grammatista->registerParser('gettextphp', array('class' => 'Grammatista\\Parser\\Php\\Agavi'));
+$grammatista->registerParser('agsmarty', array(
 	'class' => 'Grammatista\\Parser\\Pcre\\Smarty',
 	'options' => array(
 		'pcre.comment_pattern' => '/\{\*\s*%s\s*(?P<comment>[^\*\}]+?)\s*\*\}(?!.*?\{trans[\s\}])/s',
@@ -32,18 +34,18 @@ Grammatista::registerParser('agsmarty', array(
 	),
 ));
 
-Grammatista::setStorage(new \Grammatista\Storage\Pdo(array('pdo.dsn' => 'sqlite:' . dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'] . '.sqlite')));
+$grammatista->setStorage(new \Grammatista\Storage\Pdo(array('pdo.dsn' => 'sqlite:' . dirname(__FILE__) . '/' . $_SERVER['REQUEST_TIME'] . '.sqlite')));
 
 $logger = new \Grammatista\Logger\Shell();
-Grammatista::registerEventResponder('grammatista.parser.parsed', array($logger, 'log'));
-Grammatista::registerEventResponder('grammatista.storage.translatable.written', array($logger, 'log'));
-Grammatista::registerEventResponder('grammatista.storage.warning.written', array($logger, 'log'));
-Grammatista::registerEventResponder('grammatista.writer.written', array($logger, 'log'));
+$grammatista->registerEventResponder('grammatista.parser.parsed', array($logger, 'log'));
+$grammatista->registerEventResponder('grammatista.storage.translatable.written', array($logger, 'log'));
+$grammatista->registerEventResponder('grammatista.storage.warning.written', array($logger, 'log'));
+$grammatista->registerEventResponder('grammatista.writer.written', array($logger, 'log'));
 
-Grammatista::doScanParseStore();
+$grammatista->doScanParseStore();
 
 $currentDomain = null;
-foreach(Grammatista::getStorage()->readTranslatables() as $translatable) {
+foreach($grammatista->getStorage()->readTranslatables($grammatista) as $translatable) {
 	if($translatable->domain != $currentDomain) {
 		$currentDomain = $translatable->domain;
 
@@ -54,7 +56,7 @@ foreach(Grammatista::getStorage()->readTranslatables() as $translatable) {
 		));
 	}
 
-	$writer->writeTranslatable($translatable);
+	$writer->writeTranslatable($grammatista, $translatable);
 }
 
 ?>

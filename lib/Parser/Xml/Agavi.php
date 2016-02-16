@@ -3,6 +3,7 @@
 namespace Grammatista\Parser\Xml;
 
 use Grammatista\Entity;
+use Grammatista\Grammatista;
 use Grammatista\Parser\Xml;
 
 abstract class Agavi extends Xml
@@ -32,9 +33,9 @@ abstract class Agavi extends Xml
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(Entity $entity)
+	public function handles(Grammatista $grammatista, Entity $entity)
 	{
-		$handles = parent::handles($entity);
+		$handles = parent::handles($grammatista, $entity);
 
 		if($handles) {
 			$this->load($entity);

@@ -2,6 +2,7 @@
 
 namespace Grammatista\Parser\Pcre;
 
+use Grammatista\Grammatista;
 use Grammatista\Parser\Pcre;
 use Grammatista\Entity;
 
@@ -26,12 +27,12 @@ class Smarty extends Pcre
 	/**
 	 * {@inheritdoc}
 	 */
-	public function handles(Entity $entity)
+	public function handles(Grammatista $grammatista, Entity $entity)
 	{
 		$retval = $entity->type == 'tpl';
 
 		if($retval) {
-			\Grammatista\Grammatista::dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
+			$grammatista->dispatchEvent('grammatista.parser.handles', array('entity' => $entity));
 		}
 
 		return $retval;
