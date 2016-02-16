@@ -19,6 +19,8 @@
         "php": ">=5.3.0"
     },
     "autoload": {
-        "classmap": ["lib/"]
+        "psr-4": {
+            "Grammatista\\": "lib/"
+        }
     }
 }
