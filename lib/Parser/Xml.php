@@ -30,6 +30,8 @@ abstract class Xml extends Parser
 	 *
 	 * @param      mixed[] $options The options.
 	 *
+	 * @throws     Exception If EXSLT support is not available.
+	 *
 	 * @since      0.1.0
 	 */
 	public function __construct(array $options = array())

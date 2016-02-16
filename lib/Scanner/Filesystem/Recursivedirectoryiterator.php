@@ -26,6 +26,8 @@ class Recursivedirectoryiterator extends \RecursiveDirectoryIterator
 	 *
 	 * @param      mixed[] $options The options.
 	 *
+	 * @throws     Exception If the filesystem.path option is not given.
+	 *
 	 * @since      0.1.0
 	 */
 	public function __construct(array $options = array())
